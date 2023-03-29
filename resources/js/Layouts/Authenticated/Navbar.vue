@@ -63,24 +63,24 @@ const logout = () => {
                                     <!-- Team Management -->
                                     <template v-if="$page.props.jetstream.hasTeamFeatures">
                                         <div class="block px-4 py-2 text-xs text-slate-400">
-                                            Manage Team
+                                            {{ lang().label.manage_team }}
                                         </div>
 
                                         <!-- Team Settings -->
                                         <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">
-                                            Team Settings
+                                            {{ lang().label.team_settings }}
                                         </DropdownLink>
 
                                         <DropdownLink v-if="$page.props.jetstream.canCreateTeams"
                                             :href="route('teams.create')">
-                                            Create New Team
+                                            {{ lang().label.create_new_team }}
                                         </DropdownLink>
 
                                         <div class="border-t border-slate-200 dark:border-slate-600" />
 
                                         <!-- Team Switcher -->
                                         <div class="block px-4 py-2 text-xs text-slate-400">
-                                            Switch Teams
+                                            {{ lang().label.switch_teams }}
                                         </div>
 
                                         <template v-for="team in $page.props.auth.user.all_teams" :key="team.id">
@@ -139,15 +139,15 @@ const logout = () => {
                                     </div>
                                 </div>
                                 <div class="block px-4 py-2 text-xs text-slate-400">
-                                    Manage Account
+                                    {{ lang().label.manage_account }}
                                 </div>
 
                                 <DropdownLink :href="route('profile.show')">
-                                    Profile
+                                    {{ lang().label.profile }}
                                 </DropdownLink>
 
                                 <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
-                                    API Tokens
+                                    {{ lang().label.api_tokens }}
                                 </DropdownLink>
 
                                 <div class="border-t border-slate-200 dark:border-slate-600" />
@@ -155,7 +155,7 @@ const logout = () => {
                                 <!-- Authentication -->
                                 <form @submit.prevent="logout">
                                     <DropdownLink as="button">
-                                        Log Out
+                                        {{ lang().label.logout }}
                                     </DropdownLink>
                                 </form>
                             </template>

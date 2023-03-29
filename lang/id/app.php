@@ -94,7 +94,15 @@ return [
         'two_factor_auth_finish' => "To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application or enter the setup key and provide the generated OTP code.",
         'two_factor_auth_now_enabled' => "Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application or enter the setup key.",
         'two_factor_auth_recovery_code' => 'Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.',
-
+        'build_with' => 'Build with',
+        'by' => 'by',
+        'manage_team' => 'Manage Team',
+        'team_settings' => 'Team Settings',
+        'create_new_team' => 'Create New Team',
+        'switch_teams' => 'Switch Teams',
+        'manage_account' => 'Manage Account',
+        'of' => 'of',
+        'no_data' => 'No Data'
     ],
     'placeholder' => [
         'email' => 'email@email.com',
