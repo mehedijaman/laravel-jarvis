@@ -1,0 +1,113 @@
+<script setup>
+import Checkbox from '@/Components/Checkbox.vue';
+import DialogModal from '@/Components/DialogModal.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
+import { useForm } from '@inertiajs/vue3';
+import { reactive, ref } from 'vue';
+import { PlusIcon } from '@heroicons/vue/24/solid';
+
+const show = ref(false)
+const props = defineProps({
+    title: String,
+    permissions: Object,
+})
+
+const form = useForm({
+    name: '',
+    guard_name: 'web',
+    permissions: [],
+})
+
+const data = reactive({
+    multipleSelect: false,
+})
+const submit = () => {
+    form.post(route('role.store'), {
+        preserveScroll: true,
+        onSuccess: () => closeModal(),
+        onError: () => null,
+        onFinish: () => null,
+    })
+}
+
+const closeModal = () => {
+    show.value = false
+    form.errors = {}
+    form.reset()
+    data.multipleSelect = false
+}
+
+const selectAll = (event) => {
+    if (event.target.checked === false) {
+        form.permissions = []
+    } else {
+        form.permissions = []
+        props.permissions.forEach((permission) => {
+            form.permissions.push(permission.id)
+        })
+    }
+}
+const select = () => {
+    if (props.permissions.length == form.permissions.length) {
+        data.multipleSelect = true
+    } else {
+        data.multipleSelect = false
+    }
+}
+</script>
+<template>
+    <div>
+        <PrimaryButton class="flex rounded-none items-center justify-start gap-2" @click.prevent="show = true">
+            <PlusIcon class="w-4 h-auto" /> <span class="hidden md:block">Add</span>
+        </PrimaryButton>
+        <DialogModal :show="show" @close="closeModal">
+            <template #title>
+                Add {{ props.title }}
+            </template>
+
+            <template #content>
+                <form class="space-y-2" @submit.prevent="submit">
+                    <div class="space-y-1">
+                        <InputLabel for="name" value="Name" />
+                        <TextInput id="name" v-model="form.name" type="text" class="block w-full" autocomplete="name"
+                            placeholder="Role Name" :error="form.errors.name" @keyup.enter="submit" />
+                        <InputError :message="form.errors.name" />
+                    </div>
+                    <div>
+                        <InputLabel value="Permissions" />
+                        <InputError class="mt-2" :message="form.errors.permissions" />
+                        <div class="flex justify-start items-center space-x-2 mt-2">
+                            <Checkbox id="permission-all" v-model:checked="data.multipleSelect" @change="selectAll" />
+                            <InputLabel for="permission-all" value="Check All" />
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-2">
+                            <div class="flex items-center justify-start space-x-2"
+                                v-for="(permission, index) in props.permissions" :key="index">
+                                <input @change="select"
+                                    class="rounded dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-primary dark:text-primary shadow-sm focus:ring-primary/80 dark:focus:ring-primary dark:focus:ring-offset-slate-800 dark:checked:bg-primary dark:checked:border-primary"
+                                    type="checkbox" :id="'permission_' + permission.id" :value="permission.id"
+                                    v-model="form.permissions" />
+                                <InputLabel :for="'permission_' + permission.id" :value="permission.name" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </template>
+
+            <template #footer>
+                <SecondaryButton @click="closeModal">
+                    Cancel
+                </SecondaryButton>
+
+                <PrimaryButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                    @click="submit">
+                    Save {{ form.processing ? '...' : '' }}
+                </PrimaryButton>
+            </template>
+        </DialogModal>
+    </div>
+</template>
