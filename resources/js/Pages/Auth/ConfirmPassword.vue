@@ -26,27 +26,28 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Secure Area" />
+    <Head title="lang().label.secure_area" />
 
     <AuthenticationCard>
         <template #logo>
             <AuthenticationCardLogo />
         </template>
         <div class="flex flex-col mb-4">
-            <h2 class="text-primary font-semibold text-xl">Confirm Password</h2>
-            <small class="text-slate-400">This is a secure area of the application. Please confirm your password before continuing.</small>
+            <h2 class="text-primary font-semibold text-xl">{{ lang().label.confirm_password }}</h2>
+            <small class="text-slate-400">{{ lang().label.confirm_password_caption }}</small>
         </div>
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" :value="lang().label.password" />
                 <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
-                    class="mt-1 block w-full" required placeholder="••••••••" :error="form.errors.password" autocomplete="current-password" autofocus />
+                    class="mt-1 block w-full" required :placeholder="lang().placeholder.password"
+                    :error="form.errors.password" autocomplete="current-password" autofocus />
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="flex justify-end mt-4">
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Confirm {{ form.processing ? '...':'' }}
+                    {{ lang().button.confirm }} {{ form.processing ? '...' : '' }}
                 </PrimaryButton>
             </div>
         </form>

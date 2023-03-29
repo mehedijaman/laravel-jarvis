@@ -78,11 +78,11 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            {{ lang().label.profile_information }}
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            {{ lang().label.profile_information_description }}
         </template>
 
         <template #form>
@@ -91,7 +91,7 @@ const clearPhotoFileInput = () => {
                 <!-- Profile Photo File Input -->
                 <input ref="photoInput" type="file" class="hidden" @change="updatePhotoPreview">
 
-                <InputLabel for="photo" value="Photo" />
+                <InputLabel for="photo" :value="lang().label.photo" />
 
                 <!-- Current Profile Photo -->
                 <div v-show="!photoPreview" class="mt-2">
@@ -105,11 +105,11 @@ const clearPhotoFileInput = () => {
                 </div>
 
                 <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
+                    {{ lang().button.select_new_photo }}
                 </SecondaryButton>
 
                 <SecondaryButton v-if="user.profile_photo_path" type="button" class="mt-2" @click.prevent="deletePhoto">
-                    Remove Photo
+                    {{ lang().button.remove_photo }}
                 </SecondaryButton>
 
                 <InputError :message="form.errors.photo" class="mt-2" />
@@ -117,32 +117,32 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" :value="lang().label.name" />
                 <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" autocomplete="name"
-                    placeholder="Your Name" :error="form.errors.name" />
+                    :placeholder="lang().placeholder.name" :error="form.errors.name" />
                 <InputError :message="form.errors.name" class="mt-2" />
             </div>
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" :value="lang().label.email" />
                 <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" autocomplete="username"
-                    placeholder="email@email.com" :error="form.errors.email" />
+                    :placeholder="lang().placeholder.email" :error="form.errors.email" />
                 <InputError :message="form.errors.email" class="mt-2" />
 
                 <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
                     <p class="text-sm mt-2 dark:text-white">
-                        Your email address is unverified.
+                        {{ lang().label.email_address_is_unverified }}
 
                         <Link :href="route('verification.send')" method="post" as="button"
                             class="underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-slate-800"
                             @click.prevent="sendEmailVerification">
-                        Click here to re-send the verification email.
+                        {{ lang().label.click_here_to_resend_verification_email }}
                         </Link>
                     </p>
 
                     <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                        A new verification link has been sent to your email address.
+                        {{ lang().label.an_new_verification_link }}
                     </div>
                 </div>
             </div>
@@ -150,11 +150,11 @@ const clearPhotoFileInput = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                {{ lang().label.saved }}
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save {{ form.processing ? '...' : '' }}
+                {{ lang().button.save }} {{ form.processing ? '...' : '' }}
             </PrimaryButton>
         </template>
     </FormSection>

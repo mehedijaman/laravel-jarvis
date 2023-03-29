@@ -10,9 +10,9 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="API Tokens">
+    <AppLayout :title="lang().label.api_tokens">
         <template #title>
-            <span>API Tokens</span>
+            <span>{{lang().label.api_tokens}}</span>
         </template>
 
         <div>

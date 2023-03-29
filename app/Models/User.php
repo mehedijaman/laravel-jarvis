@@ -12,7 +12,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -72,10 +72,10 @@ class User extends Authenticatable
         return Carbon::parse($this->attributes['updated_at'])->isoFormat('D MMMM Y HH:mm');
     }
 
-    public function getEmailVerifiedAtAttribute()
-    {
-        return $this->attributes['email_verified_at'] == null ? null : Carbon::parse($this->attributes['email_verified_at'])->isoFormat('D MMMM Y HH:mm');
-    }
+    // public function getEmailVerifiedAtAttribute()
+    // {
+    //     return $this->attributes['email_verified_at'] == null ? null : Carbon::parse($this->attributes['email_verified_at'])->isoFormat('D MMMM Y HH:mm');
+    // }
 
     public function getPermissionArray()
     {

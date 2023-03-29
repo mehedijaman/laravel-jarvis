@@ -19,36 +19,34 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 </script>
 
 <template>
-    <Head title="Email Verification" />
+    <Head :title="lang().label.email_verification" />
 
     <AuthenticationCard>
         <template #logo>
             <AuthenticationCardLogo />
         </template>
         <div class="flex flex-col mb-4">
-            <h2 class="text-primary font-semibold text-xl">Verify Email</h2>
-            <small class="text-slate-400">Before continuing, could you verify your email address by clicking on the link we
-                just emailed to you? If you
-                didn't receive the email, we will gladly send you another.</small>
+            <h2 class="text-primary font-semibold text-xl">{{ lang().label.verify_email }}</h2>
+            <small class="text-slate-400">{{ lang().label.verify_email_caption }}</small>
         </div>
         <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            A new verification link has been sent to the email address you provided in your profile settings.
+            {{ lang().label.email_verification_link }}
         </div>
 
         <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4 flex flex-col gap-4 items-center justify-between">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email {{ form.processing ? '...' : '' }}
+                    {{ lang().button.resend_email_verification_link }} {{ form.processing ? '...' : '' }}
                 </PrimaryButton>
 
                 <div>
                     <Link :href="route('profile.show')"
                         class="underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-slate-800">
-                    Edit Profile</Link>
+                    {{ lang().label.edit_profile }}</Link>
 
                     <Link :href="route('logout')" method="post" as="button"
                         class="underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-slate-800 ml-2">
-                    Log Out
+                    {{ lang().label.logout }}
                     </Link>
                 </div>
             </div>

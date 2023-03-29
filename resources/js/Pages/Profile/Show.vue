@@ -14,9 +14,9 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="Profile">
+    <AppLayout :title="lang().label.profile">
         <template #title>
-            <span>Profile</span>
+            <span>{{ lang().label.profile }}</span>
         </template>
 
         <div>
