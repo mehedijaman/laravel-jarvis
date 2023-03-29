@@ -1,4 +1,5 @@
 <script setup>
+import SwitchLocale from '@/Components/SwitchLocale.vue';
 import SwitchDarkMode from '@/Components/SwitchDarkMode.vue';
 import AuthenticationIllustration from '@/Components/AuthenticationIllustration.vue';
 </script>
@@ -12,7 +13,10 @@ import AuthenticationIllustration from '@/Components/AuthenticationIllustration.
                         <slot name="logo" />
                         <p class="text-slate-600 dark:text-slate-400 text-xl">{{ $page.props.app.name }}</p>
                     </div>
-                    <SwitchDarkMode />
+                    <div class="flex justify-between items-center gap-1">
+                        <SwitchLocale />
+                        <SwitchDarkMode />
+                    </div>
                 </div>
                 <slot />
             </div>

@@ -54,7 +54,7 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
         </ActionButton>
         <DialogModal :show="show" @close="closeModal">
             <template #title>
-                {{ lang.label.edit }} {{ props.title }}
+                {{ lang().label.edit }} {{ props.title }}
             </template>
 
             <template #content>

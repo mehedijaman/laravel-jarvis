@@ -45,12 +45,12 @@ class UserController extends Controller
             $roles = Role::where('name', '<>', 'superadmin')->get();
         }
         return Inertia::render('User/Index', [
-            'title'         => "User",
+            'title'         => __('app.label.user'),
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
-            'users'         => $users->with('roles','roles.permissions')->paginate($perPage)->onEachSide(0),
+            'users'         => $users->with('roles', 'roles.permissions')->paginate($perPage)->onEachSide(0),
             'roles'         => $roles,
-            'breadcrumbs'   => [['label' => "User", 'href' => route('user.index')]],
+            'breadcrumbs'   => [['label' => __('app.label.user'), 'href' => route('user.index')]],
         ]);
     }
 
@@ -76,10 +76,10 @@ class UserController extends Controller
             ]);
             $user->assignRole($request->role);
             DB::commit();
-            return back()->with('success', $user->name . " created successfully");
+            return back()->with('success', __('app.label.created_successfully', ['name' => $user->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', " create failed : " . $th->getMessage());
+            return back()->with('error', __('app.label.created_error', ['name' => __('app.label.user')]) . $th->getMessage());
         }
     }
 
@@ -113,10 +113,10 @@ class UserController extends Controller
             ]);
             $user->syncRoles($request->role);
             DB::commit();
-            return back()->with('success', $user->name . " updated successfully");
+            return back()->with('success', __('app.label.updated_successfully', ['name' => $user->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $user->name . " udpate failed : " . $th->getMessage());
+            return back()->with('error', __('app.label.updated_error', ['name' => $user->name]) . $th->getMessage());
         }
     }
 
@@ -127,20 +127,20 @@ class UserController extends Controller
     {
         try {
             $user->delete();
-            return back()->with('success', $user->name . " deleted successfully");
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => $user->name]));
         } catch (\Throwable $th) {
-            return back()->with('error', $user->name . " delete failed : " . $th->getMessage());
+            return back()->with('error', __('app.label.deleted_error', ['name' => $user->name]) . $th->getMessage());
         }
     }
 
     public function destroyBulk(Request $request)
     {
         try {
-            $user = User::whereIn('id', $request->id);
-            $user->delete();
-            return back()->with('success', 'Deleted ' . count($request->id) . ' user successfully');
+            $users = User::whereIn('id', $request->id);
+            $users->delete();
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . __('app.label.user')]));
         } catch (\Throwable $th) {
-            return back()->with('success', 'Deleted ' . count($request->id) . ' user failed');
+            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id) . ' ' . __('app.label.user')]) . $th->getMessage());
         }
     }
 }

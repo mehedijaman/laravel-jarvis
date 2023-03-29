@@ -36,11 +36,11 @@ class PermissionController extends Controller
         }
         $perPage = $request->has('perPage') ? $request->perPage : 10;
         return Inertia::render('Permission/Index', [
-            'title'         => "Permission",
+            'title'         => __('app.label.permission'),
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
             'permissions'   => $permissions->paginate($perPage)->onEachSide(0),
-            'breadcrumbs'   => [['label' => "Permission", 'href' => route('permission.index')]],
+            'breadcrumbs'   => [['label' => __('app.label.permission'), 'href' => route('permission.index')]],
         ]);
     }
 
@@ -66,10 +66,10 @@ class PermissionController extends Controller
             $superadmin = Role::whereName('superadmin')->first();
             $superadmin->givePermissionTo([$request->name]);
             DB::commit();
-            return back()->with('success', $permission->name . " created succesfully");
+            return back()->with('success', __('app.label.created_successfully', ['name' => $permission->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', "Permission create failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.created_error', ['name' => __('app.label.permission')]) . $th->getMessage());
         }
     }
 
@@ -104,10 +104,10 @@ class PermissionController extends Controller
             ]);
             $superadmin->givePermissionTo([$permission->name]);
             DB::commit();
-            return back()->with('success', $permission->name . " updated succesfully");
+            return back()->with('success', __('app.label.updated_successfully', ['name' => $permission->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $permission->name . " update failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.updated_error', ['name' => $permission->name]) . $th->getMessage());
         }
     }
 
@@ -122,21 +122,21 @@ class PermissionController extends Controller
             $superadmin->revokePermissionTo([$permission->name]);
             $permission->delete();
             DB::commit();
-            return back()->with('success', $permission->name . " deleted succesfully");
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => $permission->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $permission->name . " delete failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.deleted_error', ['name' => $permission->name]) . $th->getMessage());
         }
     }
 
     public function destroyBulk(Request $request)
     {
         try {
-            $permission = Permission::whereIn('id', $request->id);
-            $permission->delete();
-            return back()->with('success', count($request->id) . " Permission deleted successfully");
+            $permissions = Permission::whereIn('id', $request->id);
+            $permissions->delete();
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . __('app.label.permission')]));
         } catch (\Throwable $th) {
-            return back()->with('error', count($request->id) . " Permission delete failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id) . ' ' . __('app.label.permission')]) . $th->getMessage());
         }
     }
 }

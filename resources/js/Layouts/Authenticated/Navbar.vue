@@ -6,6 +6,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import SwitchDarkMode from '@/Components/SwitchDarkMode.vue';
 import { Bars3BottomLeftIcon } from '@heroicons/vue/24/solid'
+import SwitchLocale from '@/Components/SwitchLocale.vue';
 
 const emit = defineEmits(['open'])
 const switchToTeam = (team) => {
@@ -39,6 +40,7 @@ const logout = () => {
                 </div>
 
                 <div class="flex items-center space-x-1">
+                    <SwitchLocale />
                     <SwitchDarkMode />
                     <div class="relative">
                         <!-- Teams Dropdown -->

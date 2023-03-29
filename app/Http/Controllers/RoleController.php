@@ -42,12 +42,12 @@ class RoleController extends Controller
         }
         $perPage = $request->has('perPage') ? $request->perPage : 10;
         return Inertia::render('Role/Index', [
-            'title'         => "Role",
+            'title'         => __('app.label.role'),
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
             'roles'         => $roles->paginate($perPage)->onEachSide(0),
             'permissions'   => $permissions->get(),
-            'breadcrumbs'   => [['label' => "Role", 'href' => route('role.index')]],
+            'breadcrumbs'   => [['label' => __('app.label.role'), 'href' => route('role.index')]],
         ]);
     }
 
@@ -72,10 +72,10 @@ class RoleController extends Controller
             ]);
             $role->givePermissionTo($request->permissions);
             DB::commit();
-            return back()->with('success', $role->name . " created succesfully");
+            return back()->with('success', __('app.label.created_successfully', ['name' => $role->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', "Role create failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.created_error', ['name' => __('app.label.role')]) . $th->getMessage());
         }
     }
 
@@ -108,10 +108,10 @@ class RoleController extends Controller
             ]);
             $role->syncPermissions($request->permissions);
             DB::commit();
-            return back()->with('success', $role->name . " updated succesfully");
+            return back()->with('success', __('app.label.updated_successfully', ['name' => $role->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $role->name . " update failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.updated_error', ['name' => $role->name]) . $th->getMessage());
         }
     }
 
@@ -122,20 +122,20 @@ class RoleController extends Controller
     {
         try {
             $role->delete();
-            return back()->with('success', $role->name . " deleted succesfully");
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => $role->name]));
         } catch (\Throwable $th) {
-            return back()->with('error', $role->name . " delete failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.deleted_error', ['name' => $role->name]) . $th->getMessage());
         }
     }
 
     public function destroyBulk(Request $request)
     {
         try {
-            $role = Role::whereIn('id', $request->id);
-            $role->delete();
-            return back()->with('success', count($request->id) . " Role deleted successfully : ");
+            $roles = Role::whereIn('id', $request->id);
+            $roles->delete();
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . __('app.label.role')]));
         } catch (\Throwable $th) {
-            return back()->with('error', count($request->id) . " Role delete failed : ") . $th->getMessage();
+            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id) . ' ' . __('app.label.role')]) . $th->getMessage());
         }
     }
 }

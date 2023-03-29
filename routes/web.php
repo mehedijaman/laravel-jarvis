@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 /*
@@ -26,6 +27,11 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/set-locale/{locale}', function ($locale) {
+    Session::put('locale', $locale);
+    return back();
+})->name('set-locale');
 
 Route::middleware([
     'auth:sanctum',

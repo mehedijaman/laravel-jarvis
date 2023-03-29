@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import SwitchDarkMode from '@/Components/SwitchDarkMode.vue';
+import SwitchLocale from '@/Components/SwitchLocale.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -26,7 +27,10 @@ defineProps({
                             {{ $page.props.app.name }}
                         </p>
                         </Link>
-                        <SwitchDarkMode />
+                        <div class="flex justify-between items-center gap-1">
+                            <SwitchLocale />
+                            <SwitchDarkMode />
+                        </div>
                     </div>
                     <div>
                         <a target="_blank" href="https://github.com/erikwibowo/Laravel-Jarvis.git"
