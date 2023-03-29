@@ -16,24 +16,24 @@ import { Link } from '@inertiajs/vue3';
         </div>
         <ol class="pb-24 pt-6 space-y-2 px-3">
             <li>
-                <span class="font-md uppercase font-semibold">MAIN MENU</span>
+                <span class="font-md uppercase font-semibold">{{ lang().label.main_menu }}</span>
             </li>
             <li v-bind:class="route().current('dashboard') ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30' : ''"
                 class="hover:bg-white/20 rounded dark:hover:bg-primary/30">
                 <Link :href="route('dashboard')" class="flex items-center py-1.5 px-3 space-x-2">
                 <Squares2X2Icon class="w-5 h-auto" />
-                <span>Dashboard</span>
+                <span>{{ lang().label.dashboard }}</span>
                 </Link>
             </li>
             <li v-show="can(['read user', 'read role', 'read permission'])">
-                <span class="font-md uppercase font-semibold">DATA</span>
+                <span class="font-md uppercase font-semibold">{{ lang().label.data }}</span>
             </li>
             <li v-show="can(['read user'])"
                 v-bind:class="route().current('user.index') ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30' : ''"
                 class="hover:bg-white/20 rounded dark:hover:bg-primary/30">
                 <Link :href="route('user.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <UserIcon class="w-5 h-auto" />
-                <span>User</span>
+                <span>{{ lang().label.user }}</span>
                 </Link>
             </li>
             <li v-show="can(['read role'])"
@@ -41,7 +41,7 @@ import { Link } from '@inertiajs/vue3';
                 class="hover:bg-white/20 rounded dark:hover:bg-primary/30">
                 <Link :href="route('role.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <KeyIcon class="w-5 h-auto" />
-                <span>Role</span>
+                <span>{{ lang().label.role }}</span>
                 </Link>
             </li>
             <li v-show="can(['read permission'])"
@@ -49,7 +49,7 @@ import { Link } from '@inertiajs/vue3';
                 class="hover:bg-white/20 rounded dark:hover:bg-primary/30">
                 <Link :href="route('permission.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <ShieldCheckIcon class="w-5 h-auto" />
-                <span>Permission</span>
+                <span>{{ lang().label.permission }}</span>
                 </Link>
             </li>
         </ol>

@@ -97,7 +97,7 @@ const select = () => {
                                         :dataSet="$page.props.app.perpage" />
                                 </div>
                                 <TextInput v-model="data.params.search" type="text" class="block h-9"
-                                    placeholder="Search" />
+                                    :placeholder="lang().placeholder.search" />
                             </div>
                         </template>
                         <template #table-head>
@@ -108,7 +108,7 @@ const select = () => {
                                 <th class="px-2 py-4 text-center">#</th>
                                 <th class="px-2 py-4 cursor-pointer" v-on:click="order('name')">
                                     <div class="flex justify-between items-center">
-                                        <span>Name</span>
+                                        <span>{{ lang().label.name }}</span>
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
@@ -118,10 +118,10 @@ const select = () => {
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th class="px-2 py-4t text-left">Permission</th>
+                                <th class="px-2 py-4t text-left">{{ lang().label.permission }}</th>
                                 <th class="px-2 py-4 cursor-pointer" v-on:click="order('created_at')">
                                     <div class="flex justify-between items-center">
-                                        <span>Created</span>
+                                        <span>{{ lang().label.created }}</span>
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
@@ -140,10 +140,14 @@ const select = () => {
                                 <td class="whitespace-nowrap py-4 px-2 sm:py-3">{{ role.name }}</td>
                                 <td class="whitespace-nowrap py-4 px-2 sm:py-3">{{ role.guard_name }}</td>
                                 <td class="whitespace-nowrap py-4 px-2 sm:py-3">
-                                    <p v-if="role.permissions.length != 0">
-                                        <Permission :permissions="role.permissions" :title="role.permissions.length+' Permissions'" />
-                                    </p>
-                                    <p v-else>not permission</p>
+                                    <div v-if="role.permissions.length != 0">
+                                        <Permission v-if="role.permissions.length == props.permissions.length"
+                                            :permissions="role.permissions" :title="lang().label.all_permission"
+                                            :caption="role.name" />
+                                        <Permission v-else :permissions="role.permissions"
+                                            :title="role.permissions.length + ' Permissions'" :caption="role.name" />
+                                    </div>
+                                    <p v-else>{{ lang().label.no_permission }}</p>
                                 </td>
                                 <td class="whitespace-nowrap py-4 px-2 sm:py-3">{{ role.created_at }}</td>
                                 <td class="whitespace-nowrap py-4 px-2 sm:py-3">

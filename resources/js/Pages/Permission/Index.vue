@@ -94,7 +94,7 @@ const select = () => {
                                         :dataSet="$page.props.app.perpage" />
                                 </div>
                                 <TextInput v-model="data.params.search" type="text" class="block h-9"
-                                    placeholder="Search" />
+                                    :placeholder="lang().placeholder.search" />
                             </div>
                         </template>
                         <template #table-head>
@@ -105,7 +105,7 @@ const select = () => {
                                 <th class="px-2 py-4 text-center">#</th>
                                 <th class="px-2 py-4 cursor-pointer" v-on:click="order('name')">
                                     <div class="flex justify-between items-center">
-                                        <span>Name</span>
+                                        <span>{{ lang().label.name }}</span>
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
@@ -117,7 +117,7 @@ const select = () => {
                                 </th>
                                 <th class="px-2 py-4 cursor-pointer" v-on:click="order('created_at')">
                                     <div class="flex justify-between items-center">
-                                        <span>Created</span>
+                                        <span>{{ lang().label.created }}</span>
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>

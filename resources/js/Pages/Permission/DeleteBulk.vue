@@ -41,26 +41,26 @@ const closeModal = () => {
 </script>
 <template>
     <div>
-        <DangerButton v-tooltip="'Delete selected'" class="rounded-none" @click.prevent="show = true">
+        <DangerButton v-tooltip="lang().label.delete_selected" class="rounded-none" @click.prevent="show = true">
             <TrashIcon class="w-4 h-auto" />
         </DangerButton>
         <ConfirmationModal :show="show" @close="closeModal">
             <template #title>
-                Delete Selected {{ props.title }}
+                {{ lang().label.delete_selected }} {{ props.title }}
             </template>
 
             <template #content>
-                Are you sure you would like to delete {{ props.selectedId?.length }} {{ props.title }}?
+                {{ lang().label.delete_confirm }} {{ props.selectedId?.length }} {{ props.title }}?
             </template>
 
             <template #footer>
                 <SecondaryButton @click="closeModal">
-                    Cancel
+                    {{ lang().button.cancel }}
                 </SecondaryButton>
 
                 <DangerButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     @click="submit">
-                    Delete {{ form.processing ? '...' : '' }}
+                    {{ lang().button.delete }} {{ form.processing ? '...' : '' }}
                 </DangerButton>
             </template>
         </ConfirmationModal>

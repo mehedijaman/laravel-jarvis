@@ -77,24 +77,24 @@ const select = () => {
 </script>
 <template>
     <div>
-        <ActionButton v-tooltip="'Edit'" @click.prevent="show = true, emit('open')">
+        <ActionButton v-tooltip="lang().label.edit" @click.prevent="show = true, emit('open')">
             <PencilIcon class="w-4 h-auto" />
         </ActionButton>
         <DialogModal :show="show" @close="closeModal">
             <template #title>
-                Edit {{ props.title }}
+                {{ lang().label.edit }} {{ props.title }}
             </template>
 
             <template #content>
                 <form class="space-y-2" @submit.prevent="submit">
                     <div class="space-y-1">
-                        <InputLabel for="name" value="Name" />
+                        <InputLabel for="name" :value="lang().label.name" />
                         <TextInput id="name" v-model="form.name" type="text" class="block w-full" autocomplete="name"
-                            placeholder="Role Name" :error="form.errors.name" @keyup.enter="submit" />
+                            :placeholder="lang().placeholder.role_name" :error="form.errors.name" @keyup.enter="submit" />
                         <InputError :message="form.errors.name" />
                     </div>
                     <div>
-                        <InputLabel value="Permissions" />
+                        <InputLabel :value="lang().label.permissions" />
                         <InputError class="mt-2" :message="form.errors.permissions" />
                         <div class="flex justify-start items-center space-x-2 mt-2">
                             <Checkbox id="permission-all" v-model:checked="data.multipleSelect" @change="selectAll" />
@@ -116,12 +116,12 @@ const select = () => {
 
             <template #footer>
                 <SecondaryButton @click="closeModal">
-                    Cancel
+                    {{ lang().button.cancel }}
                 </SecondaryButton>
 
                 <PrimaryButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     @click="submit">
-                    Save {{ form.processing ? '...' : '' }}
+                    {{ lang().button.save }} {{ form.processing ? '...' : '' }}
                 </PrimaryButton>
             </template>
         </DialogModal>

@@ -31,26 +31,26 @@ const closeModal = () => {
 </script>
 <template>
     <div>
-        <ActionButton v-tooltip="'Delete'" variant="danger" @click.prevent="show = true, emit('open')">
+        <ActionButton v-tooltip="lang().label.delete" variant="danger" @click.prevent="show = true, emit('open')">
             <TrashIcon class="w-4 h-auto" />
         </ActionButton>
         <ConfirmationModal :show="show" @close="closeModal">
             <template #title>
-                Delete {{ props.title }}
+                {{ lang().label.delete }} {{ props.title }}
             </template>
 
             <template #content>
-                Are you sure you would like to delete {{ props.user?.name }}?
+                {{ lang().label.delete_confirm }} {{ props.user?.name }}?
             </template>
 
             <template #footer>
                 <SecondaryButton @click="closeModal">
-                    Cancel
+                    {{ lang().button.cancel }}
                 </SecondaryButton>
 
                 <DangerButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     @click="submit">
-                    Delete {{ form.processing ? '...' : '' }}
+                    {{ lang().button.delete }} {{ form.processing ? '...' : '' }}
                 </DangerButton>
             </template>
         </ConfirmationModal>

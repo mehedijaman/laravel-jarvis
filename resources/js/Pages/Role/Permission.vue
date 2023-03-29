@@ -6,6 +6,10 @@ import { ref } from 'vue';
 const show = ref(false)
 const props = defineProps({
     title: String,
+    caption: {
+        type: String,
+        default: null,
+    },
     permissions: Object,
 })
 
@@ -16,12 +20,13 @@ const closeModal = () => {
 <template>
     <div>
         <div>
-            <p v-tooltip="'Show permission'" class="text-primary underline cursor-pointer w-fit" @click="show = true">{{
-                props.title }}</p>
+            <p v-tooltip="lang().label.show_permission" class="text-primary underline cursor-pointer w-fit"
+                @click="show = true">{{
+                    props.title }}</p>
         </div>
         <DialogModal :show="show" @close="closeModal">
             <template #title>
-                Permission {{ props.title }}
+                {{ lang().label.permission }} {{ props.caption ? props.caption : props.title }}
             </template>
 
             <template #content>
@@ -37,7 +42,7 @@ const closeModal = () => {
 
             <template #footer>
                 <SecondaryButton @click="closeModal">
-                    CLose
+                    {{ lang().button.close }}
                 </SecondaryButton>
             </template>
         </DialogModal>

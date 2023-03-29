@@ -49,20 +49,21 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
 </script>
 <template>
     <div>
-        <ActionButton v-tooltip="'Edit'" @click.prevent="show = true, emit('open')">
+        <ActionButton v-tooltip="lang().label.edit" @click.prevent="show = true, emit('open')">
             <PencilIcon class="w-4 h-auto" />
         </ActionButton>
         <DialogModal :show="show" @close="closeModal">
             <template #title>
-                Edit {{ props.title }}
+                {{ lang.label.edit }} {{ props.title }}
             </template>
 
             <template #content>
                 <form class="space-y-2" @submit.prevent="submit">
                     <div class="space-y-1">
-                        <InputLabel for="name" value="Name" />
+                        <InputLabel for="name" :value="lang().label.name" />
                         <TextInput id="name" v-model="form.name" type="text" class="block w-full" autocomplete="name"
-                            placeholder="Permission Name" :error="form.errors.name" @keyup.enter="submit" />
+                            :placeholder="lang().placeholder.permission_name" :error="form.errors.name"
+                            @keyup.enter="submit" />
                         <InputError :message="form.errors.name" />
                     </div>
                 </form>
@@ -70,12 +71,12 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
 
             <template #footer>
                 <SecondaryButton @click="closeModal">
-                    Cancel
+                    {{ lang().button.cancel }}
                 </SecondaryButton>
 
                 <PrimaryButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     @click="submit">
-                    Save {{ form.processing ? '...' : '' }}
+                    {{ lang().button.save }} {{ form.processing ? '...' : '' }}
                 </PrimaryButton>
             </template>
         </DialogModal>

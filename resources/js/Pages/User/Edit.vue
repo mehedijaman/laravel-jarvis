@@ -54,43 +54,44 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
 </script>
 <template>
     <div>
-        <ActionButton v-tooltip="'Edit'" @click.prevent="show = true, emit('open')">
+        <ActionButton v-tooltip="lang().label.edit" @click.prevent="show = true, emit('open')">
             <PencilIcon class="w-4 h-auto" />
         </ActionButton>
         <DialogModal :show="show" @close="closeModal">
             <template #title>
-                Edit {{ props.title }}
+                {{ lang().label.edit }} {{ props.title }}
             </template>
 
             <template #content>
                 <form class="space-y-2" @submit.prevent="submit">
                     <div class="space-y-1">
-                        <InputLabel for="name" value="Name" />
+                        <InputLabel for="name" :value="lang().label.name" />
                         <TextInput id="name" v-model="form.name" type="text" class="block w-full" autocomplete="name"
-                            placeholder="Your Name" :error="form.errors.name" @keyup.enter="submit" />
+                            :placeholder="lang().placeholder.name" :error="form.errors.name" @keyup.enter="submit" />
                         <InputError :message="form.errors.name" />
                     </div>
                     <div class="space-y-1">
-                        <InputLabel for="email" value="Email" />
+                        <InputLabel for="email" :value="lang().label.email" />
                         <TextInput id="email" v-model="form.email" type="email" class="block w-full"
-                            placeholder="email@email.com" :error="form.errors.email" @keyup.enter="submit" />
+                            :placeholder="lang().placeholder.email" :error="form.errors.email" @keyup.enter="submit" />
                         <InputError :message="form.errors.email" />
                     </div>
                     <div class="space-y-1">
-                        <InputLabel for="password" value="Password" />
+                        <InputLabel for="password" :value="lang().label.password" />
                         <TextInput id="password" v-model="form.password" type="password" class="block w-full"
-                            placeholder="••••••••" :error="form.errors.password" @keyup.enter="submit" />
+                            :placeholder="lang().placeholder.password" :error="form.errors.password"
+                            @keyup.enter="submit" />
                         <InputError :message="form.errors.password" />
                     </div>
                     <div class="space-y-1">
-                        <InputLabel for="password_confirmation" value="Password Confirmation" />
+                        <InputLabel for="password_confirmation" :value="lang().label.password_confirmation" />
                         <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
-                            class="block w-full" placeholder="••••••••" :error="form.errors.password_confirmation"
-                            @keyup.enter="submit" />
+                            class="block w-full" :placeholder="lang().placeholder.password"
+                            :error="form.errors.password_confirmation" @keyup.enter="submit" />
                         <InputError :message="form.errors.password_confirmation" />
                     </div>
                     <div class="space-y-1">
-                        <InputLabel for="role" value="Role" />
+                        <InputLabel for="role" :value="lang().label.role" />
                         <SelectInput id="role" v-model="form.role" :dataSet="roles" class="block w-full"
                             :error="form.errors.role" />
                         <InputError :message="form.errors.role" />
@@ -100,12 +101,12 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
 
             <template #footer>
                 <SecondaryButton @click="closeModal">
-                    Cancel
+                    {{ lang().button.cancel }}
                 </SecondaryButton>
 
                 <PrimaryButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     @click="submit">
-                    Save {{ form.processing ? '...' : '' }}
+                    {{ lang().button.save }} {{ form.processing ? '...' : '' }}
                 </PrimaryButton>
             </template>
         </DialogModal>
