@@ -193,6 +193,7 @@ return [
         'restored_at'              => 'restored at',
         'result_text_under_image'  => 'result text under image',
         'role'                     => 'role',
+        'permission'               => 'permission',
         'second'                   => 'second',
         'sex'                      => 'sex',
         'short_text'               => 'short text',
