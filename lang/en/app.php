@@ -130,7 +130,12 @@ return [
         'deleted_successfully' => '<b>:name</b> deleted successfully.',
         'deleted_error' => 'Error deleting <b>:name</b>. ',
         'set_locale' => 'Change to ID',
-        'check_all' => 'Check All'
+        'check_all' => 'Check All',
+        'short_name' => 'Short Name',
+        'description' => 'Description',
+        'setting' => 'Setting',
+        'web_setting' => 'Website Setting',
+        'web_setting_description' => 'Change your web setting',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

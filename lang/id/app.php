@@ -127,7 +127,12 @@ return [
         'deleted_successfully' => '<b>:name</b> berhasil dihapus.',
         'deleted_error' => 'Kesalahan saat menghapus <b>:name</b>. ',
         'set_locale' => 'Ganti ke EN',
-        'check_all' => 'Pilih Semua'
+        'check_all' => 'Pilih Semua',
+        'short_name' => 'Nama Singkat',
+        'description' => 'Deskripsi',
+        'setting' => 'Pengaturan',
+        'web_setting' => 'Pengaturan Website',
+        'web_setting_description' => 'Ubah pengaturan website anda',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

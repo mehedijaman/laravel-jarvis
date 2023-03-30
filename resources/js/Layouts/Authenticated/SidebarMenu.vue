@@ -1,6 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { KeyIcon, ShieldCheckIcon, Squares2X2Icon, UserIcon } from '@heroicons/vue/24/solid';
+import { Cog6ToothIcon, KeyIcon, ShieldCheckIcon, Squares2X2Icon, UserIcon } from '@heroicons/vue/24/solid';
 import { Link } from '@inertiajs/vue3';
 
 </script>
@@ -50,6 +50,17 @@ import { Link } from '@inertiajs/vue3';
                 <Link :href="route('permission.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <ShieldCheckIcon class="w-5 h-auto" />
                 <span>{{ lang().label.permission }}</span>
+                </Link>
+            </li>
+            <li v-show="can(['read setting'])">
+                <span class="font-md uppercase font-semibold">Setting</span>
+            </li>
+            <li v-show="can(['read setting'])"
+                v-bind:class="route().current('setting.index') ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30' : ''"
+                class="hover:bg-white/20 rounded dark:hover:bg-primary/30">
+                <Link :href="route('setting.index')" class="flex items-center py-1.5 px-3 space-x-2">
+                <Cog6ToothIcon class="w-5 h-auto" />
+                <span>{{ lang().label.setting }}</span>
                 </Link>
             </li>
         </ol>

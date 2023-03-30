@@ -148,6 +148,10 @@ const logout = () => {
                                     {{ lang().label.profile }}
                                 </DropdownLink>
 
+                                <DropdownLink v-show="can(['read setting'])" :href="route('setting.index')">
+                                    {{ lang().label.setting }}
+                                </DropdownLink>
+
                                 <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
                                     {{ lang().label.api_tokens }}
                                 </DropdownLink>

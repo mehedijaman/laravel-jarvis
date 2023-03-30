@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,6 @@ Route::middleware([
 
     Route::resource('permission', PermissionController::class)->except('create', 'show', 'edit');
     Route::post('permission/destroy-bulk', [PermissionController::class, 'destroyBulk'])->name('permission.destroy-bulk');
+
+    Route::resource('setting', SettingController::class)->except('create','store', 'show', 'edit','destory');
 });

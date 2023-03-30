@@ -27,5 +27,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'update permission', 'guard_name' => 'web']);
         Permission::create(['name' => 'read permission', 'guard_name' => 'web']);
         Permission::create(['name' => 'create permission', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'read setting', 'guard_name' => 'web']);
+        Permission::create(['name' => 'update setting', 'guard_name' => 'web']);
     }
 }
