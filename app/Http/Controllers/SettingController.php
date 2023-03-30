@@ -16,7 +16,7 @@ class SettingController extends Controller
     public function index()
     {
         return Inertia::render('Setting', [
-            'title'     => 'Setting',
+            'title'     => __('app.label.setting'),
             'setting'   => Setting::first()
         ]);
     }
