@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Privacy Policy" />
+    <Head :title="lang().label.privacy_policy" />
 
     <div class="font-sans text-slate-900 dark:text-slate-100 antialiased">
         <div class="pt-4 bg-slate-100 dark:bg-slate-900">

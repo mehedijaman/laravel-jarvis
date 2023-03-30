@@ -126,7 +126,8 @@ return [
         'updated_error' => 'Kesalahan saat memperbarui :name.',
         'deleted_successfully' => '<b>:name</b> berhasil dihapus.',
         'deleted_error' => 'Kesalahan saat menghapus <b>:name</b>. ',
-        'set_locale' => 'Ganti ke EN'
+        'set_locale' => 'Ganti ke EN',
+        'check_all' => 'Pilih Semua'
     ],
     'placeholder' => [
         'email' => 'email@email.com',
@@ -135,7 +136,7 @@ return [
         'code' => '••••••••',
         'recovery_code' => 'Kode Pemulihan',
         'token_name' => 'Nama Token',
-        'permission_name' => 'Nama Izin',
+        'permission_name' => 'Nama Hak Akses',
         'search' => 'Cari',
         'role_name' => 'Nama Level Pengguna'
     ],
@@ -148,7 +149,7 @@ return [
         'confirm' => 'Konfirmasi',
         'create' => 'Buat',
         'delete' => 'Hapus',
-        'permissions' => 'Izin',
+        'permissions' => 'Hak Akses',
         'close' => 'Tutup',
         'cancel' => 'Batal',
         'save' => 'Simpan',

@@ -82,7 +82,7 @@ const select = () => {
                         <InputError class="mt-2" :message="form.errors.permissions" />
                         <div class="flex justify-start items-center space-x-2 mt-2">
                             <Checkbox id="permission-all" v-model:checked="data.multipleSelect" @change="selectAll" />
-                            <InputLabel for="permission-all" value="Check All" />
+                            <InputLabel for="permission-all" :value="lang().label.check_all" />
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-2">
                             <div class="flex items-center justify-start space-x-2"

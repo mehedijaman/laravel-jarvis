@@ -129,7 +129,8 @@ return [
         'updated_error' => 'Error updating :name.',
         'deleted_successfully' => '<b>:name</b> deleted successfully.',
         'deleted_error' => 'Error deleting <b>:name</b>. ',
-        'set_locale' => 'Change to ID'
+        'set_locale' => 'Change to ID',
+        'check_all' => 'Check All'
     ],
     'placeholder' => [
         'email' => 'email@email.com',

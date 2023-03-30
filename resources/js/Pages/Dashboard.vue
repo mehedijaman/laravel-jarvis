@@ -6,9 +6,9 @@ Breadcrumb
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout :title="lang().label.dashboard">
         <template #title>
-            <span>Dashboard</span>
+            <span>{{ lang().label.dashboard }}</span>
         </template>
         <template #breadcrumb>
             <Breadcrumb />
