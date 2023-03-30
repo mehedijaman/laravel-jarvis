@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -56,6 +57,9 @@ class HandleInertiaRequests extends Middleware
                 'language' => function () {
                     $lang = __('app');
                     return response()->json($lang);
+                },
+                'setting' => function(){
+                    return Setting::first();
                 },
             ],
             'flash' => [

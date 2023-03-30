@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
+import ImageInput from "@/Components/ImageInput.vue";
 
 const props = defineProps({
     title: String,
@@ -15,11 +16,29 @@ const props = defineProps({
 });
 
 const form = useForm({
+    favicon: null,
+    logo: null,
     name: props.setting?.name,
     short_name: props.setting?.short_name,
     description: props.setting?.description,
+    _method: "PUT",
 });
-const update = () => {};
+const update = () => {
+    form.post(route("setting.update", props.setting?.id), {
+        preserveScroll: true,
+        onSuccess: () => null,
+        onError: () => null,
+        onFinish: () => null,
+    });
+};
+
+const fileChange = (value) => {
+    if (value.source === "favicon") {
+        form.favicon = value.file;
+    } else if (value.source === "logo") {
+        form.logo = value.file;
+    }
+};
 </script>
 
 <template>
@@ -38,6 +57,36 @@ const update = () => {};
                     </template>
 
                     <template #form>
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="favicon" value="Favicon" />
+                            <ImageInput
+                                source="favicon"
+                                v-model="form.favicon"
+                                :image="props.setting.full_path_favicon"
+                                tooltip="Click to select/change favicon"
+                                class="mt-1 block w-14 h-14"
+                                @fileChange="fileChange"
+                            />
+                            <InputError
+                                :message="form.errors.name"
+                                class="mt-2"
+                            />
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="logo" value="Logo" />
+                            <ImageInput
+                                source="logo"
+                                v-model="form.logo"
+                                :image="props.setting.full_path_logo"
+                                tooltip="Click to select/change logo"
+                                class="mt-1 block w-24 h-24"
+                                @fileChange="fileChange"
+                            />
+                            <InputError
+                                :message="form.errors.name"
+                                class="mt-2"
+                            />
+                        </div>
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="name" :value="lang().label.name" />
                             <TextInput
