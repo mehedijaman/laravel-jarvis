@@ -3,7 +3,7 @@
 
 <template>
     <div>
-        <div class="flex justify-between items-center p-2 space-x-2 overflow-x-auto">
+        <div class="flex justify-between scrollbar-table items-center p-2 space-x-2 overflow-x-auto">
             <slot name="table-action" />
         </div>
         <div class="overflow-x-auto scrollbar-table">

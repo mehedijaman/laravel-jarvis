@@ -82,13 +82,13 @@ const select = () => {
                 <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-md sm:rounded">
                     <Table>
                         <template #table-action>
-                            <div class="flex rounded overflow-hidden">
+                            <div class="flex shrink-0 rounded overflow-hidden">
                                 <Create v-show="can(['create permission'])" :title="props.title" />
                                 <DeleteBulk v-show="data.selectedId.length != 0 && can(['delete permission'])"
                                     :selectedId="data.selectedId" :title="props.title"
                                     @close="data.selectedId = [], data.multipleSelect = false" />
                             </div>
-                            <div class="flex justify-end items-center gap-2 w-3/6 md:w-2/6 lg:w-1/6">
+                            <div class="flex justify-end items-center gap-2">
                                 <div class="flex space-x-2">
                                     <SelectInput class="h-9 text-sm" v-model="data.params.perPage"
                                         :dataSet="$page.props.app.perpage" />
