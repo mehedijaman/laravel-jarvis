@@ -13,22 +13,22 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Permission::create(['name' => 'delete user', 'guard_name' => 'web']);
-        Permission::create(['name' => 'update user', 'guard_name' => 'web']);
-        Permission::create(['name' => 'read user', 'guard_name' => 'web']);
-        Permission::create(['name' => 'create user', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user delete', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user update', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user read', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user create', 'guard_name' => 'web']);
 
-        Permission::create(['name' => 'delete role', 'guard_name' => 'web']);
-        Permission::create(['name' => 'update role', 'guard_name' => 'web']);
-        Permission::create(['name' => 'read role', 'guard_name' => 'web']);
-        Permission::create(['name' => 'create role', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role delete', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role update', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role read', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role create', 'guard_name' => 'web']);
 
-        Permission::create(['name' => 'delete permission', 'guard_name' => 'web']);
-        Permission::create(['name' => 'update permission', 'guard_name' => 'web']);
-        Permission::create(['name' => 'read permission', 'guard_name' => 'web']);
-        Permission::create(['name' => 'create permission', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permission delete', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permission update', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permission read', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permission create', 'guard_name' => 'web']);
 
-        Permission::create(['name' => 'read setting', 'guard_name' => 'web']);
-        Permission::create(['name' => 'update setting', 'guard_name' => 'web']);
+        Permission::create(['name' => 'setting read', 'guard_name' => 'web']);
+        Permission::create(['name' => 'setting update', 'guard_name' => 'web']);
     }
 }

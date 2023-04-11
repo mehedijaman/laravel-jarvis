@@ -15,10 +15,10 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:create role', ['only' => ['create', 'store']]);
-        $this->middleware('permission:read role', ['only' => ['index', 'show']]);
-        $this->middleware('permission:update role', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:delete role', ['only' => ['destroy', 'destroyBulk']]);
+        $this->middleware('permission:role create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:role read', ['only' => ['index', 'show']]);
+        $this->middleware('permission:role update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:role delete', ['only' => ['destroy', 'destroyBulk']]);
     }
     /**
      * Display a listing of the resource.
@@ -37,7 +37,7 @@ class RoleController extends Controller
         $role = auth()->user()->roles->pluck('name')[0];
         $permissions = Permission::latest();
         if ($role != 'superadmin') {
-            $permissions = Permission::whereNotIn('name', ['create permission', 'read permission', 'update permission', 'delete permission'])->latest();
+            $permissions = Permission::whereNotIn('name', ['permission create', 'permission read', 'permission update', 'permission delete'])->latest();
             $roles->where('name', '<>', 'superadmin');
         }
         $perPage = $request->has('perPage') ? $request->perPage : 10;

@@ -1,55 +1,61 @@
 <script setup>
-import DialogModal from '@/Components/DialogModal.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import ActionButton from '@/Components/ActionButton.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/vue3';
-import { ref, watchEffect } from 'vue';
-import SelectInput from '@/Components/SelectInput.vue';
-import { PencilIcon } from '@heroicons/vue/24/solid';
+import DialogModal from "@/Components/DialogModal.vue";
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import ActionButton from "@/Components/ActionButton.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { useForm } from "@inertiajs/vue3";
+import { ref, watchEffect } from "vue";
+import SelectInput from "@/Components/SelectInput.vue";
+import { PencilIcon } from "@heroicons/vue/24/solid";
 
-const emit = defineEmits(['open'])
-const show = ref(false)
+const emit = defineEmits(["open"]);
+const show = ref(false);
 const props = defineProps({
     title: String,
     roles: Object,
     permission: Object,
-})
+});
 
 const form = useForm({
-    name: '',
-    guard_name: 'web',
-})
+    name: "",
+    guard_name: "web",
+});
 
 watchEffect(() => {
     if (show) {
-        form.name = props.permission?.name
+        form.name = props.permission?.name;
     }
-})
+});
 
 const submit = () => {
-    form.put(route('permission.update', props.permission?.id), {
+    form.put(route("permission.update", props.permission?.id), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,
         onFinish: () => null,
-    })
-}
+    });
+};
 
 const closeModal = () => {
-    show.value = false
-    form.errors = {}
-    form.reset()
-}
+    show.value = false;
+    form.errors = {};
+    form.reset();
+};
 
-const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
+const roles = props.roles?.map((role) => ({
+    label: role.name,
+    value: role.name,
+}));
 </script>
 <template>
     <div>
-        <ActionButton v-tooltip="lang().label.edit" @click.prevent="show = true, emit('open')">
+        <ActionButton
+            v-tooltip="lang().label.edit"
+            @click.prevent="(show = true), emit('open')"
+        >
             <PencilIcon class="w-4 h-auto" />
         </ActionButton>
         <DialogModal :show="show" @close="closeModal">
@@ -61,9 +67,15 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
                 <form class="space-y-2" @submit.prevent="submit">
                     <div class="space-y-1">
                         <InputLabel for="name" :value="lang().label.name" />
-                        <TextInput id="name" v-model="form.name" type="text" class="block w-full" autocomplete="name"
-                            :placeholder="lang().placeholder.permission_name" :error="form.errors.name"
-                            @keyup.enter="submit" />
+                        <TextInput
+                            id="name"
+                            v-model="form.name"
+                            type="text"
+                            class="block w-full"
+                            autocomplete="name"
+                            :placeholder="lang().placeholder.permission_name"
+                            :error="form.errors.name"
+                        />
                         <InputError :message="form.errors.name" />
                     </div>
                 </form>
@@ -74,9 +86,13 @@ const roles = props.roles?.map(role => ({ label: role.name, value: role.name }))
                     {{ lang().button.cancel }}
                 </SecondaryButton>
 
-                <PrimaryButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                    @click="submit">
-                    {{ lang().button.save }} {{ form.processing ? '...' : '' }}
+                <PrimaryButton
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                    @click="submit"
+                >
+                    {{ lang().button.save }} {{ form.processing ? "..." : "" }}
                 </PrimaryButton>
             </template>
         </DialogModal>

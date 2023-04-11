@@ -91,14 +91,14 @@ const select = () => {
                         <template #table-action>
                             <div class="flex shrink-0 rounded overflow-hidden">
                                 <Create
-                                    v-show="can(['create role'])"
+                                    v-show="can(['role create'])"
                                     :title="props.title"
                                     :permissions="props.permissions"
                                 />
                                 <DeleteBulk
                                     v-show="
                                         data.selectedId.length != 0 &&
-                                        can(['delete role'])
+                                        can(['role delete'])
                                     "
                                     :selectedId="data.selectedId"
                                     :title="props.title"
@@ -235,14 +235,14 @@ const select = () => {
                                         class="flex w-fit rounded overflow-hidden"
                                     >
                                         <Edit
-                                            v-show="can(['update role'])"
+                                            v-show="can(['role update'])"
                                             :title="props.title"
                                             :role="data.role"
                                             @open="data.role = role"
                                             :permissions="props.permissions"
                                         />
                                         <Delete
-                                            v-show="can(['delete role'])"
+                                            v-show="can(['role delete'])"
                                             :title="props.title"
                                             :role="data.role"
                                             @open="data.role = role"

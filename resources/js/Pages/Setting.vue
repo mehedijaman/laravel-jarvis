@@ -49,7 +49,7 @@ const fileChange = (value) => {
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <FormSection @submitted="update">
+                <FormSection>
                     <template #title> {{ lang().label.web_setting }} </template>
 
                     <template #description>
@@ -153,6 +153,7 @@ const fileChange = (value) => {
                         <PrimaryButton
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
+                            @click="update"
                         >
                             {{ lang().button.save }}
                             {{ form.processing ? "..." : "" }}

@@ -47,13 +47,13 @@ import { Link } from "@inertiajs/vue3";
                     <span>{{ lang().label.dashboard }}</span>
                 </Link>
             </li>
-            <li v-show="can(['read user', 'read role', 'read permission'])">
+            <li v-show="can(['user read', 'role read', 'permission read'])">
                 <span class="font-md uppercase font-semibold">{{
                     lang().label.data
                 }}</span>
             </li>
             <li
-                v-show="can(['read user'])"
+                v-show="can(['user read'])"
                 v-bind:class="
                     route().current('user.index')
                         ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
@@ -70,7 +70,7 @@ import { Link } from "@inertiajs/vue3";
                 </Link>
             </li>
             <li
-                v-show="can(['read role'])"
+                v-show="can(['role read'])"
                 v-bind:class="
                     route().current('role.index')
                         ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
@@ -87,7 +87,7 @@ import { Link } from "@inertiajs/vue3";
                 </Link>
             </li>
             <li
-                v-show="can(['read permission'])"
+                v-show="can(['permission read'])"
                 v-bind:class="
                     route().current('permission.index')
                         ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
@@ -103,11 +103,11 @@ import { Link } from "@inertiajs/vue3";
                     <span>{{ lang().label.permission }}</span>
                 </Link>
             </li>
-            <li v-show="can(['read setting'])">
+            <li v-show="can(['setting read'])">
                 <span class="font-md uppercase font-semibold">Setting</span>
             </li>
             <li
-                v-show="can(['read setting'])"
+                v-show="can(['setting read'])"
                 v-bind:class="
                     route().current('setting.index')
                         ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'

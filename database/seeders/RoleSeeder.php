@@ -18,32 +18,32 @@ class RoleSeeder extends Seeder
             'guard_name'    => 'web',
         ]);
         $superadmin->givePermissionTo([
-            'delete user',
-            'update user',
-            'read user',
-            'create user',
-            'delete role',
-            'update role',
-            'read role',
-            'create role',
-            'delete permission',
-            'update permission',
-            'read permission',
-            'create permission',
-            'read setting',
-            'update permission'
+            'user delete',
+            'user update',
+            'user read',
+            'user create',
+            'role delete',
+            'role update',
+            'role read',
+            'role create',
+            'permission delete',
+            'permission update',
+            'permission read',
+            'permission create',
+            'setting read',
+            'setting update'
         ]);
         $admin = Role::create([
             'name'          => 'admin',
             'guard_name'    => 'web',
         ]);
         $admin->givePermissionTo([
-            'delete user',
-            'update user',
-            'read user',
-            'create user',
-            'read role',
-            'read permission',
+            'user delete',
+            'user update',
+            'user read',
+            'user create',
+            'role read',
+            'permission read',
         ]);
         $operator = Role::create([
             'name'          => 'operator',
@@ -51,10 +51,10 @@ class RoleSeeder extends Seeder
         ]);
         
         $operator->givePermissionTo([
-            'read user',
-            'create user',
-            'read role',
-            'read permission',
+            'user read',
+            'user create',
+            'role read',
+            'permission read',
         ]);
     }
 }
