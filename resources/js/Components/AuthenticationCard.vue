@@ -1,8 +1,7 @@
 <script setup>
 import SwitchLocale from "@/Components/SwitchLocale.vue";
 import SwitchDarkMode from "@/Components/SwitchDarkMode.vue";
-import AuthenticationIllustration from "@/Components/AuthenticationIllustration.vue";
-import AuthAnimation from "@/Animations/auth.json";
+import ProfileAnimation from "@/Animations/profile.json";
 </script>
 <template>
     <div
@@ -30,7 +29,7 @@ import AuthAnimation from "@/Animations/auth.json";
                 class="bg-primary hidden dark:bg-primary sm:flex justify-center items-center"
             >
                 <Vue3Lottie
-                    :animationData="AuthAnimation"
+                    :animationData="ProfileAnimation"
                     :height="250"
                     :width="250"
                 />
