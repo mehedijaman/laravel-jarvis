@@ -16,7 +16,7 @@
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased bg-white dark:bg-slate-800 scrollbar overflow-x-hidden">
+    <body class="font-sans antialiased bg-white dark:bg-slate-900 scrollbar overflow-x-hidden">
         @inertia
     </body>
 </html>
