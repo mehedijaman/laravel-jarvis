@@ -109,6 +109,7 @@ const roles = props.roles?.map((role) => ({
                             class="block w-full"
                             :placeholder="lang().placeholder.password"
                             :error="form.errors.password"
+                            @keyup.enter="submit"
                         />
                         <InputError :message="form.errors.password" />
                     </div>

@@ -31,7 +31,6 @@ class RoleSeeder extends Seeder
             'permission read',
             'permission create',
             'setting read',
-            'setting update'
         ]);
         $admin = Role::create([
             'name'          => 'admin',
