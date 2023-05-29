@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref, watchEffect } from "vue";
+import { ref, onUpdated } from "vue";
 import SelectInput from "@/Components/SelectInput.vue";
 import { PencilIcon } from "@heroicons/vue/24/solid";
 
@@ -27,7 +27,7 @@ const form = useForm({
     role: "",
 });
 
-watchEffect(() => {
+onUpdated(() => {
     if (show) {
         form.name = props.user?.name;
         form.email = props.user?.email;

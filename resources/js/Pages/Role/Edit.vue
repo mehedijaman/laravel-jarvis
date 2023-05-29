@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
-import { reactive, ref, watchEffect } from "vue";
+import { reactive, ref, onUpdated } from "vue";
 import { PencilIcon } from "@heroicons/vue/24/solid";
 import Checkbox from "@/Components/Checkbox.vue";
 
@@ -29,7 +29,7 @@ const form = useForm({
     permissions: [],
 });
 
-watchEffect(() => {
+onUpdated(() => {
     if (show) {
         form.name = props.role?.name;
         form.permissions = props.role?.permissions?.map((d) => d.id);

@@ -68,7 +68,7 @@ const fileChange = (value) => {
                                 @fileChange="fileChange"
                             />
                             <InputError
-                                :message="form.errors.name"
+                                :message="form.errors.favicon"
                                 class="mt-2"
                             />
                         </div>
@@ -83,7 +83,7 @@ const fileChange = (value) => {
                                 @fileChange="fileChange"
                             />
                             <InputError
-                                :message="form.errors.name"
+                                :message="form.errors.logo"
                                 class="mt-2"
                             />
                         </div>
