@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpFoundation\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +24,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/profile', function (Request $request) {
-        return response()->json([
-            'data' => auth()->user(),
-            'message' => "Data user loged in",
-            'status' => Response::HTTP_OK,
-            'access_token' => "",
-            'token_type' => 'Bearer'
-        ]);
-    });
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::post('/change-password', [UserController::class, 'changePassword']);
 });
