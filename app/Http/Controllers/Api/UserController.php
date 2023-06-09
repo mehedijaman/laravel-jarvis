@@ -21,7 +21,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function changePassword(Request $request){
+    public function updatePassword(Request $request){
         try {
             $user = User::find(auth()->user()->id);
             if (!Hash::check($request->password, $user->password))
