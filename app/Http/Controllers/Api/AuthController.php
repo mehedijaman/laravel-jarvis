@@ -24,7 +24,7 @@ class AuthController extends Controller
                     'token_type' => 'Bearer'
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }else{
-                $user = User::create([
+                $user = User::with('roles')->create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
@@ -59,7 +59,7 @@ class AuthController extends Controller
             return response()
                 ->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = User::with('roles')->where('email', $request['email'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()
             ->json([
