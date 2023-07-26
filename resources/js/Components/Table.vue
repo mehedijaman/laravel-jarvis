@@ -7,7 +7,7 @@
         >
             <slot name="table-action" />
         </div>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto scrollbar-table">
             <table class="w-full">
                 <thead
                     class="uppercase text-sm border-t border-slate-200 dark:border-slate-700 dark:bg-slate-900/50"

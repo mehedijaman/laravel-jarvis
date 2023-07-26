@@ -10,8 +10,6 @@ import { usePage } from "@inertiajs/vue3";
 import FloatingVue from "floating-vue";
 import Vue3Lottie from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
-import PerfectScrollbar from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
@@ -29,7 +27,6 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(FloatingVue)
             .use(Vue3Lottie)
-            .use(PerfectScrollbar)
             .mixin({
                 methods: {
                     can: function (permissions) {

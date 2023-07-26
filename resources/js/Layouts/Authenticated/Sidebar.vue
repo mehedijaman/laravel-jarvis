@@ -19,7 +19,7 @@ const emit = defineEmits(["close"]);
             class="fixed md:flex flex-col h-screen overflow-hidden w-64 bg-white dark:bg-slate-900 dark:border-r dark:border-slate-700"
         >
             <div
-                class="flex-1 h-screen overflow-y-auto bg-primary dark:bg-primary/60"
+                class="flex-1 h-screen overflow-y-auto scrollbar-sidebar bg-primary dark:bg-primary/60"
             >
                 <SidebarMenu />
             </div>
@@ -45,7 +45,7 @@ const emit = defineEmits(["close"]);
                 >
                     <div class="flex flex-col relative h-screen min-h-screen">
                         <div
-                            class="overflow-y-auto flex-1 bg-primary dark:bg-primary/60"
+                            class="overflow-y-auto scrollbar-sidebar flex-1 bg-primary dark:bg-primary/60"
                         >
                             <SidebarMenu />
                         </div>
