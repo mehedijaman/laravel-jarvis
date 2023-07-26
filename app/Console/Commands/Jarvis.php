@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use function Termwind\{render};
 
 class Jarvis extends Command
 {
@@ -25,25 +26,29 @@ class Jarvis extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $name = ucfirst($this->argument('name'));
-        $this->controller($name);
-        $this->model($name);
-        $this->migration($name);
-
         $this->makeDir(app_path("/HTTP/Requests/{$name}"));
-        $this->indexRequest($name);
-        $this->storeRequest($name);
-        $this->updateRequest($name);
         File::append(base_path('routes/web.php'),
             "
     Route::resource('".strtolower($name)."', ".$name."Controller::class)->except('create', 'show', 'edit');
     Route::post('".strtolower($name)."/destroy-bulk', [".$name."Controller::class, 'destroyBulk'])->name('".strtolower($name).".destroy-bulk');"
         );
+
+        render(view('cli.jarvis', [
+            'controller' => $this->controller($name),
+            'model' => $this->model($name),
+            'migration' => $this->migration($name),
+            'indexRequest' => $this->indexRequest($name),
+            'storeRequest' => $this->storeRequest($name),
+            'updateRequest' => $this->updateRequest($name),
+        ]));
+        return self::SUCCESS;
     }
 
-    protected function controller($name){
+    protected function controller($name): string
+    {
         $controllerTemplate = str_replace([
                 '{{modelName}}',
                 '{{modelNamePlural}}',
@@ -58,19 +63,23 @@ class Jarvis extends Command
             ],
             $this->getStub('Controller')
         );
-            file_put_contents(app_path("/Http/Controllers/{$name}Controller.php"), $controllerTemplate);
-        }
+        file_put_contents(app_path("/Http/Controllers/{$name}Controller.php"), $controllerTemplate);
+        return "app/Http/Controllers/{$name}Controller.php";
+    }
 
-    protected function model($name){
+    protected function model($name): string
+    {
         $modelTemplate = str_replace(
             ['{{modelName}}', '{{modelNamePlural}}'],
             [$name, strtolower(Str::plural($name))],
             $this->getStub('Model')
         );
         file_put_contents(app_path("/Models/{$name}.php"), $modelTemplate);
+        return "app/Models/{$name}.php";
     }
 
-    public function migration($name){
+    public function migration($name): string
+    {
         $modelNamePluralLowerCase = strtolower(Str::plural($name));
         $migrationTemplate = str_replace([
                 '{{modelNamePluralLowerCase}}',
@@ -78,37 +87,48 @@ class Jarvis extends Command
                 $modelNamePluralLowerCase,
             ], $this->getStub('Migration')
         );
-        file_put_contents(database_path("/migrations/".date('Y_m_d_His_')."create_{$modelNamePluralLowerCase}_table.php"), $migrationTemplate);
+        $path = "/migrations/".date('Y_m_d_His_')."create_{$modelNamePluralLowerCase}_table.php";
+        file_put_contents(database_path($path), $migrationTemplate);
+        return "database/".$path;
     }
 
-    public function indexRequest($name){
+    public function indexRequest($name): string
+    {
         $migrationTemplate = str_replace([
                 '{{modelName}}',
             ],[
                 $name,
             ], $this->getStub('Requests/Index')
         );
-        file_put_contents(app_path("/HTTP/Requests/{$name}/{$name}IndexRequest.php"), $migrationTemplate);
+        $path = "/HTTP/Requests/{$name}/{$name}IndexRequest.php";
+        file_put_contents(app_path($path), $migrationTemplate);
+        return "app".$path;
     }
 
-    public function storeRequest($name){
+    public function storeRequest($name): string
+    {
         $migrationTemplate = str_replace([
                 '{{modelName}}',
             ],[
                 $name,
             ], $this->getStub('Requests/Store')
         );
-        file_put_contents(app_path("/HTTP/Requests/{$name}/{$name}StoreRequest.php"), $migrationTemplate);
+        $path = "/HTTP/Requests/{$name}/{$name}StoreRequest.php";
+        file_put_contents(app_path($path), $migrationTemplate);
+        return "app".$path;
     }
 
-    public function updateRequest($name){
+    public function updateRequest($name): string
+    {
         $migrationTemplate = str_replace([
                 '{{modelName}}',
             ],[
                 $name,
             ], $this->getStub('Requests/Update')
         );
-        file_put_contents(app_path("/HTTP/Requests/{$name}/{$name}UpdateRequest.php"), $migrationTemplate);
+        $path = "/HTTP/Requests/{$name}/{$name}UpdateRequest.php";
+        file_put_contents(app_path($path), $migrationTemplate);
+        return "app".$path;
     }
 
     protected function getStub($type){
