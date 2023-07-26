@@ -26,14 +26,15 @@ class Jarvis extends Command
     /**
      * Execute the console command.
      */
-    public function handle(): int
+    public function handle()
     {
         $name = ucfirst($this->argument('name'));
+        $this->makeDir(resource_path("/js/Pages/{$name}"));
         $this->makeDir(app_path("/HTTP/Requests/{$name}"));
         File::append(base_path('routes/web.php'),
             "
-    Route::resource('".strtolower($name)."', ".$name."Controller::class)->except('create', 'show', 'edit');
-    Route::post('".strtolower($name)."/destroy-bulk', [".$name."Controller::class, 'destroyBulk'])->name('".strtolower($name).".destroy-bulk');"
+        Route::resource('".strtolower($name)."', ".$name."Controller::class)->except('create', 'show', 'edit');
+        Route::post('".strtolower($name)."/destroy-bulk', [".$name."Controller::class, 'destroyBulk'])->name('".strtolower($name).".destroy-bulk');"
         );
 
         render(view('cli.jarvis', [
@@ -43,13 +44,19 @@ class Jarvis extends Command
             'indexRequest' => $this->indexRequest($name),
             'storeRequest' => $this->storeRequest($name),
             'updateRequest' => $this->updateRequest($name),
+            'pageIndex' => $this->pageIndex($name),
+            'pageCreate' => $this->pageCreate($name),
+            'pageDelete' => $this->pageDelete($name),
+            'pageDeleteBulk' => $this->pageDeleteBulk($name),
+            'pageEdit' => $this->pageEdit($name),
         ]));
         return self::SUCCESS;
     }
 
     protected function controller($name): string
     {
-        $controllerTemplate = str_replace([
+        $params = str_replace(
+            [
                 '{{modelName}}',
                 '{{modelNamePlural}}',
                 '{{modelNameLowerCase}}',
@@ -63,72 +70,159 @@ class Jarvis extends Command
             ],
             $this->getStub('Controller')
         );
-        file_put_contents(app_path("/Http/Controllers/{$name}Controller.php"), $controllerTemplate);
+        file_put_contents(app_path("/Http/Controllers/{$name}Controller.php"), $params);
         return "app/Http/Controllers/{$name}Controller.php";
     }
 
     protected function model($name): string
     {
-        $modelTemplate = str_replace(
+        $params = str_replace(
             ['{{modelName}}', '{{modelNamePlural}}'],
             [$name, strtolower(Str::plural($name))],
             $this->getStub('Model')
         );
-        file_put_contents(app_path("/Models/{$name}.php"), $modelTemplate);
+        file_put_contents(app_path("/Models/{$name}.php"), $params);
         return "app/Models/{$name}.php";
     }
 
     public function migration($name): string
     {
         $modelNamePluralLowerCase = strtolower(Str::plural($name));
-        $migrationTemplate = str_replace([
+        $params = str_replace(
+            [
                 '{{modelNamePluralLowerCase}}',
             ],[
                 $modelNamePluralLowerCase,
             ], $this->getStub('Migration')
         );
         $path = "/migrations/".date('Y_m_d_His_')."create_{$modelNamePluralLowerCase}_table.php";
-        file_put_contents(database_path($path), $migrationTemplate);
+        file_put_contents(database_path($path), $params);
         return "database/".$path;
     }
 
     public function indexRequest($name): string
     {
-        $migrationTemplate = str_replace([
+        $params = str_replace(
+            [
                 '{{modelName}}',
             ],[
                 $name,
             ], $this->getStub('Requests/Index')
         );
         $path = "/HTTP/Requests/{$name}/{$name}IndexRequest.php";
-        file_put_contents(app_path($path), $migrationTemplate);
+        file_put_contents(app_path($path), $params);
         return "app".$path;
     }
 
     public function storeRequest($name): string
     {
-        $migrationTemplate = str_replace([
+        $params = str_replace(
+            [
                 '{{modelName}}',
             ],[
                 $name,
             ], $this->getStub('Requests/Store')
         );
         $path = "/HTTP/Requests/{$name}/{$name}StoreRequest.php";
-        file_put_contents(app_path($path), $migrationTemplate);
+        file_put_contents(app_path($path), $params);
         return "app".$path;
     }
 
     public function updateRequest($name): string
     {
-        $migrationTemplate = str_replace([
+        $params = str_replace(
+            [
                 '{{modelName}}',
             ],[
                 $name,
             ], $this->getStub('Requests/Update')
         );
         $path = "/HTTP/Requests/{$name}/{$name}UpdateRequest.php";
-        file_put_contents(app_path($path), $migrationTemplate);
+        file_put_contents(app_path($path), $params);
         return "app".$path;
+    }
+
+    public function pageIndex($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelName}}',
+                '{{modelNameLowerCase}}',
+                '{{modelNamePluralLowerCase}}',
+            ],
+            [
+                $name,
+                strtolower($name),
+                strtolower(Str::plural($name)),
+            ], $this->getStub('Pages/Index')
+        );
+        $path = "/js/Pages/{$name}/Index.vue";
+        file_put_contents(resource_path($path), $params);
+        return "resources".$path;
+    }
+
+    public function pageCreate($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelName}}',
+                '{{modelNameLowerCase}}',
+            ],
+            [
+                $name,
+                strtolower($name),
+            ], $this->getStub('Pages/Create')
+        );
+        $path = "/js/Pages/{$name}/Create.vue";
+        file_put_contents(resource_path($path), $params);
+        return "resources".$path;
+    }
+
+    public function pageDelete($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelNameLowerCase}}',
+            ],
+            [
+                strtolower($name),
+            ], $this->getStub('Pages/Delete')
+        );
+        $path = "/js/Pages/{$name}/Delete.vue";
+        file_put_contents(resource_path($path), $params);
+        return "resources".$path;
+    }
+
+    public function pageDeleteBulk($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelNameLowerCase}}',
+            ],
+            [
+                strtolower($name),
+            ], $this->getStub('Pages/DeleteBulk')
+        );
+        $path = "/js/Pages/{$name}/DeleteBulk.vue";
+        file_put_contents(resource_path($path), $params);
+        return "resources".$path;
+    }
+
+    public function pageEdit($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelName}}',
+                '{{modelNameLowerCase}}',
+            ],
+            [
+                $name,
+                strtolower($name),
+            ], $this->getStub('Pages/Edit')
+        );
+        $path = "/js/Pages/{$name}/Edit.vue";
+        file_put_contents(resource_path($path), $params);
+        return "resources".$path;
     }
 
     protected function getStub($type){
