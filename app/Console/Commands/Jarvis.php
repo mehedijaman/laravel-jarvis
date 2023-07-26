@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -33,9 +35,21 @@ class Jarvis extends Command
         $this->makeDir(app_path("/HTTP/Requests/{$name}"));
         File::append(base_path('routes/web.php'),
             "
-        Route::resource('".strtolower($name)."', ".$name."Controller::class)->except('create', 'show', 'edit');
-        Route::post('".strtolower($name)."/destroy-bulk', [".$name."Controller::class, 'destroyBulk'])->name('".strtolower($name).".destroy-bulk');"
+    Route::resource('".strtolower($name)."', ".$name."Controller::class)->except('create', 'show', 'edit');
+    Route::post('".strtolower($name)."/destroy-bulk', [".$name."Controller::class, 'destroyBulk'])->name('".strtolower($name).".destroy-bulk');"
         );
+
+        Permission::create(['name' => strtolower($name).' delete', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' update', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' read', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' create', 'guard_name' => 'web']);
+        $superadmin = Role::where(['name' => 'superadmin'])->first();
+        $superadmin->givePermissionTo([
+            strtolower($name).' delete',
+            strtolower($name).' update',
+            strtolower($name).' read',
+            strtolower($name).' create',
+        ]);
 
         render(view('cli.jarvis', [
             'controller' => $this->controller($name),
@@ -49,7 +63,9 @@ class Jarvis extends Command
             'pageDelete' => $this->pageDelete($name),
             'pageDeleteBulk' => $this->pageDeleteBulk($name),
             'pageEdit' => $this->pageEdit($name),
+            'permission' => strtolower($name)." permission"
         ]));
+
         return self::SUCCESS;
     }
 
