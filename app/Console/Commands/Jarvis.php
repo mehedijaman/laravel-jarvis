@@ -33,10 +33,9 @@ class Jarvis extends Command
         $name = ucfirst($this->argument('name'));
         $this->makeDir(resource_path("/js/Pages/{$name}"));
         $this->makeDir(app_path("/HTTP/Requests/{$name}"));
-        File::append(base_path('routes/web.php'),
-            "
-    Route::resource('".strtolower($name)."', ".$name."Controller::class)->except('create', 'show', 'edit');
-    Route::post('".strtolower($name)."/destroy-bulk', [".$name."Controller::class, 'destroyBulk'])->name('".strtolower($name).".destroy-bulk');"
+        $this->makeDir(base_path("/routes/jarvis"));
+        File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';
+"
         );
 
         Permission::create(['name' => strtolower($name).' delete', 'guard_name' => 'web']);
@@ -63,7 +62,8 @@ class Jarvis extends Command
             'pageDelete' => $this->pageDelete($name),
             'pageDeleteBulk' => $this->pageDeleteBulk($name),
             'pageEdit' => $this->pageEdit($name),
-            'permission' => strtolower($name)." permission"
+            'permission' => strtolower($name)." permission",
+            'route' => $this->route($name)
         ]));
 
         return self::SUCCESS;
@@ -241,10 +241,27 @@ class Jarvis extends Command
         return "resources".$path;
     }
 
+    public function route($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelName}}',
+                '{{modelNameLowerCase}}',
+            ],
+            [
+                $name,
+                strtolower($name),
+            ], $this->getStub('Route')
+        );
+        $path = "/routes/jarvis/".strtolower($name).".php";
+        file_put_contents(base_path($path), $params);
+        return "app".$path;
+    }
+
     protected function getStub($type){
         return file_get_contents(resource_path("stubs/$type.stub"));
     }
-
+    
     protected function makeDir($path)
     {
         return is_dir($path) || mkdir($path);

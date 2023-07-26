@@ -52,4 +52,6 @@ Route::middleware([
     Route::post('permission/destroy-bulk', [PermissionController::class, 'destroyBulk'])->name('permission.destroy-bulk');
 
     Route::resource('setting', SettingController::class)->except('create','store', 'show', 'edit','destory');
+
+    require __DIR__.'/jarvis.php';
 });
