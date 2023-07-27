@@ -136,6 +136,7 @@ return [
         'setting' => 'Setting',
         'web_setting' => 'Website Setting',
         'web_setting_description' => 'Change your web setting',
+        'go_to_webiste' => 'Go to Website',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

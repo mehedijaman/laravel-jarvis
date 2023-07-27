@@ -83,7 +83,7 @@ const select = () => {
         >
             <PencilIcon class="w-4 h-auto" />
         </ActionButton>
-        <DialogModal :show="show" @close="closeModal">
+        <DialogModal :show="show" @close="closeModal" max-width="2xl">
             <template #title>
                 {{ lang().label.edit }} {{ props.title }}
             </template>

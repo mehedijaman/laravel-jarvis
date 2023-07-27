@@ -68,7 +68,7 @@ const select = () => {
             <PlusIcon class="w-4 h-auto" />
             <span class="hidden md:block">{{ lang().label.add }}</span>
         </PrimaryButton>
-        <DialogModal :show="show" @close="closeModal">
+        <DialogModal :show="show" @close="closeModal" max-width="2xl">
             <template #title>
                 {{ lang().label.add }} {{ props.title }}
             </template>

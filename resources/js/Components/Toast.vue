@@ -1,14 +1,27 @@
 <template>
     <transition name="slide-fade">
-        <div v-if="flash.success && isVisible" class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]">
-            <div class="flex p-4 justify-between items-center bg-green-600 rounded shadow-md">
+        <div
+            v-if="flash.success && isVisible"
+            class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]"
+        >
+            <div
+                class="flex p-4 justify-between items-center bg-green-600 rounded shadow"
+            >
                 <div>
-                    <CheckCircleIcon class="h-8 w-8 text-white" fill="currentColor" />
+                    <CheckCircleIcon
+                        class="h-8 w-8 text-white"
+                        fill="currentColor"
+                    />
                 </div>
-                <div class="mx-3 text-sm font-medium text-white" v-html="flash.success">
-                </div>
-                <button @click="toggle" type="button"
-                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8">
+                <div
+                    class="mx-3 text-sm font-medium text-white"
+                    v-html="flash.success"
+                ></div>
+                <button
+                    @click="toggle"
+                    type="button"
+                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8"
+                >
                     <span class="sr-only">Close</span>
                     <XMarkIcon class="w-5 h-5" />
                 </button>
@@ -16,15 +29,28 @@
         </div>
     </transition>
     <transition name="slide-fade">
-        <div v-if="flash.info && isVisible" class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]">
-            <div class="flex p-4 justify-between items-center bg-primary shadow-md rounded">
+        <div
+            v-if="flash.info && isVisible"
+            class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]"
+        >
+            <div
+                class="flex p-4 justify-between items-center bg-primary shadow rounded"
+            >
                 <div>
-                    <InformationCircleIcon class="h-8 w-8 text-white" fill="currentColor" />
+                    <InformationCircleIcon
+                        class="h-8 w-8 text-white"
+                        fill="currentColor"
+                    />
                 </div>
-                <div class="mx-3 text-sm font-medium text-white" v-html="flash.info">
-                </div>
-                <button @click="toggle" type="button"
-                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8">
+                <div
+                    class="mx-3 text-sm font-medium text-white"
+                    v-html="flash.info"
+                ></div>
+                <button
+                    @click="toggle"
+                    type="button"
+                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8"
+                >
                     <span class="sr-only">Close</span>
                     <XMarkIcon class="w-5 h-5" />
                 </button>
@@ -32,15 +58,28 @@
         </div>
     </transition>
     <transition name="slide-fade">
-        <div v-if="flash.warning && isVisible" class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]">
-            <div class="flex p-4 justify-between items-center bg-amber-600 rounded shadow-md">
+        <div
+            v-if="flash.warning && isVisible"
+            class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]"
+        >
+            <div
+                class="flex p-4 justify-between items-center bg-amber-600 rounded shadow"
+            >
                 <div>
-                    <ExclamationTriangleIcon class="h-8 w-8 text-white" fill="currentColor" />
+                    <ExclamationTriangleIcon
+                        class="h-8 w-8 text-white"
+                        fill="currentColor"
+                    />
                 </div>
-                <div class="mx-3 text-sm font-medium text-white" v-html="flash.warning">
-                </div>
-                <button @click="toggle" type="button"
-                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8">
+                <div
+                    class="mx-3 text-sm font-medium text-white"
+                    v-html="flash.warning"
+                ></div>
+                <button
+                    @click="toggle"
+                    type="button"
+                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8"
+                >
                     <span class="sr-only">Close</span>
                     <XMarkIcon class="w-5 h-5" />
                 </button>
@@ -48,15 +87,28 @@
         </div>
     </transition>
     <transition name="slide-fade">
-        <div v-if="flash.error && isErrorVisible" class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]">
-            <div class="flex p-4 justify-between items-center bg-rose-600 rounded shadow-md">
+        <div
+            v-if="flash.error && isErrorVisible"
+            class="fixed top-4 right-4 w-8/12 md:w-6/12 lg:w-3/12 z-[100]"
+        >
+            <div
+                class="flex p-4 justify-between items-center bg-rose-600 rounded shadow"
+            >
                 <div>
-                    <ExclamationCircleIcon class="h-8 w-8 text-white" fill="currentColor" />
+                    <ExclamationCircleIcon
+                        class="h-8 w-8 text-white"
+                        fill="currentColor"
+                    />
                 </div>
-                <div class="mx-3 text-sm font-medium text-white" v-html="flash.error">
-                </div>
-                <button @click="toggle" type="button"
-                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8">
+                <div
+                    class="mx-3 text-sm font-medium text-white"
+                    v-html="flash.error"
+                ></div>
+                <button
+                    @click="toggle"
+                    type="button"
+                    class="ml-auto bg-white/20 text-white rounded focus:ring-2 focus:ring-white/50 p-1.5 hover:bg-white/30 h-8 w-8"
+                >
                     <XMarkIcon class="w-5 h-5" />
                 </button>
             </div>
@@ -65,7 +117,13 @@
 </template>
 
 <script>
-import { XMarkIcon, CheckCircleIcon, ExclamationCircleIcon, InformationCircleIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/solid';
+import {
+    XMarkIcon,
+    CheckCircleIcon,
+    ExclamationCircleIcon,
+    InformationCircleIcon,
+    ExclamationTriangleIcon,
+} from "@heroicons/vue/24/solid";
 
 export default {
     components: {
@@ -83,7 +141,7 @@ export default {
             isVisible: false,
             isErrorVisible: false,
             timeout: null,
-        }
+        };
     },
     methods: {
         toggle() {
@@ -108,7 +166,7 @@ export default {
             },
         },
     },
-}
+};
 </script>
 
 <style>

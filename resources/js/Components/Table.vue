@@ -3,7 +3,7 @@
 <template>
     <div>
         <div
-            class="flex justify-between items-center p-2 space-x-2 overflow-x-auto"
+            class="flex justify-between items-center px-4 py-2 space-x-2 overflow-x-auto"
         >
             <slot name="table-action" />
         </div>
@@ -20,7 +20,7 @@
             </table>
         </div>
         <div
-            class="flex justify-between items-center p-2 border-t border-slate-200 dark:border-slate-700 overflow-auto"
+            class="flex justify-between items-center px-4 py-2 border-t border-slate-200 dark:border-slate-700 overflow-auto"
         >
             <slot name="table-pagination" />
         </div>

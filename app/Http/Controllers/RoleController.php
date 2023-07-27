@@ -35,7 +35,7 @@ class RoleController extends Controller
         }
         $roles->with('permissions');
         $role = auth()->user()->roles->pluck('name')[0];
-        $permissions = Permission::latest();
+        $permissions = Permission::orderBy('name');
         if ($role != 'superadmin') {
             $permissions = Permission::whereNotIn('name', ['permission create', 'permission read', 'permission update', 'permission delete'])->latest();
             $roles->where('name', '<>', 'superadmin');

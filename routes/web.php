@@ -28,7 +28,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('index');
 
 Route::get('/set-locale/{locale}', function ($locale) {
     Session::put('locale', $locale);

@@ -5,7 +5,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import SwitchDarkMode from "@/Components/SwitchDarkMode.vue";
-import { Bars3BottomLeftIcon } from "@heroicons/vue/24/solid";
+import { Bars3BottomLeftIcon, GlobeAltIcon } from "@heroicons/vue/24/solid";
 import SwitchLocale from "@/Components/SwitchLocale.vue";
 
 const emit = defineEmits(["open"]);
@@ -42,7 +42,7 @@ const logout = () => {
                             <Bars3BottomLeftIcon class="w-6 h-auto" />
                         </button>
                         <p
-                            class="flex space-x-2 text-lg font-semibold text-slate-600 dark:text-white"
+                            class="flex space-x-2 text-lg font-semibold text-slate-600 dark:text-white max-w-fit truncate"
                         >
                             <slot />
                         </p>
@@ -51,6 +51,13 @@ const logout = () => {
 
                 <div class="flex items-center space-x-1">
                     <SwitchLocale />
+                    <a
+                        v-tooltip="lang().label.go_to_webiste"
+                        :href="route('index')"
+                        class="inline-flex items-center justify-center p-2 rounded text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-900 focus:text-slate-500 dark:focus:text-slate-400 transition duration-150 ease-in-out mr-4"
+                    >
+                        <GlobeAltIcon class="w-6 h-auto" />
+                    </a>
                     <SwitchDarkMode />
                     <div class="relative">
                         <!-- Teams Dropdown -->

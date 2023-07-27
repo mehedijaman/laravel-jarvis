@@ -83,7 +83,7 @@ const select = () => {
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
                 <div
-                    class="bg-white dark:bg-slate-800 overflow-hidden shadow-md sm:rounded"
+                    class="bg-white dark:bg-slate-800 overflow-hidden shadow sm:rounded"
                 >
                     <Table>
                         <template #table-action>
@@ -123,15 +123,15 @@ const select = () => {
                         </template>
                         <template #table-head>
                             <tr>
-                                <th class="px-2 py-4 text-center">
+                                <th class="p-4 text-left">
                                     <Checkbox
                                         v-model:checked="data.multipleSelect"
                                         @change="selectAll"
                                     />
                                 </th>
-                                <th class="px-2 py-4 text-center">#</th>
+                                <th class="p-4 text-center">#</th>
                                 <th
-                                    class="px-2 py-4 cursor-pointer"
+                                    class="p-4 cursor-pointer"
                                     v-on:click="order('name')"
                                 >
                                     <div
@@ -142,7 +142,7 @@ const select = () => {
                                     </div>
                                 </th>
                                 <th
-                                    class="px-2 py-4 cursor-pointer"
+                                    class="p-4 cursor-pointer"
                                     v-on:click="order('guard_name')"
                                 >
                                     <div
@@ -153,7 +153,7 @@ const select = () => {
                                     </div>
                                 </th>
                                 <th
-                                    class="px-2 py-4 cursor-pointer"
+                                    class="p-4 cursor-pointer"
                                     v-on:click="order('created_at')"
                                 >
                                     <div
@@ -163,7 +163,7 @@ const select = () => {
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th class="px-2 py-4 text-center sr-only">
+                                <th class="p-4 text-center sr-only">
                                     Action
                                 </th>
                             </tr>
@@ -174,9 +174,7 @@ const select = () => {
                                 :key="index"
                                 class="border-t border-slate-200 dark:border-slate-700 hover:bg-slate-200/30 hover:dark:bg-slate-900/20"
                             >
-                                <td
-                                    class="whitespace-nowrap py-4 px-2 sm:py-3 text-center"
-                                >
+                                <td class="whitespace-nowrap px-4 py-2">
                                     <input
                                         class="rounded dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-primary dark:text-primary shadow-sm focus:ring-primary/80 dark:focus:ring-primary dark:focus:ring-offset-slate-800 dark:checked:bg-primary dark:checked:border-primary"
                                         type="checkbox"
@@ -186,20 +184,22 @@ const select = () => {
                                     />
                                 </td>
                                 <td
-                                    class="whitespace-nowrap py-4 px-2 sm:py-3 text-center"
+                                    class="whitespace-nowrap px-4 py-2 text-center"
                                 >
                                     {{ ++index }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-2 sm:py-3">
+                                <td class="whitespace-nowrap px-4 py-2">
                                     {{ permission.name }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-2 sm:py-3">
+                                <td class="whitespace-nowrap px-4 py-2">
                                     {{ permission.guard_name }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-2 sm:py-3">
+                                <td class="whitespace-nowrap px-4 py-2">
                                     {{ permission.created_at }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-2 sm:py-3">
+                                <td
+                                    class="whitespace-nowrap flex justify-end px-4 py-2"
+                                >
                                     <div
                                         class="flex w-fit rounded overflow-hidden"
                                     >
