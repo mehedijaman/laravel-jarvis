@@ -51,7 +51,7 @@ const logout = () => {
 
                 <div class="flex items-center space-x-1">
                     <SwitchLocale />
-                    <a
+                    <a target="_blank"
                         v-tooltip="lang().label.go_to_webiste"
                         :href="route('index')"
                         class="inline-flex items-center justify-center p-2 rounded text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-900 focus:text-slate-500 dark:focus:text-slate-400 transition duration-150 ease-in-out mr-4"
