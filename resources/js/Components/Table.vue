@@ -10,7 +10,7 @@
         <div class="overflow-x-auto scrollbar-table">
             <table class="w-full">
                 <thead
-                    class="uppercase text-sm border-t border-slate-200 dark:border-slate-700 dark:bg-slate-900/50"
+                    class="uppercase text-sm border-t border-slate-200 dark:border-slate-700"
                 >
                     <slot name="table-head" />
                 </thead>
