@@ -169,9 +169,7 @@ const select = () => {
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th class="p-4 text-center sr-only">
-                                    Action
-                                </th>
+                                <th class="p-4 text-center sr-only">Action</th>
                             </tr>
                         </template>
                         <template #table-body>
@@ -205,7 +203,12 @@ const select = () => {
                                         <Permission
                                             v-if="
                                                 role.permissions.length ==
-                                                props.permissions.length
+                                                props.permissions.reduce(
+                                                    (total, data) =>
+                                                        total +
+                                                        data.data.length,
+                                                    0
+                                                )
                                             "
                                             :permissions="role.permissions"
                                             :title="lang().label.all_permission"

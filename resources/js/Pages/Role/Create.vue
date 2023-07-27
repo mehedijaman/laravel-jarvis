@@ -47,12 +47,19 @@ const selectAll = (event) => {
     } else {
         form.permissions = [];
         props.permissions.forEach((permission) => {
-            form.permissions.push(permission.id);
+            permission.data.forEach((data) => {
+                form.permissions.push(data.id);
+            });
         });
     }
 };
 const select = () => {
-    if (props.permissions.length == form.permissions.length) {
+    if (
+        props.permissions.reduce(
+            (total, data) => total + data.data.length,
+            0
+        ) == form.permissions.length
+    ) {
         data.multipleSelect = true;
     } else {
         data.multipleSelect = false;
@@ -68,7 +75,7 @@ const select = () => {
             <PlusIcon class="w-4 h-auto" />
             <span class="hidden md:block">{{ lang().label.add }}</span>
         </PrimaryButton>
-        <DialogModal :show="show" @close="closeModal" max-width="2xl">
+        <DialogModal :show="show" @close="closeModal" max-width="md">
             <template #title>
                 {{ lang().label.add }} {{ props.title }}
             </template>
@@ -108,25 +115,43 @@ const select = () => {
                             />
                         </div>
                         <div
-                            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-2"
+                            class="mt-2"
+                            v-for="(permission, index) in props.permissions"
+                            :key="index"
                         >
-                            <div
-                                class="flex items-center justify-start space-x-2"
-                                v-for="(permission, index) in props.permissions"
-                                :key="index"
-                            >
-                                <input
-                                    @change="select"
-                                    class="rounded dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-primary dark:text-primary shadow-sm focus:ring-primary/80 dark:focus:ring-primary dark:focus:ring-offset-slate-800 dark:checked:bg-primary dark:checked:border-primary"
-                                    type="checkbox"
-                                    :id="'permission_' + permission.id"
-                                    :value="permission.id"
-                                    v-model="form.permissions"
-                                />
-                                <InputLabel
-                                    :for="'permission_' + permission.id"
-                                    :value="permission.name"
-                                />
+                            <p class="font-semibold text-primary capitalize">
+                                {{ permission.group }}
+                            </p>
+                            <div class="flex flex-wrap gap-4 mt-1 mb-4">
+                                <div
+                                    class="flex items-center justify-start space-x-2"
+                                    v-for="(
+                                        permissiondata, index
+                                    ) in permission.data"
+                                    :key="index"
+                                >
+                                    <input
+                                        @change="select"
+                                        class="rounded dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-primary dark:text-primary shadow-sm focus:ring-primary/80 dark:focus:ring-primary dark:focus:ring-offset-slate-800 dark:checked:bg-primary dark:checked:border-primary"
+                                        type="checkbox"
+                                        :id="'permission_' + permissiondata.id"
+                                        :value="permissiondata.id"
+                                        v-model="form.permissions"
+                                    />
+                                    <InputLabel
+                                        :for="'permission_' + permissiondata.id"
+                                    >
+                                        <p
+                                            v-bind:class="
+                                                permissiondata.name == 'delete'
+                                                    ? 'text-red-500 font-semibold'
+                                                    : ''
+                                            "
+                                        >
+                                            {{ permissiondata.name }}
+                                        </p>
+                                    </InputLabel>
+                                </div>
                             </div>
                         </div>
                     </div>

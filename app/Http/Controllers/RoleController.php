@@ -33,11 +33,13 @@ class RoleController extends Controller
         if ($request->has(['field', 'order'])) {
             $roles->orderBy($request->field, $request->order);
         }
-        $roles->with('permissions');
+        $roles->with('permissions', function($q){
+            $q->orderBy('name');
+        });
         $role = auth()->user()->roles->pluck('name')[0];
-        $permissions = Permission::orderBy('name');
+        $permissions = Permission::getDataByGroupSuperadmin();
         if ($role != 'superadmin') {
-            $permissions = Permission::whereNotIn('name', ['permission create', 'permission read', 'permission update', 'permission delete'])->latest();
+            $permissions = Permission::getDataByGroup();
             $roles->where('name', '<>', 'superadmin');
         }
         $perPage = $request->has('perPage') ? $request->perPage : 10;
@@ -46,7 +48,7 @@ class RoleController extends Controller
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
             'roles'         => $roles->paginate($perPage)->onEachSide(0),
-            'permissions'   => $permissions->get(),
+            'permissions'   => $permissions,
             'breadcrumbs'   => [['label' => __('app.label.role'), 'href' => route('role.index')]],
         ]);
     }

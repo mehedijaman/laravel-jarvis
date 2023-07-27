@@ -48,7 +48,9 @@ class UserController extends Controller
             'title'         => __('app.label.user'),
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
-            'users'         => $users->with('roles', 'roles.permissions')->paginate($perPage)->onEachSide(0),
+            'users'         => $users->with('roles')->with('roles.permissions', function($q){
+                $q->orderBy('name');
+            })->paginate($perPage)->onEachSide(0),
             'roles'         => $roles,
             'breadcrumbs'   => [['label' => __('app.label.user'), 'href' => route('user.index')]],
         ]);
