@@ -49,7 +49,7 @@ import { Link } from "@inertiajs/vue3";
             </li>
             <li v-show="can(['user read', 'role read', 'permission read'])">
                 <span class="font-md uppercase font-semibold">{{
-                    lang().label.data
+                    lang().label.access
                 }}</span>
             </li>
             <li
