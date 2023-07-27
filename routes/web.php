@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -21,21 +21,15 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('index');
+
+Route::get('/', [GuestController::class, 'index'])->name('index');
 
 Route::get('/set-locale/{locale}', function ($locale) {
     Session::put('locale', $locale);
     return back();
 })->name('set-locale');
 
-Route::middleware([
+Route::prefix('system')->middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',

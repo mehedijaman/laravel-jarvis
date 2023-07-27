@@ -135,6 +135,7 @@ return [
         'web_setting_description' => 'Ubah pengaturan website anda',
         'go_to_webiste' => 'Ke Halaman Website',
         'access' => 'Akses',
+        'back_to_top' => 'Kembali ke atas',
     ],
     'placeholder' => [
         'email' => 'email@email.com',
