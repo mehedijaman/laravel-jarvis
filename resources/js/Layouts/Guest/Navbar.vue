@@ -24,7 +24,7 @@ window.addEventListener("scroll", () => {
 <template>
     <header
         v-bind:class="
-            data.fixed
+            data.fixed || data.isOpen
                 ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg border-b border-slate-300/50 dark:border-slate-700/50'
                 : 'border-none'
         "
