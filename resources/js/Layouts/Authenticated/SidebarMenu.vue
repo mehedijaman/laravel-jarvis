@@ -104,7 +104,9 @@ import { Link } from "@inertiajs/vue3";
                 </Link>
             </li>
             <li v-show="can(['setting read'])">
-                <span class="font-md uppercase font-semibold">Setting</span>
+                <span class="font-md uppercase font-semibold">{{
+                    lang().label.setting
+                }}</span>
             </li>
             <li
                 v-show="can(['setting read'])"
