@@ -5,6 +5,7 @@ import Navbar from "./Authenticated/Navbar.vue";
 import Footer from "./Authenticated/Footer.vue";
 import Sidebar from "./Authenticated/Sidebar.vue";
 import { ref } from "vue";
+import Banner from "../Components/Banner.vue";
 const showingSideBar = ref(false);
 defineProps({
     title: String,
@@ -15,6 +16,7 @@ defineProps({
     <div>
         <Head :title="title" />
         <Toast :flash="$page.props.flash" />
+        <Banner />
         <div
             class="flex relative w-full min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 overflow-x-hidden text-base"
         >
