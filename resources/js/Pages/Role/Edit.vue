@@ -8,7 +8,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { reactive, ref, onUpdated } from "vue";
-import { PencilIcon } from "@heroicons/vue/24/solid";
+import { PencilIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
 
 const emit = defineEmits(["open"]);

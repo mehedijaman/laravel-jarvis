@@ -11,7 +11,7 @@ import Delete from "@/Pages/Permission/Delete.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
-import { ChevronUpDownIcon } from "@heroicons/vue/24/solid";
+import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
 import DeleteBulk from "./DeleteBulk.vue";
 
@@ -163,9 +163,7 @@ const select = () => {
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th class="p-4 text-center sr-only">
-                                    Action
-                                </th>
+                                <th class="p-4 text-center sr-only">Action</th>
                             </tr>
                         </template>
                         <template #table-body>

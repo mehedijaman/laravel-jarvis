@@ -123,7 +123,7 @@ import {
     ExclamationCircleIcon,
     InformationCircleIcon,
     ExclamationTriangleIcon,
-} from "@heroicons/vue/24/solid";
+} from "@heroicons/vue/24/outline";
 
 export default {
     components: {

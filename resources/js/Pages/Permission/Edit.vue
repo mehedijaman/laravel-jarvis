@@ -9,7 +9,7 @@ import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref, onUpdated } from "vue";
 import SelectInput from "@/Components/SelectInput.vue";
-import { PencilIcon } from "@heroicons/vue/24/solid";
+import { PencilIcon } from "@heroicons/vue/24/outline";
 
 const emit = defineEmits(["open"]);
 const show = ref(false);

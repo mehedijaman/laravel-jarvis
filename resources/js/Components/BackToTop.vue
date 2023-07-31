@@ -1,5 +1,5 @@
 <script setup>
-import { ArrowSmallUpIcon } from "@heroicons/vue/24/solid";
+import { ArrowSmallUpIcon } from "@heroicons/vue/24/outline";
 import { reactive } from "vue";
 const data = reactive({
     show: false,

@@ -6,7 +6,7 @@ import {
     ShieldCheckIcon,
     Squares2X2Icon,
     UserIcon,
-} from "@heroicons/vue/24/solid";
+} from "@heroicons/vue/24/outline";
 import { Link } from "@inertiajs/vue3";
 </script>
 

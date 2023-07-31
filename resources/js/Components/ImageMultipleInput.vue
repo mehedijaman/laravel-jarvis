@@ -1,5 +1,5 @@
 <script setup>
-import { PhotoIcon, PlusIcon } from "@heroicons/vue/24/solid";
+import { PhotoIcon, PlusIcon } from "@heroicons/vue/24/outline";
 import { reactive } from "vue";
 import InputError from "./InputError.vue";
 

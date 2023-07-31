@@ -1,5 +1,5 @@
 <script setup>
-import { PhotoIcon } from "@heroicons/vue/24/solid";
+import { PhotoIcon } from "@heroicons/vue/24/outline";
 import { reactive, watchEffect } from "vue";
 
 const props = defineProps({

@@ -12,7 +12,7 @@ import Permission from "@/Pages/Role/Permission.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
-import { ChevronUpDownIcon } from "@heroicons/vue/24/solid";
+import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
 import DeleteBulk from "./DeleteBulk.vue";
 

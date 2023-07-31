@@ -8,7 +8,7 @@ import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 import SelectInput from "@/Components/SelectInput.vue";
-import { PlusIcon } from "@heroicons/vue/24/solid";
+import { PlusIcon } from "@heroicons/vue/24/outline";
 
 const show = ref(false);
 const props = defineProps({

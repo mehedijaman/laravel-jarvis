@@ -5,7 +5,7 @@ import {
     CheckCircleIcon,
     InformationCircleIcon,
     XMarkIcon,
-} from "@heroicons/vue/24/solid";
+} from "@heroicons/vue/24/outline";
 
 const show = ref(true);
 const style = computed(

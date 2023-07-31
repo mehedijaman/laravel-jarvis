@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/vue3";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import NavbarLink from "@/Components/Guest/NavbarLink.vue";
 import SwitchDarkMode from "@/Components/SwitchDarkMode.vue";
-import { Bars3BottomRightIcon } from "@heroicons/vue/24/solid";
+import { Bars3BottomRightIcon } from "@heroicons/vue/24/outline";
 import { reactive } from "vue";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 
