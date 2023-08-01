@@ -7,6 +7,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import SwitchDarkMode from "@/Components/SwitchDarkMode.vue";
 import { Bars3BottomLeftIcon, GlobeAltIcon } from "@heroicons/vue/24/outline";
 import SwitchLocale from "@/Components/SwitchLocale.vue";
+import { CheckBadgeIcon } from "@heroicons/vue/24/solid";
 
 const emit = defineEmits(["open"]);
 const switchToTeam = (team) => {
@@ -244,7 +245,18 @@ const logout = () => {
                                 <div
                                     class="block px-4 py-2 truncate border-b border-slate-200 dark:border-slate-600"
                                 >
-                                    {{ $page.props.auth.user.name }}
+                                    <div class="flex items-center">
+                                        <p>
+                                            {{ $page.props.auth.user.name }}
+                                        </p>
+                                        <CheckBadgeIcon
+                                            v-if="
+                                                $page.props.auth.user
+                                                    .email_verified_at
+                                            "
+                                            class="w-4 h-auto text-blue-500 ml-1 shrink-0"
+                                        />
+                                    </div>
                                     <div class="block text-xs truncate">
                                         {{ $page.props.auth.user.email }}
                                     </div>

@@ -20,7 +20,7 @@ const props = defineProps({
             >
                 <div class="place-self-center space-y-6">
                     <h1
-                        class="text-4xl font-semibold tracking-tight leading-none md:text-5xl xl:text-6xl uppercase"
+                        class="text-4xl font-semibold tracking-tight leading-none md:text-5xl xl:text-6xl"
                     >
                         {{ $page.props.app.setting.name.split(" ")[0] }}
                         <span class="text-primary">{{
@@ -32,18 +32,6 @@ const props = defineProps({
                     >
                         {{ $page.props.app.setting.description }}
                     </blockquote>
-                    <div class="flex space-x-4 justify-center items-center">
-                        <a href="#">
-                            <PrimaryButton>
-                                <p class="text-sm md:text-lg">Get Started</p>
-                            </PrimaryButton>
-                        </a>
-                        <a href="#">
-                            <SecondaryButton>
-                                <p class="text-sm md:text-lg">Documentation</p>
-                            </SecondaryButton>
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>

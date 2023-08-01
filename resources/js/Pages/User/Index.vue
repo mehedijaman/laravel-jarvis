@@ -12,6 +12,7 @@ import Permission from "@/Pages/Role/Permission.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
+import { CheckBadgeIcon } from "@heroicons/vue/24/solid";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
 import DeleteBulk from "./DeleteBulk.vue";
@@ -193,7 +194,7 @@ const select = () => {
                                     {{ ++index }}
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2">
-                                    <div class="flex items-center space-x-3">
+                                    <div class="flex items-center">
                                         <div
                                             v-show="!user.profile_photo_path"
                                             class="mt-2 shrink-0"
@@ -219,9 +220,17 @@ const select = () => {
                                                 "
                                             />
                                         </div>
-                                        <p class="truncate">
+                                        <p class="truncate ml-3">
                                             {{ user.name }}
                                         </p>
+                                        <CheckBadgeIcon
+                                            v-tooltip="
+                                                'Verified at ' +
+                                                user.email_verified_at
+                                            "
+                                            v-if="user.email_verified_at"
+                                            class="w-4 h-auto text-blue-500 ml-1 shrink-0"
+                                        />
                                     </div>
                                 </td>
                                 <td

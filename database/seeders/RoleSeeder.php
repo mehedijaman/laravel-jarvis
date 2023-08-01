@@ -51,7 +51,6 @@ class RoleSeeder extends Seeder
         
         $operator->givePermissionTo([
             'user read',
-            'user create',
             'role read',
             'permission read',
         ]);
