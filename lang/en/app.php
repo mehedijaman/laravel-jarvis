@@ -139,6 +139,7 @@ return [
         'go_to_webiste' => 'Go to Website',
         'access' => 'Access',
         'back_to_top' => 'Back to top',
+        'activity' => 'Activity',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

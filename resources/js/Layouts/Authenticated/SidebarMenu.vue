@@ -1,6 +1,7 @@
 <script setup>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import {
+ClockIcon,
     Cog6ToothIcon,
     KeyIcon,
     ShieldCheckIcon,
@@ -123,6 +124,23 @@ import { Link } from "@inertiajs/vue3";
                 >
                     <Cog6ToothIcon class="w-5 h-auto" />
                     <span>{{ lang().label.setting }}</span>
+                </Link>
+            </li>
+            <li
+                v-show="can(['activity read'])"
+                v-bind:class="
+                    route().current('activity.index')
+                        ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
+                        : ''
+                "
+                class="hover:bg-white/20 dark:hover:bg-primary/30"
+            >
+                <Link
+                    :href="route('activity.index')"
+                    class="flex items-center py-1.5 px-3 space-x-2"
+                >
+                    <ClockIcon class="w-5 h-auto" />
+                    <span>{{ lang().label.activity }}</span>
                 </Link>
             </li>
         </ol>

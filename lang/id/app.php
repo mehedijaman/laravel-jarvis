@@ -136,6 +136,7 @@ return [
         'go_to_webiste' => 'Ke Halaman Website',
         'access' => 'Akses',
         'back_to_top' => 'Kembali ke atas',
+        'activity' => 'Aktivitas',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\PermissionController;
@@ -44,6 +45,9 @@ Route::prefix('system')->middleware([
 
     Route::resource('permission', PermissionController::class)->except('create', 'show', 'edit');
     Route::post('permission/destroy-bulk', [PermissionController::class, 'destroyBulk'])->name('permission.destroy-bulk');
+
+    Route::resource('activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
+    Route::post('activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
 
     Route::resource('setting', SettingController::class)->except('create','store', 'show', 'edit','destory');
 

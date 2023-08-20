@@ -8,12 +8,12 @@ import TextInput from "@/Components/TextInput.vue";
 import Create from "@/Pages/Permission/Create.vue";
 import Edit from "@/Pages/Permission/Edit.vue";
 import Delete from "@/Pages/Permission/Delete.vue";
+import DeleteBulk from "@/Pages/Permission/DeleteBulk.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
-import DeleteBulk from "./DeleteBulk.vue";
 
 const { _, debounce, pickBy } = pkg;
 const props = defineProps({
