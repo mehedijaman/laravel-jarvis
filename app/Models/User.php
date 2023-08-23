@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logUnguarded()->logFillable()->setDescriptionForEvent(fn(string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
+        return LogOptions::defaults()->logFillable()->setDescriptionForEvent(fn(string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
     }
 
     /**

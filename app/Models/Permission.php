@@ -15,7 +15,7 @@ class Permission extends ModelsPermission
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logUnguarded()->logFillable()->setDescriptionForEvent(fn(string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
+        return LogOptions::defaults()->logFillable()->setDescriptionForEvent(fn(string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
     }
 
     public function getCreatedAtAttribute()

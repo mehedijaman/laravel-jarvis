@@ -152,7 +152,7 @@ const select = () => {
                                         <ChevronUpDownIcon class="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th class="p-4 text-left">By</th>
+                                <th class="p-4 text-left">{{ lang().label.by }}</th>
                                 <th class="p-4 text-center sr-only">
                                     Action
                                 </th>
@@ -189,7 +189,7 @@ const select = () => {
                                 <td class="whitespace-nowrap px-4 py-2">
                                     {{ {{modelNameLowerCase}}.user?.name }}
                                 </td>
-                                 <td class="whitespace-nowrap flex justify-end px-4 py-2">
+                                <td class="whitespace-nowrap flex justify-end px-4 py-2">
                                     <div
                                         class="flex w-fit rounded overflow-hidden"
                                     >
