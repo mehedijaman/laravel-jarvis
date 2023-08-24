@@ -12,6 +12,10 @@ class Role extends ModelsRole
 {
     use HasFactory;
     use LogsActivity;
+    protected $fillable = [
+        'name',
+        'guard_name',
+    ];
 
     public function getCreatedAtAttribute()
     {

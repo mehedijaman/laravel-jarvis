@@ -12,6 +12,10 @@ class Permission extends ModelsPermission
 {
     use HasFactory;
     use LogsActivity;
+    protected $fillable = [
+        'name',
+        'guard_name',
+    ];
 
     public function getActivitylogOptions(): LogOptions
     {
