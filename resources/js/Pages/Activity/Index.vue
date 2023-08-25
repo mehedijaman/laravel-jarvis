@@ -7,6 +7,7 @@ import TablePagination from "@/Components/TablePagination.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Delete from "@/Pages/Activity/Delete.vue";
 import DeleteBulk from "@/Pages/Activity/DeleteBulk.vue";
+import Properties from "@/Pages/Activity/Properties.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
@@ -212,7 +213,7 @@ const select = () => {
                                     {{ activity.description }}
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2 max-w-xs truncate">
-                                    {{ activity.properties }}
+                                    <Properties title="Properties" :data="activity.properties" />
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2">
                                     {{ activity.created_at }}
