@@ -132,7 +132,11 @@ class PermissionController extends Controller
     public function destroyBulk(Request $request)
     {
         try {
+            $superadmin = Role::whereName('superadmin')->first();
             $permissions = Permission::whereIn('id', $request->id);
+            foreach ($permissions as $permission) {
+                $superadmin->revokePermissionTo([$permission->name]);
+            }
             $permissions->delete();
             return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . __('app.label.permission')]));
         } catch (\Throwable $th) {

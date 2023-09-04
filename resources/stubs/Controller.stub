@@ -60,7 +60,7 @@ class {{modelName}}Controller extends Controller
             ]);
             return back()->with('success', __('app.label.created_successfully', ['name' => ${{modelNameLowerCase}}->name]));
         } catch (\Throwable $th) {
-            return back()->with('error', __('app.label.created_error', ['name' => __('app.label.{{modelName}}')]) . $th->getMessage());
+            return back()->with('error', __('app.label.created_error', ['name' => "{{modelName}}"]) . $th->getMessage());
         }
     }
 
