@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Permission\Models\Permission as ModelsPermission;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class Permission extends ModelsPermission
 {
     use HasFactory;
     use LogsActivity;
+
     protected $fillable = [
         'name',
         'guard_name',
@@ -19,7 +20,7 @@ class Permission extends ModelsPermission
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logFillable()->setDescriptionForEvent(fn(string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
+        return LogOptions::defaults()->logFillable()->setDescriptionForEvent(fn (string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
     }
 
     public function getCreatedAtAttribute()
@@ -50,12 +51,12 @@ class Permission extends ModelsPermission
 
             if ($groupIndex !== false) {
                 // If the group exists, append the data to its 'data' array
-                $groupedData[$groupIndex]['data'][] = ['id' => $permission->id,'name' => $data];
+                $groupedData[$groupIndex]['data'][] = ['id' => $permission->id, 'name' => $data];
             } else {
                 // If the group doesn't exist, add a new entry to the groupedData array
                 $groupedData[] = [
                     'group' => $group,
-                    'data' => [['id' => $permission->id,'name' => $data]],
+                    'data' => [['id' => $permission->id, 'name' => $data]],
                 ];
             }
         }
@@ -81,12 +82,12 @@ class Permission extends ModelsPermission
 
             if ($groupIndex !== false) {
                 // If the group exists, append the data to its 'data' array
-                $groupedData[$groupIndex]['data'][] = ['id' => $permission->id,'name' => $data];
+                $groupedData[$groupIndex]['data'][] = ['id' => $permission->id, 'name' => $data];
             } else {
                 // If the group doesn't exist, add a new entry to the groupedData array
                 $groupedData[] = [
                     'group' => $group,
-                    'data' => [['id' => $permission->id,'name' => $data]],
+                    'data' => [['id' => $permission->id, 'name' => $data]],
                 ];
             }
         }

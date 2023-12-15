@@ -9,12 +9,12 @@ use Inertia\Inertia;
 
 class ActivityController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('permission:activity read', ['only' => ['index', 'show']]);
         $this->middleware('permission:activity delete', ['only' => ['destroy', 'destroyBulk']]);
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,21 +22,22 @@ class ActivityController extends Controller
     {
         $activities = Activity::query();
         if ($request->has('search')) {
-            $activities->where('log_name', 'LIKE', "%" . $request->search . "%");
-            $activities->orWhere('description', 'LIKE', "%" . $request->search . "%");
-            $activities->orWhere('event', 'LIKE', "%" . $request->search . "%");
-            $activities->orWhere('properties', 'LIKE', "%" . $request->search . "%");
+            $activities->where('log_name', 'LIKE', '%'.$request->search.'%');
+            $activities->orWhere('description', 'LIKE', '%'.$request->search.'%');
+            $activities->orWhere('event', 'LIKE', '%'.$request->search.'%');
+            $activities->orWhere('properties', 'LIKE', '%'.$request->search.'%');
         }
         if ($request->has(['field', 'order'])) {
             $activities->orderBy($request->field, $request->order);
         }
         $perPage = $request->has('perPage') ? $request->perPage : 10;
+
         return Inertia::render('Activity/Index', [
-            'title'         => __('app.label.activity'),
-            'filters'       => $request->all(['search', 'field', 'order']),
-            'perPage'       => (int) $perPage,
-            'activities'    => $activities->paginate($perPage)->onEachSide(0),
-            'breadcrumbs'   => [['label' => __('app.label.activity'), 'href' => route('activity.index')]],
+            'title' => __('app.label.activity'),
+            'filters' => $request->all(['search', 'field', 'order']),
+            'perPage' => (int) $perPage,
+            'activities' => $activities->paginate($perPage)->onEachSide(0),
+            'breadcrumbs' => [['label' => __('app.label.activity'), 'href' => route('activity.index')]],
         ]);
     }
 
@@ -87,9 +88,10 @@ class ActivityController extends Controller
     {
         try {
             $activity->delete();
+
             return back()->with('success', __('app.label.deleted_successfully', ['name' => $activity->description]));
         } catch (\Throwable $th) {
-            return back()->with('error', __('app.label.deleted_error', ['name' => $activity->description]) . $th->getMessage());
+            return back()->with('error', __('app.label.deleted_error', ['name' => $activity->description]).$th->getMessage());
         }
     }
 
@@ -98,9 +100,10 @@ class ActivityController extends Controller
         try {
             $activities = Activity::whereIn('id', $request->id);
             $activities->delete();
-            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . __('app.label.activity')]));
+
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id).' '.__('app.label.activity')]));
         } catch (\Throwable $th) {
-            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id) . ' ' . __('app.label.activity')]) . $th->getMessage());
+            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id).' '.__('app.label.activity')]).$th->getMessage());
         }
     }
 }

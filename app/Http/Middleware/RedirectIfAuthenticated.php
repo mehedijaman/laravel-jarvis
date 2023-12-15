@@ -22,8 +22,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-            Session::flash('flash.text', 'Welcome back! '.auth()->user()->name);
-            Session::flash('flash.style', 'info');
+                Session::flash('flash.text', 'Welcome back! '.auth()->user()->name);
+                Session::flash('flash.style', 'info');
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }

@@ -33,7 +33,7 @@ class Jarvis extends Command
         $name = ucfirst($this->argument('name'));
         $this->makeDir(resource_path("/js/Pages/{$name}"));
         $this->makeDir(app_path("/HTTP/Requests/{$name}"));
-        $this->makeDir(base_path("/routes/jarvis"));
+        $this->makeDir(base_path('/routes/jarvis'));
         File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';
 "
         );
@@ -62,8 +62,8 @@ class Jarvis extends Command
             'pageDelete' => $this->pageDelete($name),
             'pageDeleteBulk' => $this->pageDeleteBulk($name),
             'pageEdit' => $this->pageEdit($name),
-            'permission' => strtolower($name)." permission",
-            'route' => $this->route($name)
+            'permission' => strtolower($name).' permission',
+            'route' => $this->route($name),
         ]));
 
         return self::SUCCESS;
@@ -87,6 +87,7 @@ class Jarvis extends Command
             $this->getStub('Controller')
         );
         file_put_contents(app_path("/Http/Controllers/{$name}Controller.php"), $params);
+
         return "app/Http/Controllers/{$name}Controller.php";
     }
 
@@ -98,6 +99,7 @@ class Jarvis extends Command
             $this->getStub('Model')
         );
         file_put_contents(app_path("/Models/{$name}.php"), $params);
+
         return "app/Models/{$name}.php";
     }
 
@@ -107,13 +109,14 @@ class Jarvis extends Command
         $params = str_replace(
             [
                 '{{modelNamePluralLowerCase}}',
-            ],[
+            ], [
                 $modelNamePluralLowerCase,
             ], $this->getStub('Migration')
         );
-        $path = "/migrations/".date('Y_m_d_His_')."create_{$modelNamePluralLowerCase}_table.php";
+        $path = '/migrations/'.date('Y_m_d_His_')."create_{$modelNamePluralLowerCase}_table.php";
         file_put_contents(database_path($path), $params);
-        return "database/".$path;
+
+        return 'database/'.$path;
     }
 
     public function indexRequest($name): string
@@ -121,13 +124,14 @@ class Jarvis extends Command
         $params = str_replace(
             [
                 '{{modelName}}',
-            ],[
+            ], [
                 $name,
             ], $this->getStub('Requests/Index')
         );
         $path = "/HTTP/Requests/{$name}/{$name}IndexRequest.php";
         file_put_contents(app_path($path), $params);
-        return "app".$path;
+
+        return 'app'.$path;
     }
 
     public function storeRequest($name): string
@@ -135,13 +139,14 @@ class Jarvis extends Command
         $params = str_replace(
             [
                 '{{modelName}}',
-            ],[
+            ], [
                 $name,
             ], $this->getStub('Requests/Store')
         );
         $path = "/HTTP/Requests/{$name}/{$name}StoreRequest.php";
         file_put_contents(app_path($path), $params);
-        return "app".$path;
+
+        return 'app'.$path;
     }
 
     public function updateRequest($name): string
@@ -149,13 +154,14 @@ class Jarvis extends Command
         $params = str_replace(
             [
                 '{{modelName}}',
-            ],[
+            ], [
                 $name,
             ], $this->getStub('Requests/Update')
         );
         $path = "/HTTP/Requests/{$name}/{$name}UpdateRequest.php";
         file_put_contents(app_path($path), $params);
-        return "app".$path;
+
+        return 'app'.$path;
     }
 
     public function pageIndex($name): string
@@ -174,7 +180,8 @@ class Jarvis extends Command
         );
         $path = "/js/Pages/{$name}/Index.vue";
         file_put_contents(resource_path($path), $params);
-        return "resources".$path;
+
+        return 'resources'.$path;
     }
 
     public function pageCreate($name): string
@@ -191,7 +198,8 @@ class Jarvis extends Command
         );
         $path = "/js/Pages/{$name}/Create.vue";
         file_put_contents(resource_path($path), $params);
-        return "resources".$path;
+
+        return 'resources'.$path;
     }
 
     public function pageDelete($name): string
@@ -206,7 +214,8 @@ class Jarvis extends Command
         );
         $path = "/js/Pages/{$name}/Delete.vue";
         file_put_contents(resource_path($path), $params);
-        return "resources".$path;
+
+        return 'resources'.$path;
     }
 
     public function pageDeleteBulk($name): string
@@ -221,7 +230,8 @@ class Jarvis extends Command
         );
         $path = "/js/Pages/{$name}/DeleteBulk.vue";
         file_put_contents(resource_path($path), $params);
-        return "resources".$path;
+
+        return 'resources'.$path;
     }
 
     public function pageEdit($name): string
@@ -238,7 +248,8 @@ class Jarvis extends Command
         );
         $path = "/js/Pages/{$name}/Edit.vue";
         file_put_contents(resource_path($path), $params);
-        return "resources".$path;
+
+        return 'resources'.$path;
     }
 
     public function route($name): string
@@ -253,15 +264,17 @@ class Jarvis extends Command
                 strtolower($name),
             ], $this->getStub('Route')
         );
-        $path = "/routes/jarvis/".strtolower($name).".php";
+        $path = '/routes/jarvis/'.strtolower($name).'.php';
         file_put_contents(base_path($path), $params);
-        return "app".$path;
+
+        return 'app'.$path;
     }
 
-    protected function getStub($type){
+    protected function getStub($type)
+    {
         return file_get_contents(resource_path("stubs/$type.stub"));
     }
-    
+
     protected function makeDir($path)
     {
         return is_dir($path) || mkdir($path);

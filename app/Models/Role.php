@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Permission\Models\Role as ModelsRole;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class Role extends ModelsRole
 {
     use HasFactory;
     use LogsActivity;
+
     protected $fillable = [
         'name',
         'guard_name',
@@ -29,7 +30,6 @@ class Role extends ModelsRole
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logFillable()->setDescriptionForEvent(fn(string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
+        return LogOptions::defaults()->logFillable()->setDescriptionForEvent(fn (string $eventName) => auth()->user()?->name." {$eventName} ".$this->getTable());
     }
-
 }

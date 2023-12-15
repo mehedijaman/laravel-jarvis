@@ -12,18 +12,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         DB::beginTransaction();
         try {
-            if(User::where(['email' => $request->email])->count() != 0){
+            if (User::where(['email' => $request->email])->count() != 0) {
                 $response = response()->json([
                     'data' => [],
-                    'message' => "Email has taken",
+                    'message' => 'Email has taken',
                     'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
-                    'access_token' => "",
-                    'token_type' => 'Bearer'
+                    'access_token' => '',
+                    'token_type' => 'Bearer',
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
-            }else{
+            } else {
                 $user = User::with('roles')->create([
                     'name' => $request->name,
                     'email' => $request->email,
@@ -34,10 +35,10 @@ class AuthController extends Controller
                 $token = $user->createToken('auth_token')->plainTextToken;
                 $response = response()->json([
                     'data' => $user,
-                    'message' => "Register success",
+                    'message' => 'Register success',
                     'status' => Response::HTTP_OK,
                     'access_token' => $token,
-                    'token_type' => 'Bearer'
+                    'token_type' => 'Bearer',
                 ], Response::HTTP_OK);
             }
         } catch (\Throwable $th) {
@@ -46,28 +47,30 @@ class AuthController extends Controller
                 'data' => [],
                 'message' => $th->getMessage(),
                 'status' => $th->getCode(),
-                'access_token' => "",
-                'token_type' => 'Bearer'
+                'access_token' => '',
+                'token_type' => 'Bearer',
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
         return $response;
     }
 
-    public function login(Request $request){
-        if (!Auth::attempt($request->only('email', 'password')))
-        {
+    public function login(Request $request)
+    {
+        if (! Auth::attempt($request->only('email', 'password'))) {
             return response()
                 ->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
         $user = User::with('roles')->where('email', $request['email'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
+
         return response()
             ->json([
                 'message' => 'Hi '.$user->name.', welcome to home',
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'data' => $user,
-                'status' => Response::HTTP_OK
+                'status' => Response::HTTP_OK,
             ]);
     }
 
@@ -76,7 +79,7 @@ class AuthController extends Controller
         auth()->user()->tokens()->delete();
 
         return [
-            'message' => 'You have successfully logged out and the token was successfully deleted'
+            'message' => 'You have successfully logged out and the token was successfully deleted',
         ];
     }
 }

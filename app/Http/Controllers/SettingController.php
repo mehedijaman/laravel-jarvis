@@ -16,8 +16,8 @@ class SettingController extends Controller
     public function index()
     {
         return Inertia::render('Setting', [
-            'title'     => __('app.label.setting'),
-            'setting'   => Setting::first()
+            'title' => __('app.label.setting'),
+            'setting' => Setting::first(),
         ]);
     }
 
@@ -60,27 +60,28 @@ class SettingController extends Controller
     {
         try {
             if ($request->favicon != null) {
-                Storage::delete('public/image/setting/' . $setting->favicon);
-                $favicon = time() . "." . $request->favicon->extension();
-                Storage::put('public/image/setting/' . $favicon, File::get($request->favicon), 'public');
+                Storage::delete('public/image/setting/'.$setting->favicon);
+                $favicon = time().'.'.$request->favicon->extension();
+                Storage::put('public/image/setting/'.$favicon, File::get($request->favicon), 'public');
             } else {
                 $favicon = $setting->favicon;
             }
             if ($request->logo != null) {
-                Storage::delete('public/image/setting/' . $setting->logo);
-                $logo = time() . "." . $request->logo->extension();
-                Storage::put('public/image/setting/' . $logo, File::get($request->logo), 'public');
+                Storage::delete('public/image/setting/'.$setting->logo);
+                $logo = time().'.'.$request->logo->extension();
+                Storage::put('public/image/setting/'.$logo, File::get($request->logo), 'public');
             } else {
                 $logo = $setting->logo;
             }
             $setting->update([
-                'user_id'       => auth()->user()->id,
-                'favicon'       => $favicon,
-                'logo'          => $logo,
-                'name'          => $request->name,
-                'short_name'    => $request->short_name,
-                'description'   => $request->description,
+                'user_id' => auth()->user()->id,
+                'favicon' => $favicon,
+                'logo' => $logo,
+                'name' => $request->name,
+                'short_name' => $request->short_name,
+                'description' => $request->description,
             ]);
+
             return back();
         } catch (\Throwable $th) {
             return back();
