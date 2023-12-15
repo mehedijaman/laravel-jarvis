@@ -19,7 +19,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }
@@ -38,9 +38,9 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'can' => $request->user() ? $request->user()->getPermissionArray() : [],
-            'app'   => [
-                'name'  => ENV('APP_NAME'),
-                'version'  => ENV('APP_VERSION'),
+            'app' => [
+                'name' => ENV('APP_NAME'),
+                'version' => ENV('APP_VERSION'),
                 'perpage' => [
                     ['label' => '5', 'value' => 5],
                     ['label' => '10', 'value' => 10],
@@ -52,13 +52,15 @@ class HandleInertiaRequests extends Middleware
                     if (session()->has('locale')) {
                         app()->setLocale(session('locale'));
                     }
+
                     return app()->getLocale();
                 },
                 'language' => function () {
                     $lang = __('app');
+
                     return response()->json($lang);
                 },
-                'setting' => function(){
+                'setting' => function () {
                     return Setting::first();
                 },
             ],

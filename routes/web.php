@@ -9,7 +9,6 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +21,11 @@ use Inertia\Inertia;
 |
 */
 
-
 Route::get('/', [GuestController::class, 'index'])->name('index');
 
 Route::get('/set-locale/{locale}', function ($locale) {
     Session::put('locale', $locale);
+
     return back();
 })->name('set-locale');
 
@@ -49,7 +48,7 @@ Route::prefix('system')->middleware([
     Route::resource('activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
     Route::post('activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
 
-    Route::resource('setting', SettingController::class)->except('create','store', 'show', 'edit','destory');
+    Route::resource('setting', SettingController::class)->except('create', 'store', 'show', 'edit', 'destory');
 
     require __DIR__.'/jarvis.php';
 });

@@ -20,6 +20,7 @@ class RoleController extends Controller
         $this->middleware('permission:role update', ['only' => ['edit', 'update']]);
         $this->middleware('permission:role delete', ['only' => ['destroy', 'destroyBulk']]);
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,13 +28,13 @@ class RoleController extends Controller
     {
         $roles = Role::query();
         if ($request->has('search')) {
-            $roles->where('name', 'LIKE', "%" . $request->search . "%");
-            $roles->orWhere('guard_name', 'LIKE', "%" . $request->search . "%");
+            $roles->where('name', 'LIKE', '%'.$request->search.'%');
+            $roles->orWhere('guard_name', 'LIKE', '%'.$request->search.'%');
         }
         if ($request->has(['field', 'order'])) {
             $roles->orderBy($request->field, $request->order);
         }
-        $roles->with('permissions', function($q){
+        $roles->with('permissions', function ($q) {
             $q->orderBy('name');
         });
         $role = auth()->user()->roles->pluck('name')[0];
@@ -43,13 +44,14 @@ class RoleController extends Controller
             $roles->where('name', '<>', 'superadmin');
         }
         $perPage = $request->has('perPage') ? $request->perPage : 10;
+
         return Inertia::render('Role/Index', [
-            'title'         => __('app.label.role'),
-            'filters'       => $request->all(['search', 'field', 'order']),
-            'perPage'       => (int) $perPage,
-            'roles'         => $roles->paginate($perPage)->onEachSide(0),
-            'permissions'   => $permissions,
-            'breadcrumbs'   => [['label' => __('app.label.role'), 'href' => route('role.index')]],
+            'title' => __('app.label.role'),
+            'filters' => $request->all(['search', 'field', 'order']),
+            'perPage' => (int) $perPage,
+            'roles' => $roles->paginate($perPage)->onEachSide(0),
+            'permissions' => $permissions,
+            'breadcrumbs' => [['label' => __('app.label.role'), 'href' => route('role.index')]],
         ]);
     }
 
@@ -69,15 +71,17 @@ class RoleController extends Controller
         DB::beginTransaction();
         try {
             $role = Role::create([
-                'name'          => $request->name,
-                'guard_name'    => $request->guard_name,
+                'name' => $request->name,
+                'guard_name' => $request->guard_name,
             ]);
             $role->givePermissionTo($request->permissions);
             DB::commit();
+
             return back()->with('success', __('app.label.created_successfully', ['name' => $role->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', __('app.label.created_error', ['name' => __('app.label.role')]) . $th->getMessage());
+
+            return back()->with('error', __('app.label.created_error', ['name' => __('app.label.role')]).$th->getMessage());
         }
     }
 
@@ -105,15 +109,17 @@ class RoleController extends Controller
         DB::beginTransaction();
         try {
             $role->update([
-                'name'          => $request->name,
-                'guard_name'    => $request->guard_name,
+                'name' => $request->name,
+                'guard_name' => $request->guard_name,
             ]);
             $role->syncPermissions($request->permissions);
             DB::commit();
+
             return back()->with('success', __('app.label.updated_successfully', ['name' => $role->name]));
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', __('app.label.updated_error', ['name' => $role->name]) . $th->getMessage());
+
+            return back()->with('error', __('app.label.updated_error', ['name' => $role->name]).$th->getMessage());
         }
     }
 
@@ -124,9 +130,10 @@ class RoleController extends Controller
     {
         try {
             $role->delete();
+
             return back()->with('success', __('app.label.deleted_successfully', ['name' => $role->name]));
         } catch (\Throwable $th) {
-            return back()->with('error', __('app.label.deleted_error', ['name' => $role->name]) . $th->getMessage());
+            return back()->with('error', __('app.label.deleted_error', ['name' => $role->name]).$th->getMessage());
         }
     }
 
@@ -135,9 +142,10 @@ class RoleController extends Controller
         try {
             $roles = Role::whereIn('id', $request->id);
             $roles->delete();
-            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . __('app.label.role')]));
+
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id).' '.__('app.label.role')]));
         } catch (\Throwable $th) {
-            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id) . ' ' . __('app.label.role')]) . $th->getMessage());
+            return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id).' '.__('app.label.role')]).$th->getMessage());
         }
     }
 }

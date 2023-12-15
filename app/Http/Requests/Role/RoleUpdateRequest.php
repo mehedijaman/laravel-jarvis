@@ -22,8 +22,8 @@ class RoleUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255|unique:roles,name,' . $this->role->id,
-            'permissions'   => ['required', 'array'],
+            'name' => 'required|max:255|unique:roles,name,'.$this->role->id,
+            'permissions' => ['required', 'array'],
         ];
     }
 }

@@ -150,7 +150,7 @@ return [
         'token_name' => 'Token Name',
         'permission_name' => 'Permission Name',
         'search' => 'Search',
-        'role_name' => 'Role Name'
+        'role_name' => 'Role Name',
     ],
     'button' => [
         'login' => 'Log In',
