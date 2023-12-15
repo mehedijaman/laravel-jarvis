@@ -140,6 +140,7 @@ return [
         'access' => 'Access',
         'back_to_top' => 'Back to top',
         'activity' => 'Activity',
+        'log_viewer' => 'Log Viewer',
     ],
     'placeholder' => [
         'email' => 'email@email.com',
