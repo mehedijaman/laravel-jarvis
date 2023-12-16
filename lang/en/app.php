@@ -141,6 +141,7 @@ return [
         'back_to_top' => 'Back to top',
         'activity' => 'Activity Logs',
         'logs' => 'Error Logs',
+        'backup' => 'Backup',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

@@ -139,6 +139,7 @@ return [
         'back_to_top' => 'সবার উপরে যান',
         'activity' => 'কার্যকলাপ',
         'logs' => 'লগ ভিউ',
+        'backup' => 'ব্যাকআপ',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

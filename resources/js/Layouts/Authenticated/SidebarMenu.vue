@@ -118,6 +118,17 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
                     <span>{{ lang().label.logs }}</span>
                 </a>
             </li>
+
+            <li v-show="can(['backup read'])" v-bind:class="route().current('backup')
+                ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
+                : ''
+                " class="hover:bg-white/20 dark:hover:bg-primary/30">
+
+                <a href="/backup" class="flex items-center py-1.5 px-3 space-x-2">
+                    <ClockIcon class="w-5 h-auto" />
+                    <span>{{ lang().label.backup }}</span>
+                </a>
+            </li>
         </ol>
     </div>
 </template>

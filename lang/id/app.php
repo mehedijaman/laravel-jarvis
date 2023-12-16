@@ -138,6 +138,7 @@ return [
         'back_to_top' => 'Kembali ke atas',
         'activity' => 'Aktivitas',
         'logs' => 'Log Kesalahan',
+        'backup' => 'Cadangan',
     ],
     'placeholder' => [
         'email' => 'email@email.com',
