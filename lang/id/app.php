@@ -139,6 +139,7 @@ return [
         'activity' => 'Aktivitas',
         'logs' => 'Log Kesalahan',
         'backup' => 'Cadangan',
+        'home' => 'Rumah',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

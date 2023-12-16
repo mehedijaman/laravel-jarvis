@@ -140,6 +140,7 @@ return [
         'activity' => 'কার্যকলাপ',
         'logs' => 'লগ ভিউ',
         'backup' => 'ব্যাকআপ',
+        'home' => 'হোম',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

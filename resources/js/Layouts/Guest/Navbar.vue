@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/vue3";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import NavbarLink from "@/Components/Guest/NavbarLink.vue";
 import SwitchDarkMode from "@/Components/SwitchDarkMode.vue";
+import SwitchLocale from "@/Components/SwitchLocale.vue";
 import { Bars3BottomRightIcon } from "@heroicons/vue/24/outline";
 import { reactive } from "vue";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
@@ -70,12 +71,12 @@ window.addEventListener("scroll", () => {
                         route().current('index') ? 'font-bold text-primary' : ''
                     "
                     :href="route('index')"
-                    label="Home"
+                    :label="lang().label.home"
                 />
                 <NavbarLink
                     v-if="$page.props.auth.user"
                     :href="route('dashboard')"
-                    label="Dashboard"
+                    :label="lang().label.dashboard"
                 />
                 <template v-else>
                     <NavbarLink
@@ -89,6 +90,7 @@ window.addEventListener("scroll", () => {
                         label="Register"
                     />
                 </template>
+                <SwitchLocale/>
                 <SwitchDarkMode class="hidden sm:block" />
             </nav>
         </div>

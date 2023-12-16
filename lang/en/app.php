@@ -142,6 +142,7 @@ return [
         'activity' => 'Activity Logs',
         'logs' => 'Error Logs',
         'backup' => 'Backup',
+        'home' => 'Home',
     ],
     'placeholder' => [
         'email' => 'email@email.com',
