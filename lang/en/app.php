@@ -139,8 +139,8 @@ return [
         'go_to_webiste' => 'Go to Website',
         'access' => 'Access',
         'back_to_top' => 'Back to top',
-        'activity' => 'Activity',
-        'log_viewer' => 'Log Viewer',
+        'activity' => 'Activity Logs',
+        'logs' => 'Error Logs',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

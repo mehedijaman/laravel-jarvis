@@ -137,7 +137,7 @@ return [
         'access' => 'Akses',
         'back_to_top' => 'Kembali ke atas',
         'activity' => 'Aktivitas',
-        'log_viewer' => 'Log Viewer',
+        'logs' => 'Log Kesalahan',
     ],
     'placeholder' => [
         'email' => 'email@email.com',
