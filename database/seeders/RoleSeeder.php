@@ -16,35 +16,76 @@ class RoleSeeder extends Seeder
             'name' => 'superadmin',
             'guard_name' => 'web',
         ]);
+
         $superadmin->givePermissionTo([
-            'user delete',
-            'user update',
-            'user read',
             'user create',
-            'role delete',
-            'role update',
-            'role read',
+            'user read',
+            'user update',
+            'user delete',
+
             'role create',
-            'permission delete',
-            'permission update',
-            'permission read',
+            'role read',
+            'role update',
+            'role delete',
+
             'permission create',
+            'permission read',
+            'permission update',
+            'permission delete',
+
+            'setting create',
             'setting read',
+            'setting update',
+            'setting delete',
+
+            'activity create',
             'activity read',
+            'activity update',
             'activity delete',
+
+            'logs create',
+            'logs read',
+            'logs update',
+            'logs delete',
+
+            'backup create',
+            'backup read',
+            'backup update',
+            'backup delete',
         ]);
+
         $admin = Role::create([
             'name' => 'admin',
             'guard_name' => 'web',
         ]);
+
         $admin->givePermissionTo([
-            'user delete',
-            'user update',
-            'user read',
             'user create',
+            'user read',
+            'user update',
+            'user delete',
+
+            'role create',
             'role read',
+            'role update',
+            'role delete',
+
+            'permission create',
             'permission read',
+            'permission update',
+            'permission delete',
+
+            'setting create',
+            'setting read',
+            'setting update',
+            'setting delete',
+
+            'activity create',
+            'activity read',
+            'activity update',
+            'activity delete',
         ]);
+
         $operator = Role::create([
             'name' => 'operator',
             'guard_name' => 'web',
@@ -52,8 +93,10 @@ class RoleSeeder extends Seeder
 
         $operator->givePermissionTo([
             'user read',
-            'role read',
-            'permission read',
+            'user update',
+
+            'setting read',
+            'setting update',
         ]);
     }
 }

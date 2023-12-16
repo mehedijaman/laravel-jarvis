@@ -138,7 +138,9 @@ return [
         'access' => 'Access',
         'back_to_top' => 'সবার উপরে যান',
         'activity' => 'কার্যকলাপ',
-        'log_viewer' => 'লগ ভিউ',
+        'logs' => 'লগ ভিউ',
+        'backup' => 'ব্যাকআপ',
+        'home' => 'হোম',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

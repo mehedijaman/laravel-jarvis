@@ -25,7 +25,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
             enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in"
             leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
             <MenuItems
-                class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                class="absolute right-0 mt-2 whitespace-nowrap origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
                 <div class="px-1 py-1">
                     <MenuItem v-slot="{ active }">
 
@@ -33,7 +33,39 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]">
-                    <EditIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" class="h-4 w-6 mr-2">
+                        <!-- Blue rectangle (Union) -->
+                        <rect width="300" height="200" fill="#3C3B6E" />
+
+                        <!-- White stripes -->
+                        <rect width="600" height="40" y="40" fill="#fff" />
+                        <rect width="600" height="40" y="120" fill="#fff" />
+                        <rect width="600" height="40" y="200" fill="#fff" />
+                        <rect width="600" height="40" y="280" fill="#fff" />
+
+                        <!-- Red stripes -->
+                        <rect width="600" height="40" y="80" fill="#FF0000" />
+                        <rect width="600" height="40" y="160" fill="#FF0000" />
+                        <rect width="600" height="40" y="240" fill="#FF0000" />
+
+                        <!-- Stars (simplified representation) -->
+                        <circle cx="30" cy="30" r="5" fill="#fff" />
+                        <circle cx="90" cy="30" r="5" fill="#fff" />
+                        <circle cx="150" cy="30" r="5" fill="#fff" />
+                        <circle cx="210" cy="30" r="5" fill="#fff" />
+                        <circle cx="270" cy="30" r="5" fill="#fff" />
+                        <circle cx="30" cy="70" r="5" fill="#fff" />
+                        <circle cx="90" cy="70" r="5" fill="#fff" />
+                        <circle cx="150" cy="70" r="5" fill="#fff" />
+                        <circle cx="210" cy="70" r="5" fill="#fff" />
+                        <circle cx="270" cy="70" r="5" fill="#fff" />
+                        <circle cx="30" cy="110" r="5" fill="#fff" />
+                        <circle cx="90" cy="110" r="5" fill="#fff" />
+                        <circle cx="150" cy="110" r="5" fill="#fff" />
+                        <circle cx="210" cy="110" r="5" fill="#fff" />
+                        <circle cx="270" cy="110" r="5" fill="#fff" />
+                    </svg>
+
                     English
 
                     </Link>
@@ -45,7 +77,14 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]">
-                    <EditIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" class="h-4 w-6 mr-2">
+                        <!-- Red stripe -->
+                        <rect width="1200" height="400" fill="#ff0000" />
+
+                        <!-- White stripe -->
+                        <rect width="1200" height="400" y="400" fill="#ffffff" />
+                    </svg>
+
                     Bahasa Indonesia
 
                     </Link>
@@ -57,8 +96,16 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]">
-                    <EditIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" class="h-4 w-6 mr-2">
+                        <!-- Green background -->
+                        <rect width="1200" height="800" fill="#138808" />
+
+                        <!-- Red circle -->
+                        <circle cx="600" cy="400" r="200" fill="#e70010" />
+                    </svg>
+
                     বাংলা
+
                     </Link>
                     </MenuItem>
                 </div>
