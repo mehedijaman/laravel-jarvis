@@ -27,26 +27,51 @@ Laravel Jarvis is a starter project made with Laravel Jetstream Inertia Vue and 
 - Apache
 
 ## Installation and Usage
+Clone the git repository
 ``` bash
 git clone https://github.com/erikwibowo/Laravel-Brive.git
-cd Laravel-Brive
+```
+Go to the folder
+``` bash
+cd Laravel-Jarvis
+```
+Install and Update composer dependencies
+``` bash
 composer update
+```
+Install npm dependencies
+``` bash
 npm install
+```
+Copy .env.example and raname it to .env
+``` bash
 cp .env.example .env
+```
+Generate application key
+``` bash
 php artisan key:generate
+```
 
 SETTING UP DB CONNECTION IN .env
+``` bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=brive
 DB_USERNAME=root
 DB_PASSWORD=
-
+```
+Migrate Database with fresh seed
+``` bash
 php artisan migrate:fresh --seed
+```
 
-START THE SERVER
+Start the NPM server
+``` bash
 npm run dev
+```
+Start the Laravel Developement Server
+``` bash
 php artisan serve
 ```
 ## Login With
