@@ -1,7 +1,7 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://github.com/erikwibowo/Laravel-Jarvis/blob/master/Laravel_Jarvis.png" width="800" alt="Laravel Jarvis"></a></p>
 
 ## About Jarvis
-Laravel Jarvis is a starter project made with Laravel Jetstream Inertia Vue and add more additional feature like User, Role & Permission management, Responsive design, Light/Dark Mode, Rich Table with many features. Check the documentation for more installation.
+Laravel Jarvis is a starter project made with Laravel Jetstream Inertia Vue and add more additional feature like User, Role & Permission management, Responsive design, Light/Dark Mode, Rich Table with many features. Check the documentation for more details.
 
 ## Features
 - User Authentication.
