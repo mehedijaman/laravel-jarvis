@@ -3,6 +3,57 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Breadcrumb from "@/Layouts/Authenticated/Breadcrumb.vue";
 import { KeyIcon, ShieldCheckIcon, UserIcon } from "@heroicons/vue/24/outline";
 
+import { Bar, Pie } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
+
+const barChartData = {
+  labels: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ],
+  datasets: [
+    {
+      label: 'Data One',
+      backgroundColor: '#f87979',
+      data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+    }
+  ]
+}
+
+const barChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false
+}
+
+const pieChartData ={
+  labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+  datasets: [
+    {
+      backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+      data: [40, 20, 80, 10]
+    }
+  ]
+};
+
+const pieChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false
+}
+
+
+
 const props = defineProps({
     userCount: Number,
     roleCount: Number,
@@ -70,9 +121,13 @@ const props = defineProps({
                             </div>
                         </div>
                     </div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"></div>
+                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64">
+                        <Pie :options="pieChartOptions" :data="pieChartData" />
+                    </div>
                 </div>
-                <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+                    <Bar :options="barChartOptions" :data="barChartData" />
+                </div>
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
                     <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>

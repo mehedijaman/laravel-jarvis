@@ -1,27 +1,15 @@
 <script setup>
 import {
-    TransitionRoot,
-    TransitionChild,
-    Dialog,
-    DialogOverlay,
-} from "@headlessui/vue";
-
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import {
     ClockIcon,
-    Cog6ToothIcon,
     KeyIcon,
     ShieldCheckIcon,
     Squares2X2Icon,
     UserIcon,
     CogIcon,
     ChevronDownIcon,
-    ChevronUpIcon,
     CubeIcon,
 } from "@heroicons/vue/24/solid";
 import { Link } from "@inertiajs/vue3";
-
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 
 defineProps({
     open: Boolean,
