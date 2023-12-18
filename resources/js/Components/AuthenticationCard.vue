@@ -2,6 +2,13 @@
 import SwitchLocale from "@/Components/SwitchLocale.vue";
 import SwitchDarkMode from "@/Components/SwitchDarkMode.vue";
 import ProfileAnimation from "@/Animations/profile.json";
+
+import { initFlowbite } from 'flowbite';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    initFlowbite();
+});
 </script>
 <template>
     <div

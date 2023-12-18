@@ -74,7 +74,7 @@ function userManagementActive() {
                     <button class="flex items-center p-2 w-full font-sans font-semibold text-sm hover:bg-gray-300  text-gray-900 rounded-sm transition duration-75 group dark:text-white  dark:hover:bg-gray-600" type="button" aria-controls="user" data-collapse-toggle="user">
                         <UserIcon
                             class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
-                        <span class="flex-1 ml-3 text-left whitespace-nowrap">User Management</span>
+                        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ lang().label.user_management }}</span>
                         <ChevronDownIcon
                             class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
                         </ChevronDownIcon>
@@ -180,7 +180,7 @@ function userManagementActive() {
                         aria-controls="application" data-collapse-toggle="application">
                         <CubeIcon
                             class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
-                        <span class="flex-1 ml-3 text-left whitespace-nowrap">App Maintenance</span>
+                        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ lang().label.app_maintenance }}</span>
                         <ChevronDownIcon
                             class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
                         </ChevronDownIcon>

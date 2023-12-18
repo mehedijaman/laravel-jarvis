@@ -143,6 +143,8 @@ return [
         'logs' => 'Error Logs',
         'backup' => 'Backup',
         'home' => 'Home',
+        'user_management' => 'User Management',
+        'app_maintenance' => 'App Maintenance',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

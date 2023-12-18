@@ -21,6 +21,13 @@ window.addEventListener("scroll", () => {
         data.fixed = false;
     }
 });
+
+import { initFlowbite } from 'flowbite';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    initFlowbite();
+});
 </script>
 <template>
     <header

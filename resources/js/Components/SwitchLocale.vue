@@ -4,8 +4,6 @@ import { usePage } from '@inertiajs/vue3';
 const locale = usePage().props.app.locale;
 import { languages } from '../data/language';
 const currentLocale = languages.find(language => language.code === locale);
-
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 </script>
 <template>
     <button type="button" data-dropdown-toggle="language-dropdown-menu"

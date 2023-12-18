@@ -7,6 +7,13 @@ import Footer from "@/Layouts/Guest/Footer.vue";
 defineProps({
     title: String,
 });
+
+import { initFlowbite } from 'flowbite';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    initFlowbite();
+});
 </script>
 
 <template>

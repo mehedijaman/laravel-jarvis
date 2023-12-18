@@ -140,6 +140,8 @@ return [
         'logs' => 'Log Kesalahan',
         'backup' => 'Cadangan',
         'home' => 'Rumah',
+        'user_management' => 'Manajemen Pengguna',
+        'app_maintenance' => 'Aplikasi Maitendadnce',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

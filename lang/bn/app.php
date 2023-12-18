@@ -141,6 +141,8 @@ return [
         'logs' => 'লগ ভিউ',
         'backup' => 'ব্যাকআপ',
         'home' => 'হোম',
+        'user_management' => 'ইউজার ম্যানেজমেন্ট',
+        'app_maintenance' => 'সফটওয়্যার মেইন্টেন্যান্স',
     ],
     'placeholder' => [
         'email' => 'email@email.com',

@@ -21,13 +21,6 @@ import {
 
 const emit = defineEmits(["open"]);
 
-import { initFlowbite } from 'flowbite';
-import { onMounted } from 'vue';
-
-onMounted(() => {
-    initFlowbite();
-});
-
 defineProps({
     title: String,
 });
@@ -62,7 +55,7 @@ const logout = () => {
 
                 <Link :href="route('dashboard')" class="flex w-full justify-start items-center space-x-4">
                 <ApplicationLogo class="block h-8 w-auto" />
-                <p class="block text-lg font-semibold truncate">
+                <p class="block text-lg font-bold truncate">
                     {{ $page.props.app.setting.name }}
                 </p>
 
