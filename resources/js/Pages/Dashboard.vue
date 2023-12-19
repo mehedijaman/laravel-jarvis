@@ -73,7 +73,7 @@ const props = defineProps({
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64">
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 dark:border-gray-600 h-32 md:h-64">
                         <div
                             class="bg-white dark:bg-slate-800 overflow-hidden shadow sm:rounded text-slate-800 dark:text-slate-200 flex gap-4">
                             <div class="w-24 h-24 bg-sky-500 flex m-2 rounded justify-center items-center">
@@ -89,7 +89,7 @@ const props = defineProps({
                             </div>
                         </div>
                     </div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64">
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-32 md:h-64">
                         <div
                             class="bg-white dark:bg-slate-800 overflow-hidden shadow sm:rounded text-slate-800 dark:text-slate-200 flex gap-4">
                             <div class="w-24 h-24 bg-emerald-500 flex m-2 rounded justify-center items-center">
@@ -105,7 +105,7 @@ const props = defineProps({
                             </div>
                         </div>
                     </div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64">
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-32 md:h-64">
                         <div
                             class="bg-white dark:bg-slate-800 overflow-hidden shadow sm:rounded text-slate-800 dark:text-slate-200 flex gap-4">
                             <div class="w-24 h-24 bg-amber-500 flex m-2 rounded justify-center items-center">
@@ -121,25 +121,25 @@ const props = defineProps({
                             </div>
                         </div>
                     </div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64">
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-32 md:h-64">
                         <Pie :options="pieChartOptions" :data="pieChartData" />
                     </div>
                 </div>
-                <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+                <div class="rounded-md bg-slate-100 dark:bg-slate-700 dark:bg-opacity-50 p-4 dark:text-white h-96 mb-4">
                     <Bar :options="barChartOptions" :data="barChartData" />
                 </div>
                 <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
                 </div>
-                <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"></div>
+                <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-96 mb-4"></div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
-                    <div class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
+                    <div class="rounded-md bg-slate-100 dark:bg-slate-800 h-48 md:h-72"></div>
                 </div>
             </div>
         </div>

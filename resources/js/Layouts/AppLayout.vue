@@ -24,7 +24,7 @@ onMounted(() => {
         <Toast :flash="$page.props.flash" />
         <Banner />
         <div
-            class="flex relative w-full min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 overflow-x-hidden text-base"
+            class="flex relative w-full min-h-screen bg-slate-200 dark:bg-slate-900 text-slate-900 dark:text-slate-100 overflow-x-hidden text-base"
         >
             <Sidebar :open="showingSideBar" @close="showingSideBar = false" />
             <div class="pl-0 md:pl-64 w-full">

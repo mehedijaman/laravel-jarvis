@@ -174,7 +174,7 @@ function userManagementActive() {
                     </Link>
                 </li>
 
-                <li v-show="can(['app maintenance read'])" class="border-b-[1px] border-gray-200">
+                <li v-show="can(['app maintenance read'])" class="border-b-[1px] border-gray-200 dark:border-gray-700">
                     <button type="button"
                         class="flex items-center p-2 w-full font-sans font-semibold text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         aria-controls="application" data-collapse-toggle="application">
@@ -187,19 +187,19 @@ function userManagementActive() {
                     </button>
                     <ul id="application" class="hidden py-2 space-y-2">
 
-                        <li v-show="can(['logs read'])" class="border-b-[1px] border-gray-200">
+                        <li v-show="can(['logs read'])" >
 
                             <a href="/logs"
-                                class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700">
                                 <ClockIcon
                                     class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
                                 <span class="flex-1 whitespace-nowrap">{{ lang().label.logs }}</span>
                             </a>
                         </li>
-                        <li v-show="can(['backup read'])" class="border-b-[1px] border-gray-200">
+                        <li v-show="can(['backup read'])">
 
                             <a href="/backup"
-                                class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700">
                                 <ClockIcon
                                     class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
                                 <span class="flex-1 whitespace-nowrap">{{ lang().label.backup }}</span>
