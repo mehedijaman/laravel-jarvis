@@ -52,6 +52,11 @@ class RoleSeeder extends Seeder
             'backup read',
             'backup update',
             'backup delete',
+
+            'app maintenance create',
+            'app maintenance read',
+            'app maintenance update',
+            'app maintenance delete',
         ]);
 
         $admin = Role::create([
