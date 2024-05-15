@@ -119,7 +119,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
                 </a>
             </li>
 
-            <li v-show="can(['backup read'])" v-bind:class="route().current('backup')
+            <!-- <li v-show="can(['backup read'])" v-bind:class="route().current('backup')
                 ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
                 : ''
                 " class="hover:bg-white/20 dark:hover:bg-primary/30">
@@ -128,7 +128,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
                     <ClockIcon class="w-5 h-auto" />
                     <span>{{ lang().label.backup }}</span>
                 </a>
-            </li>
+            </li> -->
         </ol>
     </div>
 </template>
