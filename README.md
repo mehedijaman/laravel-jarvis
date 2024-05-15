@@ -29,7 +29,7 @@ Laravel Jarvis is a starter project made with Laravel Jetstream Inertia Vue and 
 ## Installation and Usage
 Clone the git repository
 ``` bash
-git clone https://github.com/erikwibowo/Laravel-Brive.git
+git clone https://github.com/erikwibowo/Laravel-Jarvis.git
 ```
 Go to the folder
 ``` bash
