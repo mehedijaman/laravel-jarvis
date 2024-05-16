@@ -71,6 +71,9 @@ const select = () => {
         data.multipleSelect = false;
     }
 };
+
+const calculateSerialNumber = (index) => (props.roles.current_page - 1) * props.roles.per_page + index + 1
+
 </script>
 
 <template>
@@ -190,7 +193,7 @@ const select = () => {
                                 <td
                                     class="whitespace-nowrap px-4 py-2 sm:py-3 text-center"
                                 >
-                                    {{ ++index }}
+                                    {{ calculateSerialNumber(index) }}
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2">
                                     {{ role.name }}

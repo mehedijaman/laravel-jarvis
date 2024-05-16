@@ -21,6 +21,7 @@ class ActivityController extends Controller
     public function index(ActivityIndexRequest $request)
     {
         $activities = Activity::query();
+
         if ($request->has('search')) {
             $activities->where('log_name', 'LIKE', '%'.$request->search.'%');
             $activities->orWhere('description', 'LIKE', '%'.$request->search.'%');
