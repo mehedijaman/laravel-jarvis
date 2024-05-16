@@ -36,15 +36,9 @@ Route::prefix('system')->middleware([
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::resource('user', UserController::class)
+            ->except('create', 'show', 'edit');
     Route::group(['prefix' => 'user'], function(){
-        Route::resource('/', UserController::class)
-            ->except('create', 'show', 'edit')
-            ->names([
-                'index' => 'user.index',
-                'store' => 'user.store',
-                'update' => 'user.update',
-                'destroy' => 'user.destroy',
-            ]);
         Route::post('user/destroy-bulk', [UserController::class, 'destroyBulk'])->name('user.destroy-bulk');
 
         Route::resource('role', RoleController::class)->except('create', 'show', 'edit');
@@ -56,8 +50,6 @@ Route::prefix('system')->middleware([
         Route::resource('activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
         Route::post('activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
     });
-
-
 
     Route::resource('setting', SettingController::class)->except('create', 'store', 'show', 'edit', 'destory');
 
