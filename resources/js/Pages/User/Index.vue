@@ -266,7 +266,7 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                         <Edit
                                             v-show="can(['user update'])"
                                             :title="props.title"
-                                            :user="data.user"
+                                            :user="user"
                                             @open="data.user = user"
                                             :roles="props.roles"
                                         />
