@@ -46,5 +46,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'backup read', 'guard_name' => 'web']);
         Permission::create(['name' => 'backup update', 'guard_name' => 'web']);
         Permission::create(['name' => 'backup delete', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'app maintenance create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'app maintenance read', 'guard_name' => 'web']);
+        Permission::create(['name' => 'app maintenance update', 'guard_name' => 'web']);
+        Permission::create(['name' => 'app maintenance delete', 'guard_name' => 'web']);
     }
 }

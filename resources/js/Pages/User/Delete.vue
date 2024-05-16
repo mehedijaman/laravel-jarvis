@@ -31,6 +31,7 @@ const closeModal = () => {
 </script>
 <template>
     <div>
+        <!-- {{ props.user.id }} -->
         <ActionButton
             v-tooltip="lang().label.delete"
             variant="danger"

@@ -72,6 +72,9 @@ const select = () => {
         data.multipleSelect = false;
     }
 };
+
+const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.users.per_page + index + 1
+
 </script>
 
 <template>
@@ -191,7 +194,7 @@ const select = () => {
                                 <td
                                     class="whitespace-nowrap px-4 py-2 text-center"
                                 >
-                                    {{ ++index }}
+                                    {{ calculateSerialNumber(index) }}
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2">
                                     <div class="flex items-center">
@@ -263,7 +266,7 @@ const select = () => {
                                         <Edit
                                             v-show="can(['user update'])"
                                             :title="props.title"
-                                            :user="data.user"
+                                            :user="user"
                                             @open="data.user = user"
                                             :roles="props.roles"
                                         />

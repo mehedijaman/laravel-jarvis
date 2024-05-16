@@ -36,17 +36,20 @@ Route::prefix('system')->middleware([
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('user', UserController::class)->except('create', 'show', 'edit');
-    Route::post('user/destroy-bulk', [UserController::class, 'destroyBulk'])->name('user.destroy-bulk');
+    Route::resource('user', UserController::class)
+            ->except('create', 'show', 'edit');
+    Route::group(['prefix' => 'user'], function(){
+        Route::post('user/destroy-bulk', [UserController::class, 'destroyBulk'])->name('user.destroy-bulk');
 
-    Route::resource('role', RoleController::class)->except('create', 'show', 'edit');
-    Route::post('role/destroy-bulk', [RoleController::class, 'destroyBulk'])->name('role.destroy-bulk');
+        Route::resource('role', RoleController::class)->except('create', 'show', 'edit');
+        Route::post('role/destroy-bulk', [RoleController::class, 'destroyBulk'])->name('role.destroy-bulk');
 
-    Route::resource('permission', PermissionController::class)->except('create', 'show', 'edit');
-    Route::post('permission/destroy-bulk', [PermissionController::class, 'destroyBulk'])->name('permission.destroy-bulk');
+        Route::resource('permission', PermissionController::class)->except('create', 'show', 'edit');
+        Route::post('permission/destroy-bulk', [PermissionController::class, 'destroyBulk'])->name('permission.destroy-bulk');
 
-    Route::resource('activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
-    Route::post('activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
+        Route::resource('activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
+        Route::post('activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
+    });
 
     Route::resource('setting', SettingController::class)->except('create', 'store', 'show', 'edit', 'destory');
 

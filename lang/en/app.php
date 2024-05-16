@@ -133,7 +133,7 @@ return [
         'check_all' => 'Check All',
         'short_name' => 'Short Name',
         'description' => 'Description',
-        'setting' => 'Setting',
+        'setting' => 'Settings',
         'web_setting' => 'Website Setting',
         'web_setting_description' => 'Change your web setting',
         'go_to_webiste' => 'Go to Website',
@@ -143,6 +143,8 @@ return [
         'logs' => 'Error Logs',
         'backup' => 'Backup',
         'home' => 'Home',
+        'user_management' => 'User Management',
+        'app_maintenance' => 'App Maintenance',
     ],
     'placeholder' => [
         'email' => 'email@email.com',
