@@ -25,6 +25,7 @@ const form = useForm({
     password: "",
     password_confirmation: "",
     role: "",
+    _method: "PUT",
 });
 
 onUpdated(() => {
@@ -36,7 +37,7 @@ onUpdated(() => {
 });
 
 const submit = () => {
-    form.put(route("user.update", props.user?.id), {
+    form.post(route("user.update", props.user?.id), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,
@@ -66,6 +67,7 @@ const roles = props.roles?.map((role) => ({
         <DialogModal :show="show" @close="closeModal">
             <template #title>
                 {{ lang().label.edit }} {{ props.title }}
+
             </template>
 
             <template #content>
