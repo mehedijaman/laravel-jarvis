@@ -37,7 +37,7 @@ onUpdated(() => {
 });
 
 const submit = () => {
-    form.post(route("user.update", props.user?.id), {
+    form.post(route("users.update", props.user?.id), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

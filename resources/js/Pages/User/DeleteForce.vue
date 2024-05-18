@@ -4,22 +4,27 @@ import ActionButton from "@/Components/ActionButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { ref, defineEmits, inject } from "vue";
 import { TrashIcon } from "@heroicons/vue/24/outline";
+
+const removeItem = inject('removeItem');
 
 const emit = defineEmits(["open"]);
 const show = ref(false);
 const props = defineProps({
     title: String,
-    user: Object,
+    item: Object,
 });
 
 const form = useForm({});
 
 const submit = () => {
-    form.delete(route("users.destroy", props.user?.id), {
+    form.delete(route("users.destroy.force", props.item?.id), {
         preserveScroll: true,
-        onSuccess: () => closeModal(),
+        onSuccess: () => {
+            closeModal();
+            removeItem(props.item?.id);
+        },
         onError: () => null,
         onFinish: () => null,
     });
@@ -32,7 +37,6 @@ const closeModal = () => {
 <template>
     <div>
         <ActionButton
-            v-tooltip="lang().label.delete"
             variant="danger"
             @click.prevent="(show = true), emit('open')"
         >
@@ -44,7 +48,7 @@ const closeModal = () => {
             </template>
 
             <template #content>
-                {{ lang().label.delete_confirm }} {{ props.user?.name }}?
+                {{ lang().label.delete_confirm }} {{ props.item?.name }}?
             </template>
 
             <template #footer>

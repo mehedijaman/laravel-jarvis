@@ -14,6 +14,8 @@ import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { TrashIcon } from "@heroicons/vue/24/outline";
 
 const { _, debounce, pickBy } = pkg;
 const props = defineProps({
@@ -45,7 +47,7 @@ watch(
     () => _.cloneDeep(data.params),
     debounce(() => {
         let params = pickBy(data.params);
-        router.get(route("permission.index"), params, {
+        router.get(route("permissions.index"), params, {
             replace: true,
             preserveState: true,
             preserveScroll: true,
@@ -123,6 +125,14 @@ const calculateSerialNumber = (index) => (props.permissions.current_page - 1) * 
                                     :placeholder="lang().placeholder.search"
                                 />
                             </div>
+                            <SecondaryButton
+                            class="flex items-center justify-start gap-2"
+                            :href="route('permissions.trash')"
+                            >
+                                <TrashIcon class="w-4 h-auto" />
+                                <span class="hidden md:block">{{ lang().label.trash }}</span>
+                            </SecondaryButton>
+
                         </template>
                         <template #table-head>
                             <tr>

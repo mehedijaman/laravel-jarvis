@@ -31,7 +31,7 @@ onUpdated(() => {
 });
 
 const submit = () => {
-    form.put(route("permission.update", props.permission?.id), {
+    form.put(route("permissions.update", props.permission?.id), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

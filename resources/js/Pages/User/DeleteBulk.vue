@@ -24,7 +24,7 @@ watchEffect(() => {
 });
 
 const submit = () => {
-    form.post(route("user.destroy-bulk"), {
+    form.post(route("users.destroy-bulk"), {
         preserveScroll: true,
         onSuccess: () => {
             closeModal();

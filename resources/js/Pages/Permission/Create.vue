@@ -20,7 +20,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("permission.store"), {
+    form.post(route("permissions.store"), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

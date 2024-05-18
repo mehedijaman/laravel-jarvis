@@ -52,7 +52,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
                         : ''
                     " class="hover:bg-white/20 dark:hover:bg-primary/30">
 
-                <Link :href="route('user.index')" class="flex items-center py-1.5 px-3 space-x-2">
+                <Link :href="route('users.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <UserIcon class="w-5 h-auto" />
                 <span>{{ lang().label.user }}</span>
 
@@ -63,18 +63,18 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
                 : ''
                 " class="hover:bg-white/20 dark:hover:bg-primary/30">
 
-                <Link :href="route('role.index')" class="flex items-center py-1.5 px-3 space-x-2">
+                <Link :href="route('roles.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <KeyIcon class="w-5 h-auto" />
                 <span>{{ lang().label.role }}</span>
 
                 </Link>
             </li>
-            <li v-show="can(['permission read'])" v-bind:class="route().current('permission.index')
+            <li v-show="can(['permission read'])" v-bind:class="route().current('permissions.index')
                 ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
                 : ''
                 " class="hover:bg-white/20 dark:hover:bg-primary/30">
 
-                <Link :href="route('permission.index')" class="flex items-center py-1.5 px-3 space-x-2">
+                <Link :href="route('permissions.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <ShieldCheckIcon class="w-5 h-auto" />
                 <span>{{ lang().label.permission }}</span>
 
@@ -85,12 +85,12 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
                     lang().label.setting
                 }}</span>
             </li>
-            <li v-show="can(['setting read'])" v-bind:class="route().current('setting.index')
+            <li v-show="can(['setting read'])" v-bind:class="route().current('settings.index')
                         ? 'border-l-4 border-white font-semibold bg-white/20 dark:bg-primary/30'
                         : ''
                     " class="hover:bg-white/20 dark:hover:bg-primary/30">
 
-                <Link :href="route('setting.index')" class="flex items-center py-1.5 px-3 space-x-2">
+                <Link :href="route('settings.index')" class="flex items-center py-1.5 px-3 space-x-2">
                 <Cog6ToothIcon class="w-5 h-auto" />
                 <span>{{ lang().label.setting }}</span>
 

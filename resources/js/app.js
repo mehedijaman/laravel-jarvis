@@ -13,6 +13,10 @@ import Vue3Lottie from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 import JsonViewer from 'vue-json-viewer'
 
+/** Vue3 Easy Data Table */
+import Vue3EasyDataTable from "vue3-easy-data-table";
+import "vue3-easy-data-table/dist/style.css";
+
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -30,6 +34,7 @@ createInertiaApp({
             .use(FloatingVue)
             .use(Vue3Lottie)
             .use(JsonViewer)
+            .component("EasyDataTable", Vue3EasyDataTable)
             .mixin({
                 methods: {
                     can: function (permissions) {

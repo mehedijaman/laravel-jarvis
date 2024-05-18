@@ -41,7 +41,7 @@ class PermissionController extends Controller
             'filters' => $request->all(['search', 'field', 'order']),
             'perPage' => (int) $perPage,
             'permissions' => $permissions->paginate($perPage)->onEachSide(0),
-            'breadcrumbs' => [['label' => __('app.label.permission'), 'href' => route('permission.index')]],
+            'breadcrumbs' => [['label' => __('app.label.permission'), 'href' => route('permissions.index')]],
         ]);
     }
 
@@ -149,6 +149,88 @@ class PermissionController extends Controller
             return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id).' '.__('app.label.permission')]));
         } catch (\Throwable $th) {
             return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id).' '.__('app.label.permission')]).$th->getMessage());
+        }
+    }
+
+    public function trash(Request $request)
+    {
+        $permissions = Permission::onlyTrashed()->get();
+
+        return Inertia::render('Permission/Trash', [
+            'title' => __('app.label.roles'),
+            'permissions' => $permissions,
+            'breadcrumbs' => [['label' => __('app.label.trash'), 'href' => route('permissions.index')]],
+        ]);
+    }
+
+     /**
+     * Parmanently delete the specified resource from storage.
+     */
+    public function destroyForce($user)
+    {
+        $user = Role::where('id', $user)->onlyTrashed()->first();
+        $user->forceDelete();
+
+        return back()->with('success', __('app.label.deleted_successfully', ['name' => $user->name]));
+    }
+
+    public function destroyForceBulk(Request $request)
+    {
+        try {
+            $roles = Role::whereIn('id', $request->id)->onlyTrashed();
+            $roles->forceDelete();
+
+            return back()->with('success', __('app.label.restored_successfully', ['name' => count($request->id).' '.__('app.label.role')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.restore_error', ['name' => count($request->id).' '.__('app.label.role')]).$th->getMessage());
+        }
+    }
+
+    public function destroyForceAll()
+    {
+        try {
+            $roles = Role::onlyTrashed()->get();
+            $count = count($roles);
+            $roles->each->forceDelete();
+
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => $count.' '.__('app.label.roles')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.deleted_error', ['name' => $count.' '.__('app.label.roles')]).$th->getMessage());
+        }
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore($user)
+    {
+        $user = Role::where('id', $user)->onlyTrashed()->first();
+        $user->restore();
+
+        return back()->with('success', __('app.label.restored_successfully', ['name' => $user->name]));
+    }
+
+    public function restoreBulk(Request $request)
+    {
+        try {
+            $roles = Role::whereIn('id', $request->id)->onlyTrashed();
+            $roles->restore();
+
+            return back()->with('success', __('app.label.restored_successfully', ['name' => count($request->id).' '.__('app.label.role')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.restore_error', ['name' => count($request->id).' '.__('app.label.role')]).$th->getMessage());
+        }
+    }
+
+    public function restoreAll()
+    {
+        try {
+            $roles = Role::onlyTrashed();
+            $roles->restore();
+
+            return back()->with('success', __('app.label.restored_successfully', [__('app.label.role')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.restore_error', [__('app.label.role')]).$th->getMessage());
         }
     }
 }

@@ -26,7 +26,7 @@ const data = reactive({
     multipleSelect: false,
 });
 const submit = () => {
-    form.post(route("role.store"), {
+    form.post(route("roles.store"), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

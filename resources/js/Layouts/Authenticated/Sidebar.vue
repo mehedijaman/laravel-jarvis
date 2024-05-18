@@ -18,9 +18,9 @@ defineProps({
 const emit = defineEmits(["close"]);
 
 function userManagementActive() {
-    return (route().current('user.index')
-        || route().current('role.index')
-        || route().current('permission.index')
+    return (route().current('users.index')
+        || route().current('roles.index')
+        || route().current('permissions.index')
         || route().current('activity.index')
     );
 }
@@ -68,7 +68,7 @@ function userManagementActive() {
 
 
                 <li :class="userManagementActive()
-                    ? 'bg-gray-200 dark:bg-gray-600'
+                    ? 'bg-gray-50 dark:bg-gray-600'
                     : 'border-b-[1px] border-gray-200 dark:border-gray-700'
                     ">
                     <button class="flex items-center p-2 w-full font-sans font-semibold text-sm hover:bg-gray-300  text-gray-900 rounded-sm transition duration-75 group dark:text-white  dark:hover:bg-gray-600" type="button" aria-controls="user" data-collapse-toggle="user">
@@ -81,9 +81,9 @@ function userManagementActive() {
                     </button>
                     <ul id="user" :class="userManagementActive()? 'space-y-2' : 'hidden space-y-2'">
                         <li v-show="can(['user read'])"
-                            :class="route().current('user.index') ? 'bg-gray-300 dark:bg-gray-700' : 'hover:bg-gray-300 dark:hover:bg-gray-700'">
+                            :class="route().current('users.index') ? 'bg-gray-300 dark:bg-gray-700' : 'hover:bg-gray-300 dark:hover:bg-gray-700'">
 
-                            <Link :href="route('user.index')"
+                            <Link :href="route('users.index')"
                                 class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group  dark:text-white dark:hover:bg-gray-700">
                             <UserIcon
                                 class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
@@ -93,9 +93,9 @@ function userManagementActive() {
                         </li>
 
                         <li v-show="can(['role read'])"
-                            :class="route().current('role.index') ? 'bg-gray-300 dark:bg-gray-700' : 'hover:bg-gray-300 dark:hover:bg-gray-700'">
+                            :class="route().current('roles.index') ? 'bg-gray-300 dark:bg-gray-700' : 'hover:bg-gray-300 dark:hover:bg-gray-700'">
 
-                            <Link :href="route('role.index')"
+                            <Link :href="route('roles.index')"
                                 class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group  dark:text-white dark:hover:bg-gray-700">
                             <KeyIcon
                                 class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
@@ -105,9 +105,9 @@ function userManagementActive() {
                         </li>
 
                         <li v-show="can(['permission read'])"
-                            :class="route().current('permission.index') ? 'bg-gray-300 dark:bg-gray-700' : 'hover:bg-gray-300 dark:hover:bg-gray-700'">
+                            :class="route().current('permissions.index') ? 'bg-gray-300 dark:bg-gray-700' : 'hover:bg-gray-300 dark:hover:bg-gray-700'">
 
-                            <Link :href="route('permission.index')"
+                            <Link :href="route('permissions.index')"
                                 class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group  dark:text-white dark:hover:bg-gray-700">
                             <ShieldCheckIcon
                                 class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
@@ -130,7 +130,7 @@ function userManagementActive() {
 
                         <!-- <li v-show="can(['role read'])">
 
-                            <Link :href="route('role.index')"
+                            <Link :href="route('roles.index')"
                                 class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <KeyIcon
                                 class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
@@ -140,7 +140,7 @@ function userManagementActive() {
                         </li>
                         <li v-show="can(['permission read'])">
 
-                            <Link :href="route('permission.index')"
+                            <Link :href="route('permissions.index')"
                                 class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <ShieldCheckIcon
                                 class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
@@ -165,7 +165,7 @@ function userManagementActive() {
                     : 'border-b-[1px] border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-700'
                     ">
 
-                    <Link :href="route('setting.index')"
+                    <Link :href="route('settings.index')"
                         class="flex items-center p-2 font-sans font-semibold text-sm  text-gray-900 rounded-sm dark:text-white  group">
                     <CogIcon
                         class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
@@ -196,7 +196,7 @@ function userManagementActive() {
                                 <span class="flex-1 whitespace-nowrap">{{ lang().label.logs }}</span>
                             </a>
                         </li>
-                        <li v-show="can(['backup read'])">
+                        <!-- <li v-show="can(['backup read'])">
 
                             <a href="/backup"
                                 class="flex items-center gap-2 p-2 pl-8 w-full font-sans font-medium text-sm text-gray-900 rounded-sm transition duration-75 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700">
@@ -204,7 +204,7 @@ function userManagementActive() {
                                     class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white shadow-md" />
                                 <span class="flex-1 whitespace-nowrap">{{ lang().label.backup }}</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
             </ul>

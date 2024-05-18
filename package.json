@@ -29,6 +29,7 @@
         "lodash": "^4.17.21",
         "vue-chartjs": "^5.3.0",
         "vue-json-viewer": "^3.0.4",
+        "vue3-easy-data-table": "^1.5.47",
         "vue3-lottie": "^2.7.0"
     }
 }

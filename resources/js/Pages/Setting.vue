@@ -24,7 +24,7 @@ const form = useForm({
     _method: "PUT",
 });
 const update = () => {
-    form.post(route("setting.update", props.setting?.id), {
+    form.post(route("settings.update", props.setting?.id), {
         preserveScroll: true,
         onSuccess: () => null,
         onError: () => null,
@@ -48,7 +48,7 @@ const fileChange = (value) => {
         </template>
 
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 flex flex-col">
                 <FormSection>
                     <template #title> {{ lang().label.web_setting }} </template>
 
@@ -87,7 +87,7 @@ const fileChange = (value) => {
                                 class="mt-2"
                             />
                         </div>
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-6 sm:col-span-6">
                             <InputLabel for="name" :value="lang().label.name" />
                             <TextInput
                                 id="name"
@@ -103,7 +103,7 @@ const fileChange = (value) => {
                             />
                         </div>
 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-6 sm:col-span-6">
                             <InputLabel
                                 for="short_name"
                                 :value="lang().label.short_name"
@@ -122,7 +122,7 @@ const fileChange = (value) => {
                             />
                         </div>
 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-8 sm:col-span-6">
                             <InputLabel
                                 for="description"
                                 :value="lang().label.description"

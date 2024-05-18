@@ -17,7 +17,7 @@ const props = defineProps({
 const form = useForm({});
 
 const submit = () => {
-    form.delete(route("role.destroy", props.role?.id), {
+    form.delete(route("roles.destroy", props.role?.id), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

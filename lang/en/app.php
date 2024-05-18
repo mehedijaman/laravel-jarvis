@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 return [
     'label' => [
+        'users' => 'Users',
+        'trash' => 'Trash',
         'documentation' => 'Documentation',
         'documentation_long' => 'Laravel Jarvis is a starter project made with Laravel Jetstream Inertia Vue and add more additional feature like User, Role & Permission management, Responsive design, Light/Dark Mode, Rich Table with many features. Check the documentation for more installation.',
         'dashboard' => 'Dasboard',
@@ -158,6 +160,7 @@ return [
         'role_name' => 'Role Name',
     ],
     'button' => [
+        'restore' => 'Restore',
         'login' => 'Log In',
         'register' => 'Register',
         'email_password_reset_link' => 'Email Password Reset Link',

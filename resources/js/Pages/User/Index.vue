@@ -16,6 +16,8 @@ import { router } from "@inertiajs/vue3";
 import { CheckBadgeIcon } from "@heroicons/vue/24/solid";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { TrashIcon } from "@heroicons/vue/24/outline";
 
 const { _, debounce, pickBy } = pkg;
 const props = defineProps({
@@ -48,7 +50,7 @@ watch(
     () => _.cloneDeep(data.params),
     debounce(() => {
         let params = pickBy(data.params);
-        router.get(route("user.index"), params, {
+        router.get(route("users.index"), params, {
             replace: true,
             preserveState: true,
             preserveScroll: true,
@@ -95,12 +97,12 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                         <template #table-action>
                             <div class="flex shrink-0 rounded overflow-hidden">
                                 <Create
-                                    v-show="can(['user create'])"
+                                    v-if="can(['user create'])"
                                     :title="props.title"
                                     :roles="props.roles"
                                 />
                                 <DeleteBulk
-                                    v-show="
+                                    v-if="
                                         data.selectedId.length != 0 &&
                                         can(['user delete'])
                                     "
@@ -127,6 +129,13 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                     :placeholder="lang().placeholder.search"
                                 />
                             </div>
+                            <SecondaryButton
+                            class="flex items-center justify-start gap-2"
+                            :href="route('users.trash')"
+                            >
+                            <TrashIcon class="w-4 h-auto" />
+                            <span class="hidden md:block">{{ lang().label.trash }}</span>
+                            </SecondaryButton>
                         </template>
                         <template #table-head>
                             <tr>
@@ -199,7 +208,7 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                 <td class="whitespace-nowrap px-4 py-2">
                                     <div class="flex items-center">
                                         <div
-                                            v-show="!user.profile_photo_path"
+                                            v-if="!user.profile_photo_path"
                                             class="mt-2 shrink-0"
                                         >
                                             <img
@@ -211,7 +220,7 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
 
                                         <!-- New Profile Photo Preview -->
                                         <div
-                                            v-show="user.profile_photo_path"
+                                            v-if="user.profile_photo_path"
                                             class="mt-2 shrink-0"
                                         >
                                             <span
@@ -264,14 +273,14 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                         class="flex w-fit rounded overflow-hidden"
                                     >
                                         <Edit
-                                            v-show="can(['user update'])"
+                                            v-if="can(['user update'])"
                                             :title="props.title"
                                             :user="user"
                                             @open="data.user = user"
                                             :roles="props.roles"
                                         />
                                         <Delete
-                                            v-show="can(['user delete'])"
+                                            v-if="can(['user delete'])"
                                             :title="props.title"
                                             :user="data.user"
                                             @open="data.user = user"

@@ -25,7 +25,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("user.store"), {
+    form.post(route("users.store"), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,
