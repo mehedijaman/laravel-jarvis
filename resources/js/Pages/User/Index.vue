@@ -16,8 +16,8 @@ import { router } from "@inertiajs/vue3";
 import { CheckBadgeIcon } from "@heroicons/vue/24/solid";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { TrashIcon } from "@heroicons/vue/24/outline";
+import { Link } from "@inertiajs/vue3";
 
 const { _, debounce, pickBy } = pkg;
 const props = defineProps({
@@ -129,13 +129,14 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                     :placeholder="lang().placeholder.search"
                                 />
                             </div>
-                            <SecondaryButton
-                            class="flex items-center justify-start gap-2"
-                            :href="route('users.trash')"
-                            >
-                            <TrashIcon class="w-4 h-auto" />
-                            <span class="hidden md:block">{{ lang().label.trash }}</span>
-                            </SecondaryButton>
+
+                            <Link
+                                :href="route('users.trash')"
+                                class="flex items-center justify-start gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-500 rounded font-semibold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-widest shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:opacity-25 transition ease-in-out duration-150"
+                                type="button">
+                                <TrashIcon class="w-4 h-auto" />
+                                Trash
+                            </Link>
                         </template>
                         <template #table-head>
                             <tr>

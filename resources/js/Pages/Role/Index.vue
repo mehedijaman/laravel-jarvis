@@ -15,6 +15,8 @@ import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { TrashIcon } from "@heroicons/vue/24/outline";
 
 const { _, debounce, pickBy } = pkg;
 const props = defineProps({
@@ -126,6 +128,13 @@ const calculateSerialNumber = (index) => (props.roles.current_page - 1) * props.
                                     :placeholder="lang().placeholder.search"
                                 />
                             </div>
+                            <SecondaryButton
+                            class="flex items-center justify-start gap-2"
+                            :href="route('roles.trash')"
+                            >
+                            <TrashIcon class="w-4 h-auto" />
+                            <span class="hidden md:block">{{ lang().label.trash }}</span>
+                            </SecondaryButton>
                         </template>
                         <template #table-head>
                             <tr>
