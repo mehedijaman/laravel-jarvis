@@ -27,12 +27,14 @@ class Jarvis extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $name = ucfirst($this->argument('name'));
         $this->makeDir(resource_path("/js/Pages/{$name}"));
-        $this->makeDir(app_path("/HTTP/Requests/{$name}"));
+        $this->makeDir(app_path("/Http/Requests/{$name}"));
         $this->makeDir(base_path('/routes/jarvis'));
         File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';
 "
@@ -128,7 +130,7 @@ class Jarvis extends Command
                 $name,
             ], $this->getStub('Requests/Index')
         );
-        $path = "/HTTP/Requests/{$name}/{$name}IndexRequest.php";
+        $path = "/Http/Requests/{$name}/{$name}IndexRequest.php";
         file_put_contents(app_path($path), $params);
 
         return 'app'.$path;
@@ -143,7 +145,7 @@ class Jarvis extends Command
                 $name,
             ], $this->getStub('Requests/Store')
         );
-        $path = "/HTTP/Requests/{$name}/{$name}StoreRequest.php";
+        $path = "/Http/Requests/{$name}/{$name}StoreRequest.php";
         file_put_contents(app_path($path), $params);
 
         return 'app'.$path;
@@ -158,7 +160,7 @@ class Jarvis extends Command
                 $name,
             ], $this->getStub('Requests/Update')
         );
-        $path = "/HTTP/Requests/{$name}/{$name}UpdateRequest.php";
+        $path = "/Http/Requests/{$name}/{$name}UpdateRequest.php";
         file_put_contents(app_path($path), $params);
 
         return 'app'.$path;
@@ -277,6 +279,6 @@ class Jarvis extends Command
 
     protected function makeDir($path)
     {
-        return is_dir($path) || mkdir($path);
+        return is_dir($path) || mkdir($path, 0777, true);
     }
 }
