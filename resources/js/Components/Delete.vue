@@ -12,6 +12,10 @@ const emit = defineEmits(["open", "delete"]);
 const show = ref(false);
 const props = defineProps({
     title: String,
+    buttonText:{
+        type: String,
+        default: '',
+    },
     item: {
         type: Object,
         required: true,
@@ -33,6 +37,7 @@ const submit = () => {
         preserveScroll: true,
         onSuccess: () => {
             emit("delete", props.item);
+            emit('close');
             closeModal();
         },
         onError: () => null,
@@ -52,6 +57,7 @@ const closeModal = () => {
             @click.prevent="(show = true), emit('open')"
         >
             <TrashIcon class="w-4 h-auto" />
+            {{ props.buttonText }}
         </ActionButton>
 
         <ConfirmationModal :show="show" @close="closeModal">

@@ -5,7 +5,6 @@ import Breadcrumb from "@/Layouts/Authenticated/Breadcrumb.vue";
 import SelectInput from "@/Components/SelectInput.vue";
 import TablePagination from "@/Components/TablePagination.vue";
 import TextInput from "@/Components/TextInput.vue";
-import DeleteBulk from "@/Pages/Activity/DeleteBulk.vue";
 import Properties from "@/Pages/Activity/Properties.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
@@ -13,8 +12,10 @@ import { router } from "@inertiajs/vue3";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
 import Delete from "@/Components/Delete.vue";
+import DeleteBulk from "@/Components/DeleteBulk.vue";
 
 const { _, debounce, pickBy } = pkg;
+
 const props = defineProps({
     title: String,
     filters: Object,
@@ -101,6 +102,7 @@ const calculateSerialNumber = (index) => (props.activities.current_page - 1) * p
                                         (data.selectedId = []),
                                             (data.multipleSelect = false)
                                     "
+                                    routeName="activity.destroy.bulk"
                                 />
                             </div>
                             <div class="flex justify-end items-center gap-2">

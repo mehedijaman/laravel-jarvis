@@ -88,7 +88,7 @@ Route::prefix('/admin')->middleware([
 
     /* Activity Log Routes */
     Route::resource('users/activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
-    Route::post('users/activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
+    Route::delete('users/activity/destroy/bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy.bulk');
 
     /* Settings Routes */
     Route::resource('settings', SettingController::class)->except('create', 'store', 'show', 'edit', 'destory');

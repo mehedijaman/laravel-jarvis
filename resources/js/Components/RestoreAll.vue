@@ -1,28 +1,33 @@
 <script setup>
 import ConfirmationModal from "@/Components/ConfirmationModal.vue";
-import DangerButton from "@/Components/DangerButton.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref, watchEffect, inject } from "vue";
-import { TrashIcon } from "@heroicons/vue/24/outline";
-
-const removeAllItems = inject('removeAllItems');
+import { ref } from "vue";
+import { ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
 
 const emit = defineEmits(["close"]);
 const show = ref(false);
 const props = defineProps({
     title: String,
+    routeName: {
+        type: String,
+        required: true
+    },
+    buttonText:{
+        type: String,
+        default: '',
+    },
 });
 
 const form = useForm({});
 
 const submit = () => {
-    form.delete(route("users.destroy.force.all"), {
+    form.post(route(props.routeName), {
         preserveScroll: true,
         onSuccess: () => {
             closeModal();
             emit("close");
-            removeAllItems();
         },
         onError: () => null,
         onFinish: () => null,
@@ -35,20 +40,20 @@ const closeModal = () => {
 </script>
 <template>
     <div>
-        <DangerButton
+        <PrimaryButton
             class="rounded-none"
             @click.prevent="show = true"
         >
-            <!-- <TrashIcon class="w-4 h-auto" /> -->
-            Empty Trash
-        </DangerButton>
+            <ArrowUturnLeftIcon class="w-4 h-auto" />
+            {{ props.buttonText }}
+        </PrimaryButton>
         <ConfirmationModal :show="show" @close="closeModal">
             <template #title>
-                {{ lang().label.delete_selected }} {{ props.title }}
+                {{ lang().label.restore_selected }} {{ props.title }}
             </template>
 
             <template #content>
-                {{ lang().label.delete_confirm }}
+                {{ lang().label.restore_confirm }}
                 {{ props.selectedId?.length }} {{ props.title }}?
             </template>
 
@@ -57,15 +62,15 @@ const closeModal = () => {
                     {{ lang().button.cancel }}
                 </SecondaryButton>
 
-                <DangerButton
+                <PrimaryButton
                     class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                     @click="submit"
                 >
-                    {{ lang().button.delete }}
+                    {{ lang().button.restore }}
                     {{ form.processing ? "..." : "" }}
-                </DangerButton>
+                </PrimaryButton>
             </template>
         </ConfirmationModal>
     </div>

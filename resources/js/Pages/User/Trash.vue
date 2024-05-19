@@ -1,11 +1,12 @@
 <script setup>
-import DeleteForce from "./DeleteForce.vue";
-import DeleteForceBulk from "./DeleteForceBulk.vue";
-import DeleteForceAll from "./DeleteForceAll.vue";
-import Restore from "./Restore.vue";
-import RestoreBulk from "./RestoreBulk.vue";
-import RestoreAll from "./RestoreAll.vue";
-import { ref, reactive, defineProps, provide, computed } from "vue";
+import Delete from "@/Components/Delete.vue";
+import DeleteBulk from "@/Components/DeleteBulk.vue";
+import DeleteAll from "@/Components/DeleteAll.vue";
+import Restore from "@/Components/Restore.vue";
+import RestoreBulk from "@/Components/RestoreBulk.vue";
+import RestoreAll from "@/Components/RestoreAll.vue";
+
+import { ref, reactive, defineProps, computed } from "vue";
 import { formatDate } from "@/Helpers/dateHelper";
 import EmptyAnimation from "@/Components/Animations/Empty.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
@@ -35,6 +36,8 @@ const headers = [
     { text: "Created", value: "created_at", sortable: true, format: val => formatDate(new Date(val)) },
     { text: "Action", value: "actions" },
 ];
+
+const selectedIds = computed(() => itemsSelected.value.map(item => item.id));
 
 // Method to remove an item from the array based on its ID
 const removeItem = (itemId) => {
@@ -66,9 +69,13 @@ const removeAllItems = () => {
     items.splice(0, items.length);
 };
 
-provide('removeItem', removeItem);
-provide('removeBulkItems', removeBulkItems);
-provide('removeAllItems', removeAllItems);
+const handleDelete = (deletedItem) => {
+    removeItem(deletedItem.id);
+};
+
+const handleBulkDelete = (deletedItems) => {
+    removeBulkItems(deletedItems);
+};
 </script>
 <template>
     <AppLayout :title="props.title">
@@ -90,12 +97,15 @@ provide('removeAllItems', removeAllItems);
                                 Back
                             </Link>
 
-                            <RestoreAll></RestoreAll>
-                            <DeleteForceAll></DeleteForceAll>
+                            <RestoreAll v-show="can(['user delete'])" routeName="users.restore.all" @restore="removeAllItems" buttonText="Restore All"></RestoreAll>
+
+                            <DeleteAll v-show="can(['user delete'])" routeName="users.destroy.force.all" @delete="removeAllItems" buttonText="Empty Trash" />
+
                             <RestoreBulk v-if="itemsSelected.length != 0 && can(['user delete'])"
-                                :itemsSelected="itemsSelected" title="Items" />
-                            <DeleteForceBulk v-if="itemsSelected.length != 0 && can(['user delete'])"
-                                :itemsSelected="itemsSelected" title="Items" />
+                                :itemsSelected="itemsSelected" title="Items" routeName="users.restore.bulk" @restore="handleBulkDelete" />
+
+                            <DeleteBulk v-if="itemsSelected.length != 0 && can(['user delete'])"
+                                :selectedId="selectedIds" title="Items" routeName="users.destroy.force.bulk" @delete="handleBulkDelete"/>
                         </div>
                         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center gap-2">
                             <div class="relative ">
@@ -120,10 +130,11 @@ provide('removeAllItems', removeAllItems);
 
                         <template #item-actions="item">
                             <div class="flex w-fit rounded overflow-hidden">
-                                <Restore v-show="can(['user update'])" :title="item.name" :item="item"
-                                    @open="item = item" />
-                                <DeleteForce v-show="can(['user delete'])" :title="item.name" :item="item"
-                                    @open="item = item" />
+                                <Restore v-show="can(['user delete'])" :title="item.name" :item="item"
+                                    @open="item = item" routeName="users.restore" @restore="handleDelete" />
+
+                                <Delete v-show="can(['user delete'])" :title="item.name" :item="item"
+                                    @open="item = item" routeName="users.destroy.force" @delete="handleDelete" />
                             </div>
                         </template>
                     </EasyDataTable>

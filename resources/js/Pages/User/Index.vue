@@ -8,7 +8,8 @@ import TextInput from "@/Components/TextInput.vue";
 import Create from "@/Pages/User/Create.vue";
 import Edit from "@/Pages/User/Edit.vue";
 import Delete from "@/Components/Delete.vue";
-import DeleteBulk from "@/Pages/User/DeleteBulk.vue";
+import DeleteBulk from "@/Components/DeleteBulk.vue";
+import DeleteAll from "@/Components/DeleteAll.vue";
 import Permission from "@/Pages/Role/Permission.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
@@ -112,6 +113,7 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                         (data.selectedId = []),
                                             (data.multipleSelect = false)
                                     "
+                                    routeName="users.destroy.bulk"
                                 />
                             </div>
                             <div class="flex justify-end items-center gap-2">
