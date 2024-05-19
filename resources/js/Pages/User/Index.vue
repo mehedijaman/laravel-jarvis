@@ -7,7 +7,7 @@ import TablePagination from "@/Components/TablePagination.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Create from "@/Pages/User/Create.vue";
 import Edit from "@/Pages/User/Edit.vue";
-import Delete from "@/Pages/User/Delete.vue";
+import Delete from "@/Components/Delete.vue";
 import DeleteBulk from "@/Pages/User/DeleteBulk.vue";
 import Permission from "@/Pages/Role/Permission.vue";
 import { reactive, watch } from "vue";
@@ -280,12 +280,12 @@ const calculateSerialNumber = (index) => (props.users.current_page - 1) * props.
                                             @open="data.user = user"
                                             :roles="props.roles"
                                         />
+
                                         <Delete
                                             v-if="can(['user delete'])"
                                             :title="props.title"
-                                            :user="data.user"
-                                            @open="data.user = user"
-                                            :roles="props.roles"
+                                            :item="user"
+                                            routeName="users.destroy"
                                         />
                                     </div>
                                 </td>
