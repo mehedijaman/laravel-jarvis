@@ -5,7 +5,6 @@ import Breadcrumb from "@/Layouts/Authenticated/Breadcrumb.vue";
 import SelectInput from "@/Components/SelectInput.vue";
 import TablePagination from "@/Components/TablePagination.vue";
 import TextInput from "@/Components/TextInput.vue";
-import Delete from "@/Pages/Activity/Delete.vue";
 import DeleteBulk from "@/Pages/Activity/DeleteBulk.vue";
 import Properties from "@/Pages/Activity/Properties.vue";
 import { reactive, watch } from "vue";
@@ -13,6 +12,7 @@ import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/Checkbox.vue";
+import Delete from "@/Components/Delete.vue";
 
 const { _, debounce, pickBy } = pkg;
 const props = defineProps({
@@ -91,7 +91,7 @@ const calculateSerialNumber = (index) => (props.activities.current_page - 1) * p
                         <template #table-action>
                             <div class="flex shrink-0 rounded overflow-hidden">
                                 <DeleteBulk
-                                    v-show="
+                                    v-if="
                                         data.selectedId.length != 0 &&
                                         can(['activity delete'])
                                     "
@@ -228,10 +228,10 @@ const calculateSerialNumber = (index) => (props.activities.current_page - 1) * p
                                         class="flex w-fit rounded overflow-hidden"
                                     >
                                         <Delete
-                                            v-show="can(['activity delete'])"
+                                            v-if="can(['activity delete'])"
                                             :title="props.title"
-                                            :activity="data.activity"
-                                            @open="data.activity = activity"
+                                            :item="activity"
+                                            routeName="activity.destroy"
                                         />
                                     </div>
                                 </td>

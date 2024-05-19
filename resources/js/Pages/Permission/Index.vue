@@ -7,7 +7,7 @@ import TablePagination from "@/Components/TablePagination.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Create from "@/Pages/Permission/Create.vue";
 import Edit from "@/Pages/Permission/Edit.vue";
-import Delete from "@/Pages/Permission/Delete.vue";
+import Delete from "@/Components/Delete.vue";
 import DeleteBulk from "@/Pages/Permission/DeleteBulk.vue";
 import { reactive, watch } from "vue";
 import pkg from "lodash";
@@ -220,11 +220,18 @@ const calculateSerialNumber = (index) => (props.permissions.current_page - 1) * 
                                             :permission="data.permission"
                                             @open="data.permission = permission"
                                         />
-                                        <Delete
+                                        <!-- <Delete
                                             v-show="can(['permission delete'])"
                                             :title="props.title"
                                             :permission="data.permission"
                                             @open="data.permission = permission"
+                                        /> -->
+
+                                        <Delete
+                                            v-if="can(['permission delete'])"
+                                            :title="props.title"
+                                            :item="permission"
+                                            routeName="permissions.destroy"
                                         />
                                     </div>
                                 </td>

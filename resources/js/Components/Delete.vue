@@ -7,19 +7,34 @@ import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { TrashIcon } from "@heroicons/vue/24/outline";
 
-const emit = defineEmits(["open"]);
+const emit = defineEmits(["open", "delete"]);
+
 const show = ref(false);
 const props = defineProps({
     title: String,
-    activity: Object,
+    item: {
+        type: Object,
+        required: true,
+    },
+    routeName: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        default: '',
+    }
 });
 
 const form = useForm({});
 
 const submit = () => {
-    form.delete(route("activity.destroy", props.activity?.id), {
+    form.delete(route(props.routeName, props.item.id), {
         preserveScroll: true,
-        onSuccess: () => closeModal(),
+        onSuccess: () => {
+            emit("delete", props.item);
+            closeModal();
+        },
         onError: () => null,
         onFinish: () => null,
     });
@@ -38,13 +53,14 @@ const closeModal = () => {
         >
             <TrashIcon class="w-4 h-auto" />
         </ActionButton>
+
         <ConfirmationModal :show="show" @close="closeModal">
             <template #title>
                 {{ lang().label.delete }} {{ props.title }}
             </template>
 
             <template #content>
-                {{ lang().label.delete_confirm }} {{ props.activity?.description }}?
+                {{ lang().label.delete_confirm }} ? {{ props.description }}
             </template>
 
             <template #footer>
