@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{{modelName}}\{{modelName}}IndexRequest;
-use App\Http\Requests\{{modelName}}\{{modelName}}StoreRequest;
-use App\Http\Requests\{{modelName}}\{{modelName}}UpdateRequest;
+use App\Http\Requests\{{modelName}}\Index{{modelName}}Request;
+use App\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use App\Http\Requests\{{modelName}}\Update{{modelName}}Request;
 use App\Models\{{modelName}};
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,7 +21,7 @@ class {{modelName}}Controller extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index({{modelName}}IndexRequest $request)
+    public function index(Index{{modelName}}Request $request)
     {
         ${{modelNamePluralLowerCase}} = {{modelName}}::query();
         if ($request->has('search')) {
@@ -51,7 +51,7 @@ class {{modelName}}Controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store({{modelName}}StoreRequest $request)
+    public function store(Store{{modelName}}Request $request)
     {
         try {
             ${{modelNameLowerCase}} = {{modelName}}::create([
@@ -83,7 +83,7 @@ class {{modelName}}Controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update({{modelName}}UpdateRequest $request, {{modelName}} ${{modelNameLowerCase}})
+    public function update(Update{{modelName}}Request $request, {{modelName}} ${{modelNameLowerCase}})
     {
         try {
             ${{modelNameLowerCase}}->update([
@@ -117,6 +117,88 @@ class {{modelName}}Controller extends Controller
             return back()->with('success', __('app.label.deleted_successfully', ['name' => count($request->id) . ' ' . "{{modelName}}"]));
         } catch (\Throwable $th) {
             return back()->with('error', __('app.label.deleted_error', ['name' => count($request->id) . ' ' . "{{modelName}}"]) . $th->getMessage());
+        }
+    }
+
+    public function trash(Request $request)
+    {
+        ${{modelNameLowerCase}} = {{modelName}}::onlyTrashed()->get();
+
+        return Inertia::render('{{modelName}}/Trash', [
+            'title' => __('app.label.{{modelNameLowerCase}}'),
+            '{{modelNameLowerCase}}' => ${{modelNameLowerCase}},
+            'breadcrumbs' => [['label' => __('app.label.trash'), 'href' => route('{{modelNameLowerCase}}.index')]],
+        ]);
+    }
+
+     /**
+     * Parmanently delete the specified resource from storage.
+     */
+    public function destroyForce($user)
+    {
+        $user = {{modelName}}::where('id', $user)->onlyTrashed()->first();
+        $user->forceDelete();
+
+        return back()->with('success', __('app.label.deleted_successfully', ['name' => $user->name]));
+    }
+
+    public function destroyForceBulk(Request $request)
+    {
+        try {
+            ${{modelNameLowerCase}} = {{modelName}}::whereIn('id', $request->id)->onlyTrashed();
+            ${{modelNameLowerCase}}->forceDelete();
+
+            return back()->with('success', __('app.label.restored_successfully', ['name' => count($request->id).' '.__('app.label.${{modelNameLowerCase}}')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.restore_error', ['name' => count($request->id).' '.__('app.label.${{modelNameLowerCase}}')]).$th->getMessage());
+        }
+    }
+
+    public function destroyForceAll()
+    {
+        try {
+            ${{modelNameLowerCase}} = {{modelName}}::onlyTrashed()->get();
+            $count = count(${{modelNameLowerCase}});
+            ${{modelNameLowerCase}}->each->forceDelete();
+
+            return back()->with('success', __('app.label.deleted_successfully', ['name' => $count.' '.__('app.label.{{modelNameLowerCase}}')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.deleted_error', ['name' => $count.' '.__('app.label.{{modelNameLowerCase}}')]).$th->getMessage());
+        }
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(${{modelNameLowerCase}})
+    {
+        ${{modelNameLowerCase}} = {{modelName}}::where('id', ${{modelNameLowerCase}})->onlyTrashed()->first();
+        ${{modelNameLowerCase}}->restore();
+
+        return back()->with('success', __('app.label.restored_successfully', ['name' => ${{modelNameLowerCase}}->name]));
+    }
+
+    public function restoreBulk(Request $request)
+    {
+        try {
+            ${{modelNameLowerCase}} = {{modelName}}::whereIn('id', $request->id)->onlyTrashed();
+            ${{modelNameLowerCase}}->restore();
+
+            return back()->with('success', __('app.label.restored_successfully', ['name' => count($request->id).' '.__('app.label.${{modelNameLowerCase}}')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.restore_error', ['name' => count($request->id).' '.__('app.label.${{modelNameLowerCase}}')]).$th->getMessage());
+        }
+    }
+
+    public function restoreAll()
+    {
+        try {
+            ${{modelNameLowerCase}} = {{modelName}}::onlyTrashed();
+            ${{modelNameLowerCase}}->restore();
+
+            return back()->with('success', __('app.label.restored_successfully', [__('app.label.${{modelNameLowerCase}}')]));
+        } catch (\Throwable $th) {
+            return back()->with('error', __('app.label.restore_error', [__('app.label.${{modelNameLowerCase}}')]).$th->getMessage());
         }
     }
 }

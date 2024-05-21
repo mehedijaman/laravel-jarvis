@@ -37,23 +37,7 @@ Route::prefix('/admin')->middleware([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Route::resource('user', UserController::class)
-    //         ->except('create', 'show', 'edit');
-
-    // Route::group(['prefix' => 'user'], function(){
-    //     Route::post('user/destroy-bulk', [UserController::class, 'destroyBulk'])->name('user.destroy-bulk');
-
-    //     Route::resource('role', RoleController::class)->except('create', 'show', 'edit');
-    //     Route::post('role/destroy-bulk', [RoleController::class, 'destroyBulk'])->name('role.destroy-bulk');
-
-    //     Route::resource('permission', PermissionController::class)->except('create', 'show', 'edit');
-    //     Route::post('permission/destroy-bulk', [PermissionController::class, 'destroyBulk'])->name('permission.destroy-bulk');
-
-    //     Route::resource('activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
-    //     Route::post('activity/destroy-bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy-bulk');
-    // });
-
-      /** Users Routes */
+    /** User Routes */
     Route::get('users/trash', [UserController::class, 'trash'])->name('users.trash');
     Route::delete('users/destroy/bulk', [UserController::class, 'destroyBulk'])->name('users.destroy.bulk');
     Route::delete('users/{user}/destroy/force', [UserController::class, 'destroyForce'])->name('users.destroy.force');
@@ -90,7 +74,7 @@ Route::prefix('/admin')->middleware([
     Route::resource('users/activity', ActivityController::class)->except('create', 'show', 'edit', 'store', 'update');
     Route::delete('users/activity/destroy/bulk', [ActivityController::class, 'destroyBulk'])->name('activity.destroy.bulk');
 
-    /* Settings Routes */
+    /* Setting Routes */
     Route::resource('settings', SettingController::class)->except('create', 'store', 'show', 'edit', 'destory');
 
     require __DIR__.'/jarvis.php';

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -13,8 +14,9 @@ class {{modelName}} extends Model
 {
     use HasFactory;
     use LogsActivity;
+    use SoftDeletes;
+
     protected $fillable = [
-        'user_id',
         'name',
     ];
 
@@ -31,15 +33,5 @@ class {{modelName}} extends Model
     public function getUpdatedAtAttribute()
     {
         return Carbon::parse($this->attributes['updated_at'])->isoFormat('D MMMM Y HH:mm');
-    }
-    
-    /**
-     * Get the user that owns the Setting
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 }

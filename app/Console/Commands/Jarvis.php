@@ -33,40 +33,45 @@ class Jarvis extends Command
     public function handle(): int
     {
         $name = ucfirst($this->argument('name'));
+
         $this->makeDir(resource_path("/js/Pages/{$name}"));
         $this->makeDir(app_path("/Http/Requests/{$name}"));
         $this->makeDir(base_path('/routes/jarvis'));
-        File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';
-"
-        );
+        File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';");
 
-        Permission::create(['name' => strtolower($name).' delete', 'guard_name' => 'web']);
-        Permission::create(['name' => strtolower($name).' update', 'guard_name' => 'web']);
-        Permission::create(['name' => strtolower($name).' read', 'guard_name' => 'web']);
         Permission::create(['name' => strtolower($name).' create', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' read', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' update', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' delete', 'guard_name' => 'web']);
+        Permission::create(['name' => strtolower($name).' restore', 'guard_name' => 'web']);
+
         $superadmin = Role::where(['name' => 'superadmin'])->first();
+
         $superadmin->givePermissionTo([
-            strtolower($name).' delete',
-            strtolower($name).' update',
-            strtolower($name).' read',
             strtolower($name).' create',
+            strtolower($name).' read',
+            strtolower($name).' update',
+            strtolower($name).' delete',
+            strtolower($name).' restore',
         ]);
 
-        render(view('cli.jarvis', [
-            'controller' => $this->controller($name),
-            'model' => $this->model($name),
-            'migration' => $this->migration($name),
-            'indexRequest' => $this->indexRequest($name),
-            'storeRequest' => $this->storeRequest($name),
-            'updateRequest' => $this->updateRequest($name),
-            'pageIndex' => $this->pageIndex($name),
-            'pageCreate' => $this->pageCreate($name),
-            'pageDelete' => $this->pageDelete($name),
-            'pageDeleteBulk' => $this->pageDeleteBulk($name),
-            'pageEdit' => $this->pageEdit($name),
-            'permission' => strtolower($name).' permission',
-            'route' => $this->route($name),
-        ]));
+        render(view('cli.jarvis',
+            [
+                'controller' => $this->controller($name),
+                'model' => $this->model($name),
+                'migration' => $this->migration($name),
+                'indexRequest' => $this->indexRequest($name),
+                'storeRequest' => $this->storeRequest($name),
+                'updateRequest' => $this->updateRequest($name),
+                'pageIndex' => $this->pageIndex($name),
+                'pageCreate' => $this->pageCreate($name),
+                'pageDelete' => $this->pageDelete($name),
+                'pageDeleteBulk' => $this->pageDeleteBulk($name),
+                'pageEdit' => $this->pageEdit($name),
+                'permission' => strtolower($name).' permission',
+                'route' => $this->route($name),
+            ])->render()
+        );
 
         return self::SUCCESS;
     }
@@ -130,7 +135,7 @@ class Jarvis extends Command
                 $name,
             ], $this->getStub('Requests/Index')
         );
-        $path = "/Http/Requests/{$name}/{$name}IndexRequest.php";
+        $path = "/Http/Requests/{$name}/Index{$name}Request.php";
         file_put_contents(app_path($path), $params);
 
         return 'app'.$path;
@@ -145,7 +150,7 @@ class Jarvis extends Command
                 $name,
             ], $this->getStub('Requests/Store')
         );
-        $path = "/Http/Requests/{$name}/{$name}StoreRequest.php";
+        $path = "/Http/Requests/{$name}/Store{$name}Request.php";
         file_put_contents(app_path($path), $params);
 
         return 'app'.$path;
@@ -160,7 +165,7 @@ class Jarvis extends Command
                 $name,
             ], $this->getStub('Requests/Update')
         );
-        $path = "/Http/Requests/{$name}/{$name}UpdateRequest.php";
+        $path = "/Http/Requests/{$name}/Update{$name}Request.php";
         file_put_contents(app_path($path), $params);
 
         return 'app'.$path;
@@ -260,13 +265,15 @@ class Jarvis extends Command
             [
                 '{{modelName}}',
                 '{{modelNameLowerCase}}',
+                '{{modelNamePluralLowerCase}}',
             ],
             [
                 $name,
                 strtolower($name),
+                strtolower(Str::plural($name)),
             ], $this->getStub('Route')
         );
-        $path = '/routes/jarvis/'.strtolower($name).'.php';
+        $path = '/routes/jarvis.php';
         file_put_contents(base_path($path), $params);
 
         return 'app'.$path;

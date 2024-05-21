@@ -3,5 +3,13 @@
 use App\Http\Controllers\{{modelName}}Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('{{modelNameLowerCase}}', {{modelName}}Controller::class)->except('create', 'show', 'edit');
-Route::post('{{modelNameLowerCase}}/destroy-bulk', [{{modelName}}Controller::class, 'destroyBulk'])->name('{{modelNameLowerCase}}.destroy-bulk');
+/** {{modelName}} Routes */
+Route::get('{{modelNamePluralLowerCase}}/trash', [{{modelName}}Controller::class, 'trash'])->name('{{modelNamePluralLowerCase}}.trash');
+Route::delete('{{modelNamePluralLowerCase}}/destroy/bulk', [{{modelName}}Controller::class, 'destroyBulk'])->name('{{modelNamePluralLowerCase}}.destroy.bulk');
+Route::delete('{{modelNamePluralLowerCase}}/{{{modelNameLowerCase}}}/destroy/force', [{{modelName}}Controller::class, 'destroyForce'])->name('{{modelNamePluralLowerCase}}.destroy.force');
+Route::delete('{{modelNamePluralLowerCase}}/destroy/force/bulk', [{{modelName}}Controller::class, 'destroyForceBulk'])->name('{{modelNamePluralLowerCase}}.destroy.force.bulk');
+Route::delete('{{modelNamePluralLowerCase}}/destroy/force/all', [{{modelName}}Controller::class, 'destroyForceAll'])->name('{{modelNamePluralLowerCase}}.destroy.force.all');
+Route::post('{{modelNamePluralLowerCase}}/{{{modelNameLowerCase}}}/restore', [{{modelName}}Controller::class, 'restore'])->name('{{modelNamePluralLowerCase}}.restore');
+Route::post('{{modelNamePluralLowerCase}}/restore/bulk', [{{modelName}}Controller::class, 'restoreBulk'])->name('{{modelNamePluralLowerCase}}.restore.bulk');
+Route::post('{{modelNamePluralLowerCase}}/restore/all', [{{modelName}}Controller::class, 'restoreAll'])->name('{{modelNamePluralLowerCase}}.restore.all');
+Route::resource('{{modelNamePluralLowerCase}}', {{modelName}}Controller::class);
