@@ -49,7 +49,7 @@ const closeModal = () => {
         </PrimaryButton>
         <ConfirmationModal :show="show" @close="closeModal">
             <template #title>
-                {{ lang().label.restore_selected }} {{ props.title }}
+                {{ lang().label.restore_confirm }} {{ props.title }}
             </template>
 
             <template #content>
