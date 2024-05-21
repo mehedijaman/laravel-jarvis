@@ -7,8 +7,11 @@ import TablePagination from "@/Components/TablePagination.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Create from "@/Pages/{{modelName}}/Create.vue";
 import Edit from "@/Pages/{{modelName}}/Edit.vue";
-import Delete from "@/Pages/{{modelName}}/Delete.vue";
-import DeleteBulk from "@/Pages/{{modelName}}/DeleteBulk.vue";
+
+import Delete from "@/Components/Delete.vue";
+import DeleteBulk from "@/Components/DeleteBulk.vue";
+import DeleteAll from "@/Components/DeleteAll.vue";
+
 import { reactive, watch } from "vue";
 import pkg from "lodash";
 import { router } from "@inertiajs/vue3";
@@ -45,7 +48,7 @@ watch(
     () => _.cloneDeep(data.params),
     debounce(() => {
         let params = pickBy(data.params);
-        router.get(route("{{modelNameLowerCase}}.index"), params, {
+        router.get(route("{{modelNamePluralLowerCase}}.index"), params, {
             replace: true,
             preserveState: true,
             preserveScroll: true,
@@ -69,6 +72,8 @@ const select = () => {
         data.multipleSelect = false;
     }
 };
+
+const calculateSerialNumber = (index) => (props.{{modelNamePluralLowerCase}}.current_page - 1) * props.{{modelNamePluralLowerCase}}.per_page + index + 1
 </script>
 
 <template>
@@ -103,6 +108,7 @@ const select = () => {
                                         (data.selectedId = []),
                                             (data.multipleSelect = false)
                                     "
+                                    routeName="{{modelNamePluralLowerCase}}.destroy.bulk"
                                 />
                             </div>
                             <div class="flex justify-end items-center gap-2">
@@ -115,7 +121,7 @@ const select = () => {
                                 </div>
                                 <TextInput
                                     v-model="data.params.search"
-                                    type="text"
+                                    type="search"
                                     class="block h-9"
                                     :placeholder="lang().placeholder.search"
                                 />
@@ -178,7 +184,7 @@ const select = () => {
                                 <td
                                     class="whitespace-nowrap px-4 py-2 text-center"
                                 >
-                                    {{ ++index }}
+                                    {{ calculateSerialNumber(index) }}
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2">
                                     {{ {{modelNameLowerCase}}.name }}
@@ -202,8 +208,8 @@ const select = () => {
                                         <Delete
                                             v-show="can(['{{modelNameLowerCase}} delete'])"
                                             :title="props.title"
-                                            :{{modelNameLowerCase}}="data.{{modelNameLowerCase}}"
-                                            @open="data.{{modelNameLowerCase}} = {{modelNameLowerCase}}"
+                                            :item="{{modelNameLowerCase}}"
+                                            routeName="{{modelNamePluralLowerCase}}.destroy"
                                         />
                                     </div>
                                 </td>

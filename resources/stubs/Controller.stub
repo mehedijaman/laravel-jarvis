@@ -35,7 +35,7 @@ class {{modelName}}Controller extends Controller
             'title'         => "{{modelName}}",
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
-            '{{modelNamePluralLowerCase}}'   => ${{modelNamePluralLowerCase}}->with('user')->paginate($perPage)->onEachSide(0),
+            '{{modelNamePluralLowerCase}}'   => ${{modelNamePluralLowerCase}}->paginate($perPage)->onEachSide(0),
             'breadcrumbs'   => [['label' => "{{modelName}}", 'href' => route('{{modelNamePluralLowerCase}}.index')]],
         ]);
     }

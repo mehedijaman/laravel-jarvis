@@ -36,8 +36,6 @@ class Jarvis extends Command
 
         $this->makeDir(resource_path("/js/Pages/{$name}"));
         $this->makeDir(app_path("/Http/Requests/{$name}"));
-        // $this->makeDir(base_path('/routes/jarvis'));
-        // File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';");
 
         Permission::create(['name' => strtolower($name).' create', 'guard_name' => 'web']);
         Permission::create(['name' => strtolower($name).' read', 'guard_name' => 'web']);
@@ -65,8 +63,8 @@ class Jarvis extends Command
                 'updateRequest' => $this->updateRequest($name),
                 'pageIndex' => $this->pageIndex($name),
                 'pageCreate' => $this->pageCreate($name),
-                'pageDelete' => $this->pageDelete($name),
-                'pageDeleteBulk' => $this->pageDeleteBulk($name),
+                // 'pageDelete' => $this->pageDelete($name),
+                // 'pageDeleteBulk' => $this->pageDeleteBulk($name),
                 'pageEdit' => $this->pageEdit($name),
                 'permission' => strtolower($name).' permission',
                 'route' => $this->route($name),
@@ -197,10 +195,12 @@ class Jarvis extends Command
             [
                 '{{modelName}}',
                 '{{modelNameLowerCase}}',
+                '{{modelNamePluralLowerCase}}',
             ],
             [
                 $name,
                 strtolower($name),
+                strtolower(Str::plural($name)),
             ], $this->getStub('Pages/Create')
         );
         $path = "/js/Pages/{$name}/Create.vue";
@@ -209,37 +209,37 @@ class Jarvis extends Command
         return 'resources'.$path;
     }
 
-    public function pageDelete($name): string
-    {
-        $params = str_replace(
-            [
-                '{{modelNameLowerCase}}',
-            ],
-            [
-                strtolower($name),
-            ], $this->getStub('Pages/Delete')
-        );
-        $path = "/js/Pages/{$name}/Delete.vue";
-        file_put_contents(resource_path($path), $params);
+    // public function pageDelete($name): string
+    // {
+    //     $params = str_replace(
+    //         [
+    //             '{{modelNameLowerCase}}',
+    //         ],
+    //         [
+    //             strtolower($name),
+    //         ], $this->getStub('Pages/Delete')
+    //     );
+    //     $path = "/js/Pages/{$name}/Delete.vue";
+    //     file_put_contents(resource_path($path), $params);
 
-        return 'resources'.$path;
-    }
+    //     return 'resources'.$path;
+    // }
 
-    public function pageDeleteBulk($name): string
-    {
-        $params = str_replace(
-            [
-                '{{modelNameLowerCase}}',
-            ],
-            [
-                strtolower($name),
-            ], $this->getStub('Pages/DeleteBulk')
-        );
-        $path = "/js/Pages/{$name}/DeleteBulk.vue";
-        file_put_contents(resource_path($path), $params);
+    // public function pageDeleteBulk($name): string
+    // {
+    //     $params = str_replace(
+    //         [
+    //             '{{modelNameLowerCase}}',
+    //         ],
+    //         [
+    //             strtolower($name),
+    //         ], $this->getStub('Pages/DeleteBulk')
+    //     );
+    //     $path = "/js/Pages/{$name}/DeleteBulk.vue";
+    //     file_put_contents(resource_path($path), $params);
 
-        return 'resources'.$path;
-    }
+    //     return 'resources'.$path;
+    // }
 
     public function pageEdit($name): string
     {
@@ -247,10 +247,12 @@ class Jarvis extends Command
             [
                 '{{modelName}}',
                 '{{modelNameLowerCase}}',
+                '{{modelNamePluralLowerCase}}',
             ],
             [
                 $name,
                 strtolower($name),
+                strtolower(Str::plural($name)),
             ], $this->getStub('Pages/Edit')
         );
         $path = "/js/Pages/{$name}/Edit.vue";

@@ -19,7 +19,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("{{modelNameLowerCase}}.store"), {
+    form.post(route("{{modelNamePluralLowerCase}}.store"), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

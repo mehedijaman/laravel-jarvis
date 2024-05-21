@@ -29,7 +29,7 @@ onUpdated(() => {
 });
 
 const submit = () => {
-    form.put(route("{{modelNameLowerCase}}.update", props.{{modelNameLowerCase}}?.id), {
+    form.put(route("{{modelNamePluralLowerCase}}.update", props.{{modelNameLowerCase}}?.id), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => null,

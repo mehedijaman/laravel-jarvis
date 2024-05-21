@@ -7,8 +7,6 @@
     'updateRequest',
     'pageIndex',
     'pageCreate',
-    'pageDelete',
-    'pageDeleteBulk',
     'pageEdit',
     'permission',
     'route'
@@ -54,16 +52,6 @@
         </div>
         <div class="flex space-x-1">
             <span class="font-bold">{{ $pageCreate }}</span>
-            <span class="flex-1 content-repeat-[.] text-gray"></span>
-            <span class="font-bold text-green uppercase">created</span>
-        </div>
-        <div class="flex space-x-1">
-            <span class="font-bold">{{ $pageDelete }}</span>
-            <span class="flex-1 content-repeat-[.] text-gray"></span>
-            <span class="font-bold text-green uppercase">created</span>
-        </div>
-        <div class="flex space-x-1">
-            <span class="font-bold">{{ $pageDeleteBulk }}</span>
             <span class="flex-1 content-repeat-[.] text-gray"></span>
             <span class="font-bold text-green uppercase">created</span>
         </div>
