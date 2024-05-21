@@ -36,7 +36,7 @@ class {{modelName}}Controller extends Controller
             'filters'       => $request->all(['search', 'field', 'order']),
             'perPage'       => (int) $perPage,
             '{{modelNamePluralLowerCase}}'   => ${{modelNamePluralLowerCase}}->with('user')->paginate($perPage)->onEachSide(0),
-            'breadcrumbs'   => [['label' => "{{modelName}}", 'href' => route('{{modelNameLowerCase}}.index')]],
+            'breadcrumbs'   => [['label' => "{{modelName}}", 'href' => route('{{modelNamePluralLowerCase}}.index')]],
         ]);
     }
 
@@ -127,7 +127,7 @@ class {{modelName}}Controller extends Controller
         return Inertia::render('{{modelName}}/Trash', [
             'title' => __('app.label.{{modelNameLowerCase}}'),
             '{{modelNameLowerCase}}' => ${{modelNameLowerCase}},
-            'breadcrumbs' => [['label' => __('app.label.trash'), 'href' => route('{{modelNameLowerCase}}.index')]],
+            'breadcrumbs' => [['label' => __('app.label.trash'), 'href' => route('{{modelNamePluralLowerCase}}.index')]],
         ]);
     }
 

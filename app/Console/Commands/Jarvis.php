@@ -36,8 +36,8 @@ class Jarvis extends Command
 
         $this->makeDir(resource_path("/js/Pages/{$name}"));
         $this->makeDir(app_path("/Http/Requests/{$name}"));
-        $this->makeDir(base_path('/routes/jarvis'));
-        File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';");
+        // $this->makeDir(base_path('/routes/jarvis'));
+        // File::append(base_path('routes/jarvis.php'), "require __DIR__.'/jarvis/".strtolower($name).".php';");
 
         Permission::create(['name' => strtolower($name).' create', 'guard_name' => 'web']);
         Permission::create(['name' => strtolower($name).' read', 'guard_name' => 'web']);
