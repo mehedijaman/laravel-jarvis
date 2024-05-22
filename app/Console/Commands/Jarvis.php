@@ -63,8 +63,7 @@ class Jarvis extends Command
                 'updateRequest' => $this->updateRequest($name),
                 'pageIndex' => $this->pageIndex($name),
                 'pageCreate' => $this->pageCreate($name),
-                // 'pageDelete' => $this->pageDelete($name),
-                // 'pageDeleteBulk' => $this->pageDeleteBulk($name),
+                'pageTrash' => $this->pageTrash($name),
                 'pageEdit' => $this->pageEdit($name),
                 'permission' => strtolower($name).' permission',
                 'route' => $this->route($name),
@@ -209,37 +208,25 @@ class Jarvis extends Command
         return 'resources'.$path;
     }
 
-    // public function pageDelete($name): string
-    // {
-    //     $params = str_replace(
-    //         [
-    //             '{{modelNameLowerCase}}',
-    //         ],
-    //         [
-    //             strtolower($name),
-    //         ], $this->getStub('Pages/Delete')
-    //     );
-    //     $path = "/js/Pages/{$name}/Delete.vue";
-    //     file_put_contents(resource_path($path), $params);
+    public function pageTrash($name): string
+    {
+        $params = str_replace(
+            [
+                '{{modelName}}',
+                '{{modelNameLowerCase}}',
+                '{{modelNamePluralLowerCase}}',
+            ],
+            [
+                $name,
+                strtolower($name),
+                strtolower(Str::plural($name)),
+            ], $this->getStub('Pages/Trash')
+        );
+        $path = "/js/Pages/{$name}/Trash.vue";
+        file_put_contents(resource_path($path), $params);
 
-    //     return 'resources'.$path;
-    // }
-
-    // public function pageDeleteBulk($name): string
-    // {
-    //     $params = str_replace(
-    //         [
-    //             '{{modelNameLowerCase}}',
-    //         ],
-    //         [
-    //             strtolower($name),
-    //         ], $this->getStub('Pages/DeleteBulk')
-    //     );
-    //     $path = "/js/Pages/{$name}/DeleteBulk.vue";
-    //     file_put_contents(resource_path($path), $params);
-
-    //     return 'resources'.$path;
-    // }
+        return 'resources'.$path;
+    }
 
     public function pageEdit($name): string
     {

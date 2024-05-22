@@ -6,11 +6,11 @@ import { useForm } from "@inertiajs/vue3";
 import { ref, watchEffect } from "vue";
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "restore"]);
 const show = ref(false);
 const props = defineProps({
     title: String,
-    itemsSelected: Object,
+    selectedId: Object,
     routeName: {
         type: String,
         required: true
@@ -27,12 +27,7 @@ const form = useForm({
 
 watchEffect(() => {
     if (show) {
-        if (props.itemsSelected && props.itemsSelected.length > 0) {
-            form.id = props.itemsSelected.map(item => item.id);
-        } else {
-            // Reset form.id if itemsSelected is empty or not available
-            form.id = [];
-        }
+        form.id = props.selectedId;
     }
 });
 
@@ -40,8 +35,9 @@ const submit = () => {
     form.post(route(props.routeName), {
         preserveScroll: true,
         onSuccess: () => {
-            closeModal();
             emit("close");
+            emit("restore",  props.selectedId);
+            closeModal();
         },
         onError: () => null,
         onFinish: () => null,

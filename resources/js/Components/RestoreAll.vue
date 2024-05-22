@@ -6,7 +6,7 @@ import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "restore"]);
 const show = ref(false);
 const props = defineProps({
     title: String,
@@ -28,6 +28,7 @@ const submit = () => {
         onSuccess: () => {
             closeModal();
             emit("close");
+            emit('restore');
         },
         onError: () => null,
         onFinish: () => null,

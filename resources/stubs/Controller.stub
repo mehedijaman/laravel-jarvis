@@ -122,11 +122,11 @@ class {{modelName}}Controller extends Controller
 
     public function trash(Request $request)
     {
-        ${{modelNameLowerCase}} = {{modelName}}::onlyTrashed()->get();
+        ${{modelNamePluralLowerCase}} = {{modelName}}::onlyTrashed()->get();
 
         return Inertia::render('{{modelName}}/Trash', [
             'title' => __('app.label.{{modelNameLowerCase}}'),
-            '{{modelNameLowerCase}}' => ${{modelNameLowerCase}},
+            '{{modelNamePluralLowerCase}}' => ${{modelNamePluralLowerCase}},
             'breadcrumbs' => [['label' => __('app.label.trash'), 'href' => route('{{modelNamePluralLowerCase}}.index')]],
         ]);
     }
@@ -145,8 +145,8 @@ class {{modelName}}Controller extends Controller
     public function destroyForceBulk(Request $request)
     {
         try {
-            ${{modelNameLowerCase}} = {{modelName}}::whereIn('id', $request->id)->onlyTrashed();
-            ${{modelNameLowerCase}}->forceDelete();
+            ${{modelNamePluralLowerCase}} = {{modelName}}::whereIn('id', $request->id)->onlyTrashed();
+            ${{modelNamePluralLowerCase}}->forceDelete();
 
             return back()->with('success', __('app.label.restored_successfully', ['name' => count($request->id).' '.__('app.label.${{modelNameLowerCase}}')]));
         } catch (\Throwable $th) {
@@ -157,9 +157,9 @@ class {{modelName}}Controller extends Controller
     public function destroyForceAll()
     {
         try {
-            ${{modelNameLowerCase}} = {{modelName}}::onlyTrashed()->get();
-            $count = count(${{modelNameLowerCase}});
-            ${{modelNameLowerCase}}->each->forceDelete();
+            ${{modelNamePluralLowerCase}} = {{modelName}}::onlyTrashed()->get();
+            $count = count(${{modelNamePluralLowerCase}});
+            ${{modelNamePluralLowerCase}}->each->forceDelete();
 
             return back()->with('success', __('app.label.deleted_successfully', ['name' => $count.' '.__('app.label.{{modelNameLowerCase}}')]));
         } catch (\Throwable $th) {
@@ -181,8 +181,8 @@ class {{modelName}}Controller extends Controller
     public function restoreBulk(Request $request)
     {
         try {
-            ${{modelNameLowerCase}} = {{modelName}}::whereIn('id', $request->id)->onlyTrashed();
-            ${{modelNameLowerCase}}->restore();
+            ${{modelNamePluralLowerCase}} = {{modelName}}::whereIn('id', $request->id)->onlyTrashed();
+            ${{modelNamePluralLowerCase}}->restore();
 
             return back()->with('success', __('app.label.restored_successfully', ['name' => count($request->id).' '.__('app.label.${{modelNameLowerCase}}')]));
         } catch (\Throwable $th) {
@@ -193,8 +193,8 @@ class {{modelName}}Controller extends Controller
     public function restoreAll()
     {
         try {
-            ${{modelNameLowerCase}} = {{modelName}}::onlyTrashed();
-            ${{modelNameLowerCase}}->restore();
+            ${{modelNamePluralLowerCase}} = {{modelName}}::onlyTrashed();
+            ${{modelNamePluralLowerCase}}->restore();
 
             return back()->with('success', __('app.label.restored_successfully', [__('app.label.${{modelNameLowerCase}}')]));
         } catch (\Throwable $th) {
