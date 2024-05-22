@@ -164,7 +164,7 @@ class UserController extends Controller
         }
     }
 
-     /**
+    /**
      * Parmanently delete the specified resource from storage.
      */
     public function destroyForce($user)

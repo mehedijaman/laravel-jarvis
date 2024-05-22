@@ -20,11 +20,11 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
     use HasRoles;
     use LogsActivity;
+    use Notifiable;
     use SoftDeletes;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.

@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+
 use function Termwind\{render};
 
 class Jarvis extends Command
@@ -27,8 +27,6 @@ class Jarvis extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(): int
     {
